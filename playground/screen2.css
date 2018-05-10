@@ -1,0 +1,77 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: darkgrey;
+}
+
+.main-grid-cell {
+    background-color: #8FAECF;
+}
+
+.order-info {
+    grid-area: order-info;
+}
+
+.order-receipt {
+    grid-area: order-receipt;
+    background-color: #fde5c0;
+}
+
+.category-selection {
+    grid-area: category-selection;
+    display: grid;
+    grid-template-rows: 73% auto;
+    grid-template-areas: "category-items" "placeholder-panel";
+    background-color: darkgrey;
+    gap: 3px;
+}
+
+.category-items {
+    grid-area: category-items;
+    background-color: red;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.placeholder-panel {
+    grid-area: placholder-panel;
+    background-color: green;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.category-item {
+    background: linear-gradient(to right, #dadada, #aeaeae);
+    border-radius: 10%;
+}
+
+.category-status {
+    grid-area: category-status;
+    background-color: #8FAECF;
+}
+
+.selection-panel {
+    grid-area: selection-panel;
+}
+
+.receipt-ops {
+    grid-area: receipt-ops;
+}
+
+.order-ops {
+    grid-area: order-ops;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: [col1] 38vw [col2] auto [col3];
+    grid-template-rows: 18vh auto 14vh;
+    grid-template-areas:
+        "order-info category-selection"
+        "order-receipt selection-panel"
+        "receipt-ops order-ops";
+    gap: 5px;
+    height: 100vh;
+}

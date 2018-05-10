@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.screen {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-areas: 
+        'info info info categories categories categories categories' 
+        'info info info categories categories categories categories' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
+        'receipt-ops receipt-ops receipt-ops order-ops order-ops order-ops order-ops';
+    background-color: grey;
+}
+
+.screen>div {
+    background-color: #8FAECF;
+    text-align: center;
+    font-size: 30px;
+    border: 3px lightgrey inset;
+}
+
+.screen .order-info {
+    grid-area: info;
+}
+
+.order-receipt {
+    grid-area: receipt;
+}
+
+.screen > .order-receipt {
+    background-color: #fde5c0;
+}
+
+.order-receipt:after {
+    content: 'Not iPad'
+}
+
+.item-categories {
+    grid-area: categories;
+    display: grid;
+}
+
+.item-contegories > .item-category {
+    background: linear-gradient(#dadada, #aeaeae);
+}
+
+.item-modifiers {
+    grid-area: modifiers;
+    display: grid;
+}
+
+.receipt-operations {
+    grid-area: receipt-ops;
+    height: 20vh;
+}
+
+.order-operations {
+    grid-area: order-ops;
+}
+
+.control-bar {
+    border-top: 4px #c4cfd6 inset;
+    display: flex;
+}
+
+.control-bar button {
+    text-align: center;
+    width: calc(100% / 6);
+    margin: 0 3px;
+    height: 3vh;
+    background-color: #007400;
+    color: white;
+    border: none;
+}
+
+.item-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding-right: 80px;
+}
+
+.item-category,
+.item-modifier {
+    border: 1px solid black;
+    border-radius: 10%;
+    text-align: center;
+    font-size: 1.1rem;
+    height: 8vh;
+    width: 10vw;
+    margin: 10px;
+    background: linear-gradient(#dadada, #aeaeae);
+}
+
+.item-category>p,
+.item-modifier>p {
+    height: 100%;
+    width: 100%;
+    margin-top: 10%;
+    color: orange;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    letter-spacing: 2px;
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+    .screen {
+        height: 1024px;
+    }
+    .order-receipt:after {
+        content: 'iPad portrait'
+    }
+}
+
+/** 
+   * iPad with landscape orientation.
+   */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    .screen {
+        height: 768px;
+    }
+    .order-receipt:after {
+        content: 'iPad landscape'
+    }
+}
