@@ -30,14 +30,14 @@
 
 .category-items {
     grid-area: category-items;
-    background-color: red;
+    background-color: #8FAECF;
     grid-column: 1;
     grid-row: 1;
 }
 
 .placeholder-panel {
     grid-area: placholder-panel;
-    background-color: green;
+    background-color: #8FAECF;
     grid-column: 1;
     grid-row: 2;
 }
