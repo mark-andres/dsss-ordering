@@ -25,6 +25,7 @@
     font-size: 0.8rem;
     font-weight: bold;
     border-collapse: collapse;
+    
 }
 
 .order-receipt table thead {
@@ -34,27 +35,39 @@
 
 .order-receipt table thead th {
     padding: 5px 10px;
-    /* border-left: 1px solid #0000d1; */
 }
 
+/* The border between columns */
 .order-receipt table td + td { 
     border-left: 1px solid grey;
 }
 
+/* Set width of Qty column */
 .order-receipt table thead th:nth-child(1) {
     width: 10%;
 }
 
+/* Set width of Price column */
 .order-receipt table thead th:nth-child(3) {
     width: 18%;
 }
 
+/* Center align the quantity */
 .order-receipt table tr td:nth-child(1) {
     text-align: center;
 }
 
+/* Right align the price */
 .order-receipt table tr td:nth-child(3) {
     text-align: right;
+}
+
+.order-receipt table tr {
+    height: 3vh;
+}
+
+.order-receipt table tbody tr:last-child {
+    height: 100%;
 }
 
 .order-receipt table tr:hover {
