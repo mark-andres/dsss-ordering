@@ -12,37 +12,181 @@
 <body>
     <div class="main-grid">
         <div class="main-grid-cell order-info">
-            Order Info
+            <div class="order-info-header">
+                <span id="order-no-label">Order #: </span>
+                <span id="order-no">&NonBreakingSpace;New</span>
+            </div>            
         </div>
         <div class="main-grid-cell category-selection">
 
-
-
-
-
             <div class="category-items">
-                Category Items
-            </div>
+                
+                <div class="category-item category-item-selected grid-item-row1-col1 imaged-background pizza-background">
+                    <p>Pizza</p>
+                </div>
+                <div class="category-item grid-item-row1-col2 imaged-background salad-background">
+                    <p>Salads</p>
+                </div>
+                <div class="category-item grid-item-row1-col3 imaged-background appetizers-background">
+                    <p>Appetizers</p>
+                </div>
+                <div class="category-item grid-item-row1-col4 imaged-background sides-background">
+                    <p>Sides</p>
+                </div>
+                <div class="category-item grid-item-row1-col5 imaged-background beverages-background">
+                    <p>Beverages</p>
+                </div>
+                <div class="category-item grid-item-row2-col1 imaged-background slice-background">
+                    <p>Slice</p>
+                </div>
+                <div class="category-item grid-item-row2-col2 imaged-background subs-background">
+                    <p>Subs</p>
+                </div>
+                <div class="category-item grid-item-row2-col3 imaged-background pasta-background">
+                    <p>Pasta</p>
+                </div>
+                <div class="category-item grid-item-row2-col4 images-background desserts-background">
+                    <p>Desserts</p>
+                </div>
+                <div class="category-item grid-item-row2-col5">
+                    <p>Beer &amp; Wine</p>
+                </div>
+
+            </div> <!-- End category-items -->
 
             <div class="placeholder-panel">
-                Placeholder panel
+                <div class="nav-item nav-item-active grid-item-row1-col1">
+                    <p>Items</p>
+                </div>
+                <div class="nav-item grid-item-row1-col2">
+                    <p>Modifiers</p>
+                </div>
+                <div class="nav-item grid-item-row1-col3">
+                    <p>Sizes</p>
+                </div>
+                <div class="nav-item grid-item-row1-col4">
+                    <p>Styles</p>
+                </div>
+                <div class="nav-item grid-item-row1-col5">
+                    <p>Preferences</p>
+                </div>
+                <div class="nav-item nav-item-canceled grid-item-row1-col6">
+                    <p>Cancel</p>
+                </div>
             </div>
-
-
-
-
         </div>
         <div class="main-grid-cell order-receipt">
-            Receipt
+            <table>
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Large Cheese Pizza</td>
+                        <td>14.00</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Medium Deluxe Pizza</td>
+                        <td>14.00</td>
+                    </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr class="receipt-summary-line">
+                        <td></td>
+                        <td><span class="receipt-summary-item">Subtotal</span></td>
+                        <td>28.00</td>
+                    </tr>
+                    <tr class="receipt-summary-line">
+                        <td></td>
+                        <td><span class="receipt-summary-item">Tax</span></td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr class="receipt-summary-line">
+                        <td></td>
+                        <td><span class="receipt-summary-item">Total</span></td>
+                        <td>28.00</td>
+                    </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                    <tr> <td></td> <td></td> <td></td> </tr>
+                </tbody>
+            </table>
         </div>
         <div class="main-grid-cell selection-panel">
             Selection Panel
         </div>
         <div class="main-grid-cell receipt-ops">
-            Receipt Operations
+            <div class="std-button grid-item-row1-col1">
+                <p class="std-button-caption">Remove Item</p>
+            </div>
+            <div class="std-button grid-item-row1-col2">
+                <p class="std-button-caption caption-color-green">Clear All</p>
+            </div>
+            <div class="std-button grid-item-row1-col3">
+                <p class="std-button-caption">Quantity</p>
+            </div>
+            <div class="std-button grid-item-row2-col1">
+                <p class="std-button-caption caption-color-red">Manager Functions</p>
+            </div>
+            <div class="std-button grid-item-row2-col2">
+                <p class="std-button-caption">Order Note</p>
+            </div>
+            <div class="std-button grid-item-row2-col3">
+                <p class="std-button-caption">Coupons</p>
+            </div>
+            <div class="std-button grid-item-row2-col4">
+                <p class="std-button-caption">Repeat Item</p>
+            </div>
         </div>
         <div class="main-grid-cell order-ops">
-            Order Operations
+            <div class="std-button grid-item-row1-col1">
+                <p class="std-button-caption caption-color-red large-caption">Logoff</p>
+            </div>
+            <div class="std-button grid-item-row1-col2">
+                <p class="std-button-caption caption-color-green large-caption">No Sale</p>
+            </div>
+            <div class="button-stack grid-item-row1-col3">
+                <div class="std-button grid-item-row1-col1">
+                    <p class="std-button-caption medium-caption">&NonBreakingSpace;Order Lookup</p>
+                </div>
+                <div class="std-button grid-item-row2-col1">
+                    <p class="std-button-caption medium-caption">Print</p>
+                </div>
+            </div>
+            <div class="button-stack grid-item-row1-col4">
+                <div class="std-button grid-item-row1-col1">
+                    <p class="std-button-caption medium-caption">Defer Order</p>
+                </div>
+                <div class="std-button grid-item-row2-col1">
+                    <p class="std-button-caption medium-caption caption-color-red">Exit</p>
+                </div>
+            </div>
+            <div class="std-button grid-item-row1-col5">
+                <p class="std-button-caption caption-color-gold large-caption">Send</p>
+            </div>
+            <div class="std-button grid-item-row1-col6">
+                <p class="std-button-caption caption-color-green large-caption">Collect</p>
+            </div>
         </div>
     </div>
 </body>
