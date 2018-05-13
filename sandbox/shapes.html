@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shapes</title>
+    <link rel="stylesheet" href="shapes.css">
+</head>
+<body>
+  <div class="container">
+    <div class="square"><p>Square</p></div> 
+    <div class="rectangle"><p>Rectangle</p></div>
+    <div class="circle"><p>Circle</p></div>
+    <div class="oval"><p>Oval</p></div>
+    <div class="triangle-up"><p>Triangle Up</p></div>
+    <div class="triangle-down"><p>Triangle Down</p></div>
+    <div class="triangle-left"><p>Triangle Left</p></div>
+    <div class="triangle-right"><p>Triangle Right</p></div>
+    <div class="triangle-topleft"><p>Triangle Top-left</p></div>
+    <div class="triangle-topright"><p>Triangle Top-right</p></div>
+  </div>
+  <div class="shape-builder-container">
+    <fieldset>
+      <legend>Shape Values</legend>
+
+      <input type="range" name="width" value="50" max="200">
+      Width: <input type='text' name="width" value="50"><br>
+      <input type="range" name="height" value="50" max="200">
+      Height: <input type='text' name="height" value="50"><br>
+      <input type="range" name="borderRadius" value="0" max="50">
+      Border Radius: <input type='text' name="borderRadius" value="0"><br>
+      <input type="range" name="borderTop" value="0" max="200">
+      Top Border Size: <input type="text" name="borderTop" value="0">
+      <input type="color" name="borderTop"> <br>
+      <input type="range" name="borderBottom" value="0" max="200">
+      Bottom Border Size: <input type="text" name="borderBottom" value="0">
+      <input type="color" name="borderBottom"> <br>
+      <input type="range" name="borderRight" value="0" max="200">
+      Right Border Size: <input type="text" name="borderRight" value="0">
+      <input type="color" name="borderRight"> <br>
+      <input type="range" name="borderLeft" value="0" max="200">
+      Left Border Size: <input type="text" name="borderLeft" value="0">
+      <input type="color" name="borderLeft"> <br>
+    </fieldset>
+
+    <div id="shape"></div>
+  </div>   
+
+  <script>
+    const inputs = document.querySelectorAll('input[type=range]');
+    const values = document.querySelectorAll('input[type=text]');
+    const shape = document.getElementById('shape');
+    const colors = document.querySelectorAll('input[type=color]');
+
+    inputs.forEach(input => {
+      input.addEventListener('input', setInput);
+      inputs[input.name] = input;
+    });
+    values.forEach(value => {
+      value.addEventListener('input', setInput);
+      values[value.name] = value;
+    });
+    colors.forEach(color => {
+      color.addEventListener('input', changeColor);
+      colors[color.name] = color;
+    });
+
+    function setInput(e) {
+      values[e.target.name].value = e.target.value;
+      setStyle(e.target.name, e.target.value);
+      if (e.target.type === 'text') {
+        inputs[e.target.name].value = e.target.value;
+      }
+    }
+
+    function setStyle(styleName, styleValue) {
+      if (styleName === 'borderRadius') {
+        shape.style[styleName] = styleValue + "%";
+      } else if (styleName.startsWith('border')) {
+        const color = colors[styleName].value;
+        shape.style[styleName] = `${styleValue}px solid ${color}`;
+      } else {
+        shape.style[styleName] = styleValue + "px";
+      }
+    }
+
+    function changeColor(e) {
+      setStyle(e.target.name, values[e.target.name].value);
+    }
+
+  </script>
+</body>
+</html>
