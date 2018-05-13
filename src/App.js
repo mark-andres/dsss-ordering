@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import OrderInfo from './components/OrderInfo';
+import CategorySelection from './components/CategorySelection';
+import OrderReceipt from './components/OrderReceipt';
+import SelectionPanel from './components/SelectionPanel';
+import ReceiptOperations from './components/ReceiptOperations';
+import OrderOperations from './components/OrderOperations';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="main-grid">
+        <OrderInfo />
+        <CategorySelection />
+        <OrderReceipt />
+        <SelectionPanel />
+        <ReceiptOperations />
+        <OrderOperations />
       </div>
     );
   }
