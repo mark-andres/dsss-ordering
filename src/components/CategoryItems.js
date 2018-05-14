@@ -1,13 +1,14 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
-import categories from '../data/categories';
+import { connect } from 'react-redux';
+// import categories from '../data/categories';
 
 class CategoryItems extends React.Component {
   renderCategories() {
-    return categories.map(category => (
+    return this.props.categories.map(category => (
       <CategoryItem
         category={category.category}
-        isActive={category.isActive}
+        isActive={this.props.currentCategory.category === category.category || false}
         row={category.row}
         column={category.column}
         key={`${category.category}${category.row}${category.column}`}
@@ -25,4 +26,11 @@ class CategoryItems extends React.Component {
   }
 }
 
-export default CategoryItems;
+const mapStateToProps = state => {
+  return {
+    categories: state.dsssApp.categories,
+    currentCategory: state.dsssApp.currentCategory
+  }
+};
+
+export default connect(mapStateToProps, null)(CategoryItems);

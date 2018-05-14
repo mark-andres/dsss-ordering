@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { setCurrentCategory } from '../actions/categories';
 
 class CategoryItem extends React.Component {
   onClick = () => {
-    alert(this.props.category);
+    const { category, row, column } = this.props;
+
+    this.props.setCurrentCategory({ category, isActive: true, row, column });
   }
 
   render() {
@@ -24,4 +29,10 @@ class CategoryItem extends React.Component {
   }
 }
 
-export default CategoryItem;
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrentCategory: category => dispatch(setCurrentCategory(category))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CategoryItem);

@@ -248,6 +248,13 @@
     grid-area: selection-panel;
 }
 
+.selectionMenu {
+    height: 100%;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+}
+
 .receipt-ops {
     grid-area: receipt-ops;
     display: grid;
