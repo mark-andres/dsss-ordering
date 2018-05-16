@@ -109,6 +109,7 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     padding-top: 10px;
+    overflow-y: scroll;
 }
 
 .placeholder-panel {

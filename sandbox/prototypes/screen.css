@@ -10,19 +10,13 @@
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-areas: 
-        'info info info categories categories categories categories' 
-        'info info info categories categories categories categories' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt receipt receipt modifiers modifiers modifiers modifiers' 
-        'receipt-ops receipt-ops receipt-ops order-ops order-ops order-ops order-ops';
+    grid-template-columns: [col1] 36vw [col2] auto [col3];
+    grid-template-rows: 22vh 61vh 17vh;
+
+    grid-template-areas:
+        "info categories"
+        "receipt modifiers"
+        "receipt-ops order-ops";
     background-color: grey;
 }
 
@@ -65,11 +59,12 @@
 
 .receipt-operations {
     grid-area: receipt-ops;
-    height: 20vh;
+    /* height: 20vh; */
 }
 
 .order-operations {
     grid-area: order-ops;
+    height: 100%;
 }
 
 .control-bar {
@@ -90,7 +85,24 @@
 .item-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(10, 11.5vh);
     padding-right: 80px;
+    overflow-y: hidden;
+}
+
+.scroll-down-modifiers, .scroll-up-modifiers {
+    height: 5vh;
+    width: 3vw;
+    position: fixed;
+    right: 1.4vw;
+}
+
+.scroll-down-modifiers {
+    bottom: 22.4vh;
+}
+
+.scroll-up-modifiers {
+    top: 23vh;
 }
 
 .item-category,
@@ -99,10 +111,18 @@
     border-radius: 10%;
     text-align: center;
     font-size: 1.1rem;
-    height: 8vh;
+    height: 7.4vh;
     width: 10vw;
     margin: 10px;
     background: linear-gradient(#dadada, #aeaeae);
+}
+
+.blank-item {
+    border: 1px solid #8FAECF;
+    border-radius: 10%;
+    height: 7.4vh;
+    width: 10vw;
+    margin: 10px;
 }
 
 .item-category>p,

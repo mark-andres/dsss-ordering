@@ -61,12 +61,12 @@
         </div>
         <div class="item-category">
           <p>
-           Desserts 
+            Desserts
           </p>
         </div>
         <div class="item-category">
           <p>
-          Beer &amp; Wine 
+            Beer &amp; Wine
           </p>
         </div>
       </div>
@@ -81,6 +81,8 @@
     </div>
     <div class="item-modifiers">
       <div class="item-container">
+        <img class="scroll-down-modifiers" src="up-arrow.png" alt="">
+        <img src="down-arrow.png" alt="" class="scroll-up-modifiers">
         <div class="item-modifier">
           <p>
             Pepperoni
@@ -211,13 +213,68 @@
             Cheese
           </p>
         </div>
+        <div class="item-modifier">
+          <p>
+            Artichoke
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Green Olives
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Feta
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Basil
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Pepperchinis
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Pineapple
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Olive Oil
+          </p>
+        </div>
+        <div class="item-modifier">
+          <p>
+            Cheese
+          </p>
+        </div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
+        <div class="blank-item"></div>
       </div>
       <div class="control-bar">
         <button>EXTRA</button>
         <button>LITE</button>
         <button>SIDE</button>
       </div>
-      <div class="control-bar"></div>
     </div>
     <div class="receipt-operations">
       Receipt Operations
@@ -226,6 +283,42 @@
       Order Operations
     </div>
   </div>
+
+  <script>
+
+    const upArrow = document.querySelector('.scroll-down-modifiers');
+    const downArrow = document.querySelector('.scroll-up-modifiers');
+    upArrow.addEventListener('click', scrollUp);
+    downArrow.addEventListener('click', scrollDown);
+    const itemContainer = upArrow.parentNode;
+    const pages = Math.ceil(itemContainer.scrollHeight / itemContainer.clientHeight);
+    const newHeight = itemContainer.clientHeight * pages;
+    const clientHeight = itemContainer.clientHeight;
+    const scrollHeight = itemContainer.scrollHeight;
+
+    showHideArrows();
+
+    function scrollUp(e) {
+      itemContainer.scrollTop = clientHeight; 
+      showHideArrows();
+    }
+
+    function scrollDown(e) {
+      itemContainer.scrollTop = 0;
+      showHideArrows();
+    }
+
+    function showHideArrows() {
+      if (itemContainer.scrollTop === clientHeight) {
+        downArrow.style.display = 'block';
+        upArrow.style.display = 'none';
+      } else {
+        downArrow.style.display = 'none';
+        upArrow.style.display = 'block';
+      }
+    }
+  
+  </script>
 </body>
 
 </html>
