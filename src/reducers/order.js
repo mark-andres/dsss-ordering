@@ -1,4 +1,4 @@
-import uuidv4 from 'uuid/v4';
+import uuid from 'uuid/v4';
 
 import { TAX_RATE } from '../data';
 import types from '../actions/types';
@@ -16,7 +16,7 @@ const addItem = (order, item) => {
   // Create new item
   const selectedItem = {
     ...item,
-    id: uuidv4()
+    id: uuid()
   };
   
   // Create new items array with the new item
@@ -54,6 +54,56 @@ const removeItem = (order, itemToRemove) => {
   };
 }
 
+const changeItem = (order, itemToChange) => {
+  // Create a new array with the item changed
+  const items = order.items.map(item => {
+    if (itemToChange.id === item.id) {
+      order.selectedItem = {
+        ...item,
+        ...itemToChange
+      };
+      return order.selectedItem;
+    } else {
+      return item;
+    }
+  });
+
+  // Recalc the totals
+  const {subtotal, tax, total} = calculateTotals(items);
+
+  // Return new order with item changed
+  return {
+    ...order, 
+    items,
+    subtotal,
+    tax,
+    total
+  };
+}
+
+const addModifier = (order, item, modifier) => {
+  const modifiers = item.modifiers || [];
+  const newItem = {
+    ...item,
+    modifiers: modifiers.concat({
+      ...modifier,
+      id: uuid()
+    })
+  };
+
+  return changeItem(order, newItem);
+}
+
+const removeModifier = (order, item, modifierToRemove) => {
+  const modifiers = item.modifiers.filter(modifier => modifier.id !== modifierToRemove.id);
+  const newItem = {
+    ...item,
+    modifiers
+  }
+
+  return changeItem(order, newItem);
+}
+
 function calculateTotals(items) {
   const subtotal = calculateSubTotals(items);
   const tax = subtotal * TAX_RATE;
@@ -87,19 +137,19 @@ const orderReducer = (order = orderDefault, action) => {
       return removeItem(order, action.item);
       
     case types.CHANGE_ITEM:
-      return order;
+      return changeItem(order, action.item);
 
     case types.SEND_ORDER:
-      return order;
+      return orderDefault;
 
     case types.PRINT_ORDER:
-      return order;
+      return orderDefault;
 
     case types.ADD_MODIFIER:
-      return order;
+      return addModifier(order, action.item, action.modifier);
 
     case types.REMOVE_MODIFIER:
-      return order;
+      return removeModifier(order, action.item, action.modifier);
 
     default:
       return order;
