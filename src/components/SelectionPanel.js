@@ -35,7 +35,7 @@ class SelectionPanel extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentCategory: state.dsssApp.currentCategory
+  currentCategory: state.menuCategories.currentCategory
 });
 
 export default connect(mapStateToProps, null)(SelectionPanel);

@@ -28,8 +28,8 @@ class CategoryItems extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.dsssApp.categories,
-    currentCategory: state.dsssApp.currentCategory
+    categories: state.menuCategories.categories,
+    currentCategory: state.menuCategories.currentCategory
   }
 };
 

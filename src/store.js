@@ -1,13 +1,15 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import categoriesReducer from './reducers/categories';
+import menuCategoriesReducer from './reducers/menuCategories';
+import orderReducer from './reducers/order';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
     const store = createStore(
         combineReducers({
-            dsssApp: categoriesReducer
+            menuCategories: menuCategoriesReducer,
+            order: orderReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
     )
