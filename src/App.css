@@ -253,6 +253,15 @@
     width: 100%;
     font-size: 2rem;
     text-align: center;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
 }
 
 .receipt-ops {
@@ -292,8 +301,8 @@
 
 .main-grid {
     display: grid;
-    grid-template-columns: [col1] 36vw [col2] auto [col3];
-    grid-template-rows: 22vh auto 17vh;
+    grid-template-columns: [col1] 36vw [col2] 64vw [col3];
+    grid-template-rows: 22vh 61vh 17vh;
     grid-template-areas:
         "order-info category-selection"
         "order-receipt selection-panel"

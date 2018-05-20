@@ -40,6 +40,7 @@ describe('orderReducer', () => {
       expect(order.items[0].price).toBe(item.price);
       expect(order.items[0].size).toBe(MEDIUM);
       expect(order.items[0].id).toEqual(order.selectedItem.id);
+      expect(order.total).toBe(item.price);
     });
 
     it('should remove an item from an order', () => {

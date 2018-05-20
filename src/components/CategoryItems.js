@@ -1,17 +1,16 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import { connect } from 'react-redux';
-// import categories from '../data/categories';
 
 class CategoryItems extends React.Component {
-  renderCategories() {
-    return this.props.categories.map(category => (
+  renderMenuItems() {
+    return this.props.menu.map(menuItem => (
       <CategoryItem
-        category={category.category}
-        isActive={this.props.currentCategory.category === category.category || false}
-        row={category.row}
-        column={category.column}
-        key={`${category.category}${category.row}${category.column}`}
+        menu={menuItem}
+        isActive={this.props.currentMenu.name === menuItem.name || false}
+        row={menuItem.row}
+        column={menuItem.column}
+        key={menuItem.key}
       />
     ));
   }
@@ -19,7 +18,7 @@ class CategoryItems extends React.Component {
     return (
       <div className="category-items">
 
-        {this.renderCategories()}
+        {this.renderMenuItems()}
 
       </div>
     );
@@ -28,8 +27,8 @@ class CategoryItems extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.menuCategories.categories,
-    currentCategory: state.menuCategories.currentCategory
+    menu: state.menu.menu,
+    currentMenu: state.menu.currentMenu
   }
 };
 

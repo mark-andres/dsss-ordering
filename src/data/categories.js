@@ -1,3 +1,23 @@
+export const CATEGORY = {
+    PIZZA: 'Pizza',
+    SALADS: 'Salads',
+    APPETIZERS: 'Appetizers',
+    SIDES: 'Sides',
+    BEVERAGES: 'Beverages',
+    SLICES: 'Slice',
+    SUBS: 'Subs',
+    PASTA: 'Pasta',
+    DESSERTS: 'Desserts'
+};
+
+export const PIZZA_SIZE = {
+  SMALL: 'Small',
+  MEDIUM: 'Medium',
+  LARGE: 'Large',
+  EXTRA_LARGE: 'Extra Large',
+  SICILIAN: 'Sicilian'
+};
+
 const categories = [
   {
     category: 'Pizza',

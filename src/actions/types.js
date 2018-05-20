@@ -1,5 +1,6 @@
-// Types for categories
-export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
+// Types for menu
+export const SET_CURRENT_MENU = 'SET_CURRENT_MENU';
+export const RESET_CURRENT_MENU = 'RESET_CURRENT_MENU';
 
 // Types for order
 export const ADD_ITEM = 'ADD_ITEM';
@@ -11,7 +12,8 @@ export const ADD_MODIFIER = 'ADD_MODIFIER';
 export const REMOVE_MODIFIER = 'REMOVE_MODIFIER';
 
 export default {
-  SET_CURRENT_CATEGORY,
+  SET_CURRENT_MENU,
+  RESET_CURRENT_MENU,
   ADD_ITEM,
   REMOVE_ITEM,
   CHANGE_ITEM,

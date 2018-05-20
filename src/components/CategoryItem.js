@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentCategory } from '../actions/categories';
+import { setCurrentMenu } from '../actions/menu';
 
 class CategoryItem extends React.Component {
   onClick = () => {
-    const { category, row, column } = this.props;
-
-    this.props.setCurrentCategory({ category, isActive: true, row, column });
+    this.props.setCurrentMenu(this.props.menu);
   }
 
   render() {
-    const { category, isActive, row, column } = this.props;
+    const { menu, isActive, row, column } = this.props;
     const rowColumn = `grid-item-row${row}-col${column}`;
-    const specialClass = category.toLowerCase() + '-background';
+    const specialClass = menu.caption.toLowerCase() + '-background';
     const classes = "category-item imaged-background";
     const active = isActive ? "category-item-selected" : "";
 
@@ -22,7 +20,7 @@ class CategoryItem extends React.Component {
         className={`${classes} ${active} ${specialClass} ${rowColumn}`}
         onClick={this.onClick}
       >
-        <p>{category}</p>
+        <p>{menu.caption}</p>
       </div>
     )
 
@@ -31,7 +29,7 @@ class CategoryItem extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentCategory: category => dispatch(setCurrentCategory(category))
+    setCurrentMenu: menu => dispatch(setCurrentMenu(menu))
   }
 }
 

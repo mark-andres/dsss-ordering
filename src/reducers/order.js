@@ -1,4 +1,4 @@
-import uuid from 'uuid/v4';
+import uuid from 'uuid/v1';
 
 import { TAX_RATE } from '../data';
 import types from '../actions/types';
