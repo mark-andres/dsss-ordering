@@ -6,6 +6,7 @@ export const RESET_CURRENT_MENU = 'RESET_CURRENT_MENU';
 export const ADD_ITEM = 'ADD_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const CHANGE_ITEM = 'UPDATE_ITEM';
+export const SET_SELECTED_ITEM = 'SET_SELECTED_ITEM';
 export const SEND_ORDER = 'SEND_ORDER';
 export const PRINT_ORDER = 'PRINT_ORDER';
 export const ADD_MODIFIER = 'ADD_MODIFIER';
@@ -17,6 +18,7 @@ export default {
   ADD_ITEM,
   REMOVE_ITEM,
   CHANGE_ITEM,
+  SET_SELECTED_ITEM,
   SEND_ORDER,
   PRINT_ORDER,
   ADD_MODIFIER,

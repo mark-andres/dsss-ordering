@@ -65,6 +65,10 @@
     height: 3vh;
 }
 
+.order-receipt table tr:hover {
+    cursor: pointer;
+}
+
 .order-receipt table tbody tr:last-child {
     height: 100%;
 }

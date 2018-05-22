@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+const OrderInfo = () => {
   return (
     <div className="main-grid-cell order-info">
       <div className="order-info-header">
@@ -10,3 +10,5 @@ export default () => {
     </div>
   );
 }
+
+export default OrderInfo;

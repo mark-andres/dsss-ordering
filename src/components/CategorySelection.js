@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryItems from './CategoryItems';
 import PlaceholderPanel from './PlaceholderPanel';
 
-export default () => {
+const CategorySelection = () => {
   return (
     <div className="main-grid-cell category-selection">
       <CategoryItems />
@@ -10,3 +10,5 @@ export default () => {
     </div>
   );
 }
+
+export default CategorySelection;

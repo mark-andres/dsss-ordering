@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+const ReceiptOperations = () => {
   return (
     <div className="main-grid-cell receipt-ops">
       <div className="std-button grid-item-row1-col1">
@@ -27,3 +27,5 @@ export default () => {
     </div>
   );
 }
+
+export default ReceiptOperations;

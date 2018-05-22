@@ -13,10 +13,11 @@ describe('orderReducer', () => {
 
     beforeEach(() => {
       item = {
-        description: 'Cheese Pizza',
+        name: 'Cheese Pizza',
         size: LARGE,
         price: 14.00,
-        category: 'Pizza'
+        category: 'Pizza', 
+        quantity: 1
       };
       order = orderReducer(undefined, { type: ADD_ITEM, item });
     });
@@ -33,7 +34,8 @@ describe('orderReducer', () => {
       const item = {
         ...order.selectedItem,
         size: MEDIUM,
-        price: 12.00
+        price: 12.00,
+        quantity: 1
       }
       order = orderReducer(order, { type: CHANGE_ITEM, item });
       expect(order.items.length).toBe(1);
@@ -62,7 +64,7 @@ describe('orderReducer', () => {
         order = orderReducer(order, {
           type: ADD_MODIFIER, 
           item: order.items[0], 
-          modifier: { description: "pepperoni", price: 1.50 }
+          modifier: { name: "pepperoni", price: 1.50, quantity: 1 }
         });
       });
       
@@ -87,12 +89,12 @@ describe('orderReducer', () => {
         order = orderReducer(order, {
           type: ADD_MODIFIER, 
           item: order.items[0], 
-          modifier: { description: "beef sausage", price: 1.50 }
+          modifier: { name: "beef sausage", price: 1.50, quantity: 1 }
         });
         order = orderReducer(order, {
           type: ADD_MODIFIER, 
           item: order.items[0], 
-          modifier: { description: "onions", price: 1.50 }
+          modifier: { name: "onions", price: 1.50, quantity: 1 }
         });
 
         expect(order.items[0].modifiers.length).toBe(3);

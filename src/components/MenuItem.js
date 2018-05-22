@@ -7,8 +7,10 @@ class MenuItem extends React.Component {
     const menuItem = this.props.menuItem;
     const size = 'Large';
     const item = {
-      description: menuItem.name,
+      name: menuItem.name,
       size,
+      quantity: 1,
+      menu: this.props.currentMenu
     };
     if (menuItem.priceMatrix) {
       item.price = menuItem.priceMatrix[size];
@@ -29,4 +31,8 @@ const mapDispatchToProps = dispatch => ({
   addItem: item => dispatch(addItem(item))
 });
 
-export default connect(null, mapDispatchToProps)(MenuItem);
+const mapStateToProps = state => ({
+  currentMenu: state.menu.currentMenu
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItem);

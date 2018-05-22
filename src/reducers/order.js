@@ -18,16 +18,16 @@ const addItem = (order, item) => {
     ...item,
     id: uuid()
   };
-  
+
   // Create new items array with the new item
   const items = order.items.concat(selectedItem);
 
   // Recalc the totals
-  const {subtotal, tax, total} = calculateTotals(items);
+  const { subtotal, tax, total } = calculateTotals(items);
 
   // Return new order with the new item added
   return {
-    ...order, 
+    ...order,
     items,
     selectedItem,
     subtotal,
@@ -41,11 +41,11 @@ const removeItem = (order, itemToRemove) => {
   const items = order.items.filter(item => item.id !== itemToRemove.id)
 
   // Recalc the totals
-  const {subtotal, tax, total} = calculateTotals(items);
+  const { subtotal, tax, total } = calculateTotals(items);
 
   // Return new order with item removed
   return {
-    ...order, 
+    ...order,
     items,
     selectedItem: null,
     subtotal,
@@ -69,11 +69,11 @@ const changeItem = (order, itemToChange) => {
   });
 
   // Recalc the totals
-  const {subtotal, tax, total} = calculateTotals(items);
+  const { subtotal, tax, total } = calculateTotals(items);
 
   // Return new order with item changed
   return {
-    ...order, 
+    ...order,
     items,
     subtotal,
     tax,
@@ -116,15 +116,17 @@ function calculateTotals(items) {
 
 function calculateSubTotals(items) {
   return items.reduce((total, item) => {
-    if (item.price) {
-      let modifiersSum = 0;
-      if (item.modifiers) {
-        modifiersSum = calculateSubTotals(item.modifiers);
-      }
-      return total + item.price + modifiersSum;
-    } else {
-      return total;
+    let { price, quantity } = item;
+    let modifiersSum = 0;
+
+    price = price || 0;
+    quantity = quantity || 0;
+
+    if (item.modifiers) {
+      modifiersSum = calculateSubTotals(item.modifiers);
     }
+
+    return total + quantity * (price + modifiersSum);
   }, 0);
 }
 
@@ -135,9 +137,15 @@ const orderReducer = (order = orderDefault, action) => {
 
     case types.REMOVE_ITEM:
       return removeItem(order, action.item);
-      
+
     case types.CHANGE_ITEM:
       return changeItem(order, action.item);
+
+    case types.SET_SELECTED_ITEM:
+      return {
+        ...order,
+        selectedItem: { ...action.item }
+      };
 
     case types.SEND_ORDER:
       return orderDefault;
