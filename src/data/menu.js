@@ -1,15 +1,15 @@
 import uuid from 'uuid/v1';
 
 export const CATEGORY = {
-    PIZZA: 'Pizza',
-    SALADS: 'Salads',
-    APPETIZERS: 'Appetizers',
-    SIDES: 'Sides',
-    BEVERAGES: 'Beverages',
-    SLICES: 'Slice',
-    SUBS: 'Subs',
-    PASTA: 'Pasta',
-    DESSERTS: 'Desserts'
+  PIZZA: 'Pizza',
+  SALADS: 'Salads',
+  APPETIZERS: 'Appetizers',
+  SIDES: 'Sides',
+  BEVERAGES: 'Beverages',
+  SLICES: 'Slice',
+  SUBS: 'Subs',
+  PASTA: 'Pasta',
+  DESSERTS: 'Desserts'
 };
 
 export const PIZZA_SIZE = {
@@ -36,13 +36,162 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
-// Add qualifiers, modifiers, and toppings.
+export const PIZZA_MODIFIERS = {
+  items: [{
+    name: 'Pepperoni',
+    price: 1.50,
+  }, {
+    name: 'Beef Sausage',
+    price: 1.50,
+  }, {
+    name: 'Canadian Bacon',
+    price: 1.50
+  }, {
+    name: 'Italian Sausage',
+    price: 1.50
+  }, {
+    name: 'Anchovies',
+    price: 1.50
+  }, {
+    name: 'Meatballs',
+    price: 1.50
+  }, {
+    name: 'Grilled Chicken',
+    price: 1.50
+  }, {
+    name: 'Kalamata Olives',
+    price: 2.50
+  }, {
+    name: 'Ricotta Cheese',
+    price: 2.50
+  }, {
+    name: 'Bell Peppers',
+    price: 1.50
+  }, {
+    name: 'Mushrooms',
+    price: 1.50
+  }, {
+    name: 'Onions',
+    price: 1.50
+  }, {
+    name: 'Black Olives',
+    price: 1.50
+  }, {
+    name: 'Jalapeños',
+    price: 1.50
+  }, {
+    name: 'Eggplant',
+    price: 1.50
+  }, {
+    name: 'Garlic',
+    price: 1.50
+  }, {
+    name: 'Spinach',
+    price: 1.50
+  }, {
+    name: 'Tomatoes',
+    price: 1.50
+  }, {
+    name: 'Artichokes',
+    price: 1.50
+  }, {
+    name: 'Green Olives',
+    price: 1.50
+  }, {
+    name: 'Basil',
+    price: 1.50
+  }, {
+    name: 'Pepperonchini',
+    price: 1.50
+  }, {
+    name: 'Pineapple',
+    price: 1.50
+  }, {
+    name: 'Topping Cheese',
+    price: 1.50
+  }, {
+    name: 'Pizza Sauce',
+    price: 1.50
+  }, {
+    name: 'Olive Oil',
+    price: 1.50
+  }, {
+    name: 'White Sauce',
+    price: 1.50
+  }, {
+    name: 'Pizza Cheese',
+    price: 1.50
+  }, {
+    name: 'Feta Cheese',
+    price: 2.50
+  }]
+};
+
+export const PIZZA_GLOBAL_QUALIFIERS = [{
+  name: 'Half/Half'
+}];
+
+export const PIZZA_QUALIFIERS = [{
+  name: 'EXTRA',
+  receiptCaption: 'EXTRA',
+  exclusionSet: 'HowMuch',
+  action: ['toggle', 'prefix', 'update-quantity'],
+  quantity: 1,
+  quantityType: 'ADD'
+}, {
+  name: 'LITE',
+  receiptCaption: 'LITE',
+  action: ['toggle', 'prefix'],
+  exclusionSet: 'HowMuch',
+}, {
+  name: 'SIDE',
+  receiptCaption: 'SD ',
+  action: ['toggle', 'prefix', 'add-quantity'],
+}, {
+  name: 'Half 1',
+  receiptCaption: 'H1-',
+  exclusionSet: 'WhichPart',
+  action: 'toggle;filter',
+}, {
+  name: 'Half 2',
+  receiptCaption: 'H2-',
+  exclusionSet: 'WhichPart',
+}, {
+  name: 'Whole',
+  receiptCaption: '',
+  exclusionSet: 'WhichPart',
+  quantity: 0.5,
+  quantityType: 'MULTIPLY',
+}, {
+  name: 'Prepare',
+  exclusionSet: 'CheckMenu',
+  items: [
+    'Add Oregano after cooked',
+    'Well Done',
+    'Extra Crispy',
+    'Undercooked',
+    'Do Not Cut',
+    'Dbl cut',
+    'Cut in Squares'
+  ]
+}];
+
+// Modifiers together with qualifiers represent all possible subitems.
+// There are qualifier sets and qualifier actions (prepare).
+// Qualfier sets are single choices (either whole , half1, or half2 - either excluded, extra, or lite).
+// Qualifiers apply to modifiers as siblings and a subitem is the combination of a qualifier and modifier.
+// Certain combinations of qualifier and modifier are prohibited: h1 and h2 cannot qualify cheese or sauce.
+// Menu subitems are not present in an order item's subitems.
+// Menu subitems are automatically included in the item's price.
+// Modifiers exist at the menu (or submenu) level, whereas subitems exist at the menu item level.
 
 export const MENU = {
   [CATEGORY.PIZZA]: {
     name: CATEGORY.PIZZA,
     caption: 'Pizza',
     key: uuid(),
+    modifiers: PIZZA_MODIFIERS,
+    qualifiers: PIZZA_GLOBAL_QUALIFIERS,
     sizes: PIZZA_SIZE,
     image: 'pizza.jpeg',
     row: 1,
