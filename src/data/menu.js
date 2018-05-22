@@ -36,6 +36,8 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+// Add qualifiers, modifiers, and toppings.
+
 export const MENU = {
   [CATEGORY.PIZZA]: {
     name: CATEGORY.PIZZA,
