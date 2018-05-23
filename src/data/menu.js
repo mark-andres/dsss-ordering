@@ -36,7 +36,53 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+export const PIZZA_QUALIFIERS = [{
+  name: 'EXTRA',
+  receiptCaption: 'EXTRA',
+  exclusionSet: 'HowMuch',
+  action: ['toggle', 'prefix', 'update-quantity'],
+  quantity: 1,
+  quantityType: 'ADD'
+}, {
+  name: 'LITE',
+  receiptCaption: 'LITE',
+  action: ['toggle', 'prefix'],
+  exclusionSet: 'HowMuch',
+}, {
+  name: 'SIDE',
+  receiptCaption: 'SD ',
+  action: ['toggle', 'prefix', 'add-quantity'],
+}, {
+  name: 'Half 1',
+  receiptCaption: 'H1-',
+  exclusionSet: 'WhichPart',
+  action: 'toggle;filter',
+}, {
+  name: 'Half 2',
+  receiptCaption: 'H2-',
+  exclusionSet: 'WhichPart',
+}, {
+  name: 'Whole',
+  receiptCaption: '',
+  exclusionSet: 'WhichPart',
+  quantity: 0.5,
+  quantityType: 'MULTIPLY',
+}, {
+  name: 'Prepare',
+  exclusionSet: 'CheckMenu',
+  items: [
+    'Add Oregano after cooked',
+    'Well Done',
+    'Extra Crispy',
+    'Undercooked',
+    'Do Not Cut',
+    'Dbl cut',
+    'Cut in Squares'
+  ]
+}];
+
 export const PIZZA_MODIFIERS = {
+  qualifiers: PIZZA_QUALIFIERS,
   items: [{
     name: 'Pepperoni',
     price: 1.50,
@@ -131,50 +177,6 @@ export const PIZZA_GLOBAL_QUALIFIERS = [{
   name: 'Half/Half'
 }];
 
-export const PIZZA_QUALIFIERS = [{
-  name: 'EXTRA',
-  receiptCaption: 'EXTRA',
-  exclusionSet: 'HowMuch',
-  action: ['toggle', 'prefix', 'update-quantity'],
-  quantity: 1,
-  quantityType: 'ADD'
-}, {
-  name: 'LITE',
-  receiptCaption: 'LITE',
-  action: ['toggle', 'prefix'],
-  exclusionSet: 'HowMuch',
-}, {
-  name: 'SIDE',
-  receiptCaption: 'SD ',
-  action: ['toggle', 'prefix', 'add-quantity'],
-}, {
-  name: 'Half 1',
-  receiptCaption: 'H1-',
-  exclusionSet: 'WhichPart',
-  action: 'toggle;filter',
-}, {
-  name: 'Half 2',
-  receiptCaption: 'H2-',
-  exclusionSet: 'WhichPart',
-}, {
-  name: 'Whole',
-  receiptCaption: '',
-  exclusionSet: 'WhichPart',
-  quantity: 0.5,
-  quantityType: 'MULTIPLY',
-}, {
-  name: 'Prepare',
-  exclusionSet: 'CheckMenu',
-  items: [
-    'Add Oregano after cooked',
-    'Well Done',
-    'Extra Crispy',
-    'Undercooked',
-    'Do Not Cut',
-    'Dbl cut',
-    'Cut in Squares'
-  ]
-}];
 
 // Modifiers together with qualifiers represent all possible subitems.
 // There are qualifier sets and qualifier actions (prepare).
