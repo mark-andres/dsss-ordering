@@ -39,9 +39,9 @@ describe('scratchPadReducer tests', () => {
 
   it('correctly adds a sized item to a scratch pad', () => {
     scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
-    scratchPad = scratchPadReducer(scratchPad, { 
+    scratchPad = scratchPadReducer(scratchPad, {
       type: types.SET_SIZE_REQUIRED,
-      sizeRequired: true 
+      sizeRequired: true
     });
     scratchPad = scratchPadReducer(scratchPad, {
       type: types.ADD_ITEM_TO_SCRATCH,
@@ -66,9 +66,9 @@ describe('scratchPadReducer tests', () => {
 
   it('correctly adds an item that then gets sized to a scratch pad', () => {
     scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
-    scratchPad = scratchPadReducer(scratchPad, { 
+    scratchPad = scratchPadReducer(scratchPad, {
       type: types.SET_SIZE_REQUIRED,
-      sizeRequired: true 
+      sizeRequired: true
     });
     scratchPad = scratchPadReducer(scratchPad, {
       type: types.SET_ITEM_SIZE,
@@ -93,9 +93,9 @@ describe('scratchPadReducer tests', () => {
 
   it('correctly creates a half and half completed item', () => {
     scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
-    scratchPad = scratchPadReducer(scratchPad, { 
+    scratchPad = scratchPadReducer(scratchPad, {
       type: types.SET_SIZE_REQUIRED,
-      sizeRequired: true 
+      sizeRequired: true
     });
     scratchPad = scratchPadReducer(scratchPad, {
       type: types.SET_ITEM_SIZE,
@@ -137,5 +137,63 @@ describe('scratchPadReducer tests', () => {
     expect(scratchPad.completedItem).toBeTruthy();
     expect(scratchPad.completedItem.price).toBe(13);
     expect(scratchPad.completedItem.name).toBe('Small H1-Supreme/H2-Cheese');
+  });
+
+  it('correctly adds and removes an item', () => {
+    const item = {
+      name: 'Supreme Pizza',
+      conciseName: 'Supreme',
+      key: uuid(),
+      priceMatrix: SPECIALTY_PIZZA_PRICES
+    };
+    scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.SET_SIZE_REQUIRED,
+      sizeRequired: true
+    });
+
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.ADD_ITEM_TO_SCRATCH,
+      item
+    });
+
+    expect(scratchPad.items.length).toBe(1);
+    expect(scratchPad.completedItem).toBe(null);
+
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.REMOVE_ITEM_FROM_SCRATCH,
+      item
+    });
+
+    expect(scratchPad.items.length).toBe(0);
+  });
+
+  it('correctly toggles an item', () => {
+    const item = {
+      name: 'Supreme Pizza',
+      conciseName: 'Supreme',
+      key: uuid(),
+      priceMatrix: SPECIALTY_PIZZA_PRICES
+    };
+    scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.SET_SIZE_REQUIRED,
+      sizeRequired: true
+    });
+
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.TOGGLE_ITEM_IN_SCRATCH,
+      item
+    });
+
+    expect(scratchPad.items.length).toBe(1);
+    expect(scratchPad.completedItem).toBe(null);
+
+    scratchPad = scratchPadReducer(scratchPad, {
+      type: types.TOGGLE_ITEM_IN_SCRATCH,
+      item 
+    });
+
+    expect(scratchPad.items.length).toBe(0);
   });
 });

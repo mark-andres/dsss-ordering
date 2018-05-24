@@ -82,12 +82,12 @@ const removeItemFromScratch = (scratchPad, itemToRemove) => {
   };
 }
 
-const toggleItemInScratch = (scratchPad, itemInScratch) => {
-  const item = scratchPad.items.find(item => item.key === itemInScratch.key);
-  if (item) {
-    return removeItemFromScratch(scratchPad, item);
+const toggleItemInScratch = (scratchPad, itemToToggle) => {
+  const foundItem = scratchPad.items.find(item => item.key === itemToToggle.key);
+  if (foundItem) {
+    return removeItemFromScratch(scratchPad, foundItem);
   } else {
-    return addItemToScratch(scratchPad, item);
+    return addItemToScratch(scratchPad, itemToToggle);
   }
 }
 
