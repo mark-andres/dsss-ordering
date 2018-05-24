@@ -200,30 +200,37 @@ export const MENU = {
     column: 1,
     items: [{
       name: 'Cheese Pizza',
+      conciseName: 'Cheese',
       key: uuid(),
       priceMatrix: CHEESE_PIZZA_PRICES,
     }, {
       name: 'Deluxe Pizza',
+      conciseName: 'Deluxe',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Spinach Tomato & Garlic',
+      conciseName: 'SPG',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Veggie Lovers',
+      conciseName: 'Veggie',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Meat Lovers',
+      conciseName: 'Meat',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Hawaiian',
+      conciseName: 'Hawaiian',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Blanco Pie',
+      conciseName: 'Blanco',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }]

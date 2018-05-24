@@ -1,6 +1,7 @@
 import { 
   ADD_ITEM_TO_SCRATCH,
   REMOVE_ITEM_FROM_SCRATCH,
+  TOGGLE_ITEM_IN_SCRATCH,
   SET_ITEM_SIZE,
   SET_SIZE_REQUIRED,
   SET_HALF_ORDERING, 
@@ -17,13 +18,18 @@ export const removeItemToScratch = item => ({
   item
 });
 
+export const toggleItemInScratch = item => ({
+  type: TOGGLE_ITEM_IN_SCRATCH,
+  item
+});
+
 export const setItemSize = size => ({
   type: SET_ITEM_SIZE,
   size
 });
 
 export const setSizeRequired = sizeRequired => ({
-  type: SET_ITEM_SIZE,
+  type: SET_SIZE_REQUIRED,
   sizeRequired
 });
 

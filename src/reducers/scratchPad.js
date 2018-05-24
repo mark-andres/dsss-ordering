@@ -1,15 +1,27 @@
-import types from '../actions/scratchPad';
+import types from '../actions/types';
 
-const defaultScratchPad = {
+export const defaultScratchPad = {
   items: [],
   halfOrdering: false,
   completedItem: null,
   sizeRequired: false
 }
 
+const getPrice = (size, item) => {
+  if (item.price) {
+    return item.price;
+  }
+
+  if (item.priceMatrix) {
+    return item.priceMatrix[size];
+  }
+
+  return 0;
+}
+
 const computeCompletedItem = scratchPad => {
   const { items, halfOrdering, sizeRequired, size } = scratchPad;
-  const allItemsEntered = false;
+  let allItemsEntered = false;
   let completedItem;
   const newScratchPad = { ...scratchPad };
 
@@ -20,11 +32,11 @@ const computeCompletedItem = scratchPad => {
   if (halfOrdering) {
     if (items.length === 2) {
       completedItem = {
-        name: `H1-${items[0].name}/H2-${items[1].name}`,
-        modifiersH1 = items[0].modifiers,
-        modifiersH2 = items[1].modifiers,
+        name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
+        modifiersH1: items[0].modifiers,
+        modifiersH2: items[1].modifiers,
         quantity: 1,
-        price: (items[0].price + items[1].price) / 2
+        price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2)
       }
       allItemsEntered = true;
     }
@@ -33,6 +45,7 @@ const computeCompletedItem = scratchPad => {
       completedItem = {
         ...items[0],
         quantity: 1,
+        price: getPrice(size, items[0])
       }
       allItemsEntered = true;
     }
@@ -47,7 +60,7 @@ const computeCompletedItem = scratchPad => {
       ...scratchPad,
       completedItem
     }
-  } 
+  }
 
   return scratchPad;
 }
@@ -70,6 +83,15 @@ const removeItemFromScratch = (scratchPad, itemToRemove) => {
   };
 }
 
+const toggleItemInScratch = (scratchPad, itemInScratch) => {
+  const item = scratchPad.items.find(item => item.key === itemInScratch.key);
+  if (item) {
+    return removeItemFromScratch(scratchPad, item);
+  } else {
+    return addItemToScratch(scratchPad, item);
+  }
+}
+
 const setItemSize = (scratchPad, size) => {
   return computeCompletedItem({
     ...scratchPad,
@@ -79,31 +101,41 @@ const setItemSize = (scratchPad, size) => {
 
 const scratchPadReducer = (scratchPad = defaultScratchPad, action) => {
   switch (action.type) {
-    case ADD_ITEM_TO_SCRATCH:
-      return addItemToScratch(scratchPad, item);
+    case types.ADD_ITEM_TO_SCRATCH:
+      return addItemToScratch(scratchPad, action.item);
 
-    case REMOVE_ITEM_FROM_SCRATCH:
-      return removeItemFromScratch(scratchPad, item);
+    case types.REMOVE_ITEM_FROM_SCRATCH:
+      return removeItemFromScratch(scratchPad, action.item);
 
-    case SET_SIZE_REQUIRED:
+    case types.TOGGLE_ITEM_IN_SCRATCH:
+      return toggleItemInScratch(scratchPad, action.item);
+
+    case types.SET_SIZE_REQUIRED:
       return {
         ...scratchPad,
         sizeRequired: action.sizeRequired
       };
 
-    case SET_ITEM_SIZE:
+    case types.SET_ITEM_SIZE:
       return setItemSize(scratchPad, action.size);
 
-    case SET_HALF_ORDERING:
+    case types.SET_HALF_ORDERING:
       return {
         ...scratchPad,
         halfOrdering: action.halfOrdering
       };
 
-    case RESET_SCRATCH:
-      return defaultScratchPad;
+    case types.RESET_SCRATCH:
+      return {
+        items: [],
+        halfOrdering: false,
+        completedItem: null,
+        sizeRequired: false
+      };
 
     default:
       return scratchPad;
   }
 }
+
+export default scratchPadReducer;
