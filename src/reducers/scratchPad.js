@@ -23,7 +23,6 @@ const computeCompletedItem = scratchPad => {
   const { items, halfOrdering, sizeRequired, size } = scratchPad;
   let allItemsEntered = false;
   let completedItem;
-  const newScratchPad = { ...scratchPad };
 
   if (sizeRequired && !size) {
     return scratchPad;
