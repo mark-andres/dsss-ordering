@@ -35,7 +35,8 @@ const computeCompletedItem = scratchPad => {
         modifiersH1: items[0].modifiers,
         modifiersH2: items[1].modifiers,
         quantity: 1,
-        price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2)
+        price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
+        size
       }
       allItemsEntered = true;
     }
@@ -44,7 +45,8 @@ const computeCompletedItem = scratchPad => {
       completedItem = {
         ...items[0],
         quantity: 1,
-        price: getPrice(size, items[0])
+        price: getPrice(size, items[0]),
+        size: size || 0
       }
       allItemsEntered = true;
     }
