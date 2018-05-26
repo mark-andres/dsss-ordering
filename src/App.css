@@ -5,6 +5,10 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+p {
+  cursor: default;
+}
+
 .main-grid-cell {
   background-color: #8FAECF;
 }
@@ -316,14 +320,14 @@
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .menu-item {
   background: linear-gradient(to right, #006900, #007500, #006900);
   color: white;
-  border-radius: 40%;
+  border-radius: 30%;
   height: 20%;
   width: 30%;
   margin: 1%;
@@ -334,12 +338,13 @@
 .menu-item > p {
   text-align: center;
   position: absolute;
-  bottom: 38%;
-  left: 25%;
+  top: 34%;
+  left: 0;
+  width: 100%;
 }
 
 .menu-item-set {
-  background: linear-gradient(to right, #62e460, #587a57, #62e460)
+  background: linear-gradient(to right, #62e460, #62e460, #62e460);
 }
 
 .size-items {
@@ -354,7 +359,7 @@
   color: white;
   height: 10%;
   width: 90%;
-  border-radius: 40%;
+  border-radius: 30%;
   box-shadow: 6px 6px black;
   position: relative;
   margin: 1%;
@@ -364,12 +369,13 @@
 .size-item > p {
   text-align: center;
   position: absolute;
-  bottom: 33%;
-  left: 30%;
+  bottom: 24%;
+  left: 0;
+  width: 100%;
 }
 
 .size-item-set {
-  background: linear-gradient(to right, #62e460, #587a57, #62e460)
+  background: linear-gradient(to right, #62e460, #62e460, #62e460);
 }
 
 .qualifier-panel {
