@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/order';
-import { toggleItemInScratch, resetScratch } from '../actions/scratchPad';
+import { toggleItemInScratch } from '../actions/scratchPad';
 import uuid from 'uuid/v1';
 
 class MenuItem extends React.Component {
@@ -28,8 +27,8 @@ class MenuItem extends React.Component {
       key: this.key,
       quantity: 1,
     };
-    this.props.toggleItem(item);
 
+    this.props.toggleItem(item);
     // if (this.props.scratchPad.completedItem) {
     //   this.props.addItem(this.props.scratchPad.completedItem);
     //   this.props.resetScratch();
@@ -56,9 +55,7 @@ class MenuItem extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleItem: item => dispatch(toggleItemInScratch(item)),
-  resetScratch: () => dispatch(resetScratch()),
-  addItem: item => dispatch(addItem(item))
+  toggleItem: item => dispatch(toggleItemInScratch(item))
 });
 
 const mapStateToProps = state => ({

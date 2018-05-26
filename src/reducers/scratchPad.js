@@ -67,13 +67,23 @@ const computeCompletedItem = scratchPad => {
 }
 
 const addItemToScratch = (scratchPad, item) => {
-  const maxItems = scratchPad.halfOrdering ? 1 : 0;
-  if (scratchPad.items.length <= maxItems) {
-    scratchPad.items = scratchPad.items.concat(item);
-    return computeCompletedItem(scratchPad);
+  const items = scratchPad.items;
+  const halfOrdering = scratchPad.halfOrdering;
+
+  if (items.length === 0) {
+    items[0] = item;
+  } else if (halfOrdering) {
+    if (items.length === 1) {
+      items[1] = item;
+    } else {
+      items[0] = items[1];
+      items[1] = item;
+    }
   } else {
-    return scratchPad;
+    items[0] = item;
   }
+  scratchPad.items = [...items];
+  return computeCompletedItem(scratchPad);
 }
 
 const removeItemFromScratch = (scratchPad, itemToRemove) => {
