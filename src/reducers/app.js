@@ -8,7 +8,8 @@ import { setCurrentMenu } from '../actions/menu';
 
 const appReducer = (state = {}, action) => {
   switch (action.type) {
-    case types.SET_CURRENT_MENU:
+    case types.MAKE_TOP_MENU_CURRENT:
+    case types.RESTORE_TOP_MENU:
       state.menu = menuReducer(state.menu, action);
       state.order = orderReducer(
         state.order, setSelectedItem(null)

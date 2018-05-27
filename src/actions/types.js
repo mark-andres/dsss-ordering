@@ -1,6 +1,8 @@
 // Types for menu
 export const SET_CURRENT_MENU = 'SET_CURRENT_MENU';
 export const RESET_CURRENT_MENU = 'RESET_CURRENT_MENU';
+export const MAKE_TOP_MENU_CURRENT = 'MAKE_TOP_MENU_CURRENT';
+export const RESTORE_TOP_MENU = 'RESTORE_TOP_MENU';
 
 // Types for order
 export const ADD_ITEM = 'ADD_ITEM';
@@ -24,6 +26,8 @@ export const SET_SIZE_REQUIRED = 'SET_SIZE_REQUIRED';
 export default {
   SET_CURRENT_MENU,
   RESET_CURRENT_MENU,
+  MAKE_TOP_MENU_CURRENT,
+  RESTORE_TOP_MENU,
   ADD_ITEM,
   REMOVE_ITEM,
   CHANGE_ITEM,

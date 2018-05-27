@@ -39,6 +39,7 @@ export const SPECIALTY_PIZZA_PRICES = {
 export const PIZZA_QUALIFIERS = [{
   name: 'EXTRA',
   receiptCaption: 'EXTRA',
+  id: 'EXTRA',
   exclusionSet: 'HowMuch',
   action: ['toggle', 'prefix', 'update-quantity'],
   quantity: 1,
@@ -46,29 +47,35 @@ export const PIZZA_QUALIFIERS = [{
 }, {
   name: 'LITE',
   receiptCaption: 'LITE',
+  id: 'LITE',
   action: ['toggle', 'prefix'],
   exclusionSet: 'HowMuch',
 }, {
   name: 'SIDE',
+  id: 'SIDE',
   receiptCaption: 'SD ',
   action: ['toggle', 'prefix', 'add-quantity'],
 }, {
   name: 'Half 1',
   receiptCaption: 'H1-',
+  id: 'H1',
   exclusionSet: 'WhichPart',
   action: 'toggle;filter',
 }, {
   name: 'Half 2',
   receiptCaption: 'H2-',
+  id: 'H2',
   exclusionSet: 'WhichPart',
 }, {
   name: 'Whole',
   receiptCaption: '',
   exclusionSet: 'WhichPart',
+  id: 'WHOLE',
   quantity: 0.5,
   quantityType: 'MULTIPLY',
 }, {
   name: 'Prepare',
+  id: 'PREPARE',
   exclusionSet: 'CheckMenu',
   items: [
     'Add Oregano after cooked',
@@ -84,12 +91,120 @@ export const PIZZA_QUALIFIERS = [{
 export const MENU_TYPE = {
   MODIFIERS_MENU: 'MODIFIERS_MENU',
   ITEMS_MENU: 'ITEMS_MENU',
-  SUBITEMS_MENU: 'SUBITEMS_MENU'
+  CHOICES_MENU: 'CHOICES_MENU'
 }
+
+export const SUBS_MODIFIERS = {
+  name: 'Subs Modifiers',
+  caption: 'Subs and Calzones Modifiers',
+  type: MENU_TYPE.MODIFIERS_MENU,
+  key: uuid(),
+  qualifiers: PIZZA_QUALIFIERS,
+  items: [{
+    name: 'Pepperoni',
+    price: 0.50,
+  }, {
+    name: 'Beef Sausage',
+    price: 0.50,
+  }, {
+    name: 'Canadian Bacon',
+    price: 0.50
+  }, {
+    name: 'Italian Sausage',
+    price: 0.50
+  }, {
+    name: 'Anchovies',
+    price: 0.50
+  }, {
+    name: 'Meatballs',
+    price: 0.50
+  }, {
+    name: 'Grilled Chicken',
+    price: 0.50
+  }, {
+    name: 'Ham',
+    price: 0.50
+  }, {
+    name: 'Salami',
+    price: 1.00
+  }, {
+    name: 'Steak',
+    price: 0.50
+  }, {
+    name: 'Bell Peppers',
+    price: 0.50
+  }, {
+    name: 'Mushrooms',
+    price: 0.50
+  }, {
+    name: 'Onions',
+    price: 0.50
+  }, {
+    name: 'Black Olives',
+    price: 0.50
+  }, {
+    name: 'Jalapeños',
+    price: 0.50
+  }, {
+    name: 'Eggplant',
+    price: 0.50
+  }, {
+    name: 'Garlic',
+    price: 0.50
+  }, {
+    name: 'Spinach',
+    price: 0.50
+  }, {
+    name: 'Tomatoes',
+    price: 0.50
+  }, {
+    name: 'Artichokes',
+    price: 0.50
+  }, {
+    name: 'Green Olives',
+    price: 0.50
+  }, {
+    name: 'Basil',
+    price: 0.50
+  }, {
+    name: 'Pepperonchini',
+    price: 0.50
+  }, {
+    name: 'Pineapple',
+    price: 0.50
+  }, {
+    name: 'Provolone',
+    price: 0.50
+  }, {
+    name: 'Pizza Sauce',
+    price: 0.50
+  }, {
+    name: 'Olive Oil',
+    price: 0.50
+  }, {
+    name: 'Ricotta',
+    price: 0.50
+  }, {
+    name: 'Pizza Cheese',
+    price: 0.50
+  }, {
+    name: 'Feta Cheese',
+    price: 0.50
+  }, {
+    name: 'Lettuce',
+    prince: 0.50
+  }, {
+    name: 'Italian',
+    price: 0.50
+  }, {
+    name: 'Breaded Chicken Fillet',
+    price: 1.00
+  }]
+};
 
 export const PIZZA_MODIFIERS = {
   name: 'Modifiers',
-  caption: 'Pizza',
+  caption: 'Pizza Modifiers',
   type: MENU_TYPE.MODIFIERS_MENU,
   key: uuid(),
   qualifiers: PIZZA_QUALIFIERS,
@@ -119,6 +234,9 @@ export const PIZZA_MODIFIERS = {
     price: 2.50
   }, {
     name: 'Ricotta Cheese',
+    price: 2.50
+  }, {
+    name: '__blank__',
     price: 2.50
   }, {
     name: 'Bell Peppers',
@@ -183,19 +301,256 @@ export const PIZZA_MODIFIERS = {
   }]
 };
 
+export const SLICES_MODIFIERS = {
+  name: 'Slices Modifiers',
+  caption: 'Slices Modifiers',
+  type: MENU_TYPE.MODIFIERS_MENU,
+  key: uuid(),
+  qualifiers: PIZZA_QUALIFIERS,
+  items: [{
+    name: 'Pepperoni',
+    price: 1.50,
+  }, {
+    name: 'Beef Sausage',
+    price: 1.50,
+  }, {
+    name: 'Canadian Bacon',
+    price: 1.50
+  }, {
+    name: 'Italian Sausage',
+    price: 1.50
+  }, {
+    name: 'Anchovies',
+    price: 1.50
+  }, {
+    name: 'Meatballs',
+    price: 1.50
+  }, {
+    name: '__blank__',
+  }, {
+    name: '__blank__',
+  }, {
+    name: '__blank__',
+  }, {
+    name: '__blank__',
+  }, {
+    name: 'Bell Peppers',
+    price: 1.50
+  }, {
+    name: 'Mushrooms',
+    price: 1.50
+  }, {
+    name: 'Onions',
+    price: 1.50
+  }, {
+    name: 'Black Olives',
+    price: 1.50
+  }, {
+    name: 'Jalapeños',
+    price: 1.50
+  }, {
+    name: '__blank__'
+  }, {
+    name: 'Garlic',
+    price: 1.50
+  }, {
+    name: 'Spinach',
+    price: 1.50
+  }, {
+    name: 'Tomatoes',
+    price: 1.50
+  }, {
+    name: '__blank__',
+  }, {
+    name: 'Green Olives',
+    price: 1.50
+  }, {
+    name: 'Basil',
+    price: 1.50
+  }, {
+    name: 'Pepperonchini',
+    price: 1.50
+  }, {
+    name: 'Pineapple',
+    price: 1.50
+  }, {
+    name: '__blank__',
+  }, {
+    name: 'Pizza Sauce',
+    price: 1.50
+  }, {
+    name: 'Olive Oil',
+    price: 1.50
+  }, {
+    name: '__blank__',
+  }, {
+    name: 'Pizza Cheese',
+    price: 1.50
+  }, {
+    name: 'Feta Cheese',
+    price: 2.50
+  }]
+};
+
 export const PIZZA_GLOBAL_QUALIFIERS = [{
   name: 'Half/Half'
 }];
 
+export const ENTREE_MODIFIERS = {
+  name: 'Modifiers',
+  caption: 'Pizza',
+  type: MENU_TYPE.MODIFIERS_MENU,
+  key: uuid(),
+  qualifiers: PIZZA_QUALIFIERS,
+  items: [{
+    name: 'Breaded Chicken Fillet',
+    price: 1.50,
+  }, {
+    name: 'Eggplant',
+    price: 1.50,
+  }, {
+    name: 'Marinara',
+    price: 1.50,
+  }, {
+    name: 'Meatballs',
+    price: 1.50,
+  }, {
+    name: 'Mozzarella',
+    price: 1.50,
+  }, {
+    name: 'Ricotta',
+    price: 1.50,
+  }, {
+    name: 'Sausage',
+    price: 1.50,
+  }, {
+    name: 'Meat Sauce',
+    price: 1.50,
+  }, {
+    name: 'Spaghetti',
+    price: 1.50,
+  }, {
+    name: 'Penne',
+    price: 1.50,
+  }, {
+    name: 'Spinach',
+    price: 1.50,
+  }, {
+    name: 'Garlic',
+    price: 1.50,
+  }]
+};
 
-// Modifiers together with qualifiers represent all possible subitems.
-// There are qualifier sets and qualifier actions (prepare).
-// Qualfier sets are single choices (either whole , half1, or half2 - either excluded, extra, or lite).
-// Qualifiers apply to modifiers as siblings and a subitem is the combination of a qualifier and modifier.
-// Certain combinations of qualifier and modifier are prohibited: h1 and h2 cannot qualify cheese or sauce.
-// Menu subitems are not present in an order item's subitems.
-// Menu subitems are automatically included in the item's price.
-// Modifiers exist at the menu (or submenu) level, whereas subitems exist at the menu item level.
+export const ENTREE_SALAD_CHOICEMENU = {
+  prompt: 'Please Select Salad',
+  items: [
+    { 
+      name: 'Salad w Ranch',
+    },
+    {
+      name: 'Salad w Blue Chz',
+    },
+    {
+      name: 'Salad w Vin',
+    },
+    {
+      name: 'Salad w 1000 Isle',
+    },
+    {
+      name: 'Salad w Caesar',
+    },
+    {
+      name: 'Salad w NO Dress',
+    },
+    {
+      name: 'NO Salad',
+    },
+    {
+      name: 'NO Salad Xtra Brd',
+    },
+    {
+      name: 'Salad w Italian',
+    },
+  ]
+};
+
+export const WINGSAUCE_CHOICEMENU = {
+  prompt: 'Please choose wingsauce',
+  items: [
+    { 
+      name: 'Hot',
+    },
+    {
+      name: 'Garlic Parmesan',
+    },
+    {
+      name: 'Dry',
+    },
+    {
+      name: 'Hot Sauce on Side',
+    },
+    {
+      name: 'GP on Side',
+    },
+    {
+      name: '5 Hot / 5 Garlic',
+    },
+    {
+      name: 'GP and Hot mixed',
+    },
+  ]
+};
+
+export const MARINARA_CHOICEMENU = {
+  prompt: 'Please choose marinara or none',
+  items: [
+    {
+      name: 'Marinara',
+    },
+    {
+      name: 'No DIP',
+    },
+  ]
+};
+
+export const DIP_CHOICEMENU = {
+  prompt: 'Please choose dip',
+  items: [
+    { 
+      name: 'Ranch',
+    },
+    {
+      name: 'Blue Cheese',
+    },
+    {
+      name: 'Ranch and BC',
+    },
+    {
+      name: 'Marinara',
+    },
+    {
+      name: 'No DIP',
+    },
+  ]
+};
+
+export const DIP2_CHOICEMENU = {
+  prompt: 'Please choose dip',
+  items: [
+    { 
+      name: 'Ranch',
+    },
+    {
+      name: 'Blue Cheese',
+    },
+    {
+      name: 'Ranch and BC',
+    },
+    {
+      name: 'No DIP',
+    },
+  ]
+};
 
 export const MENU = {
   [CATEGORY.PIZZA]: {
@@ -214,36 +569,86 @@ export const MENU = {
       conciseName: 'Cheese',
       key: uuid(),
       priceMatrix: CHEESE_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ],
     }, {
       name: 'Deluxe Pizza',
       conciseName: 'Deluxe',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Pepperoni',
+        'Beef Sausage',
+        'Canadian Bacon',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Black Olives',
+      ],
     }, {
       name: 'Spinach Tomato & Garlic',
       conciseName: 'STG',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Olive Oil',
+        'Spinach',
+        'Tomatoes',
+        'Garlic',
+      ],
     }, {
       name: 'Veggie Lovers',
       conciseName: 'Veggie',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Black Olives',
+      ],
     }, {
       name: 'Meat Lovers',
       conciseName: 'Meat',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Italian Sausage',
+        'Pepperoni',
+        'Beef Sausage',
+        'Canadian Bacon',
+      ],
     }, {
       name: 'Hawaiian',
       conciseName: 'Hawaiian',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Canadian Bacon',
+        'Pineapple',
+      ],
     }, {
       name: 'Blanco Pie',
       conciseName: 'Blanco',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'White Sauce',
+      ],
     }]
   },
   [CATEGORY.SALADS]: {
@@ -316,30 +721,52 @@ export const MENU = {
       name: 'Chicken Wings',
       key: uuid(),
       price: 9.00,
+      choices: [
+        WINGSAUCE_CHOICEMENU,
+        DIP2_CHOICEMENU
+      ]
     }, {
       name: 'Chicken Tenders',
       key: uuid(),
       price: 8.00,
+      choices: [
+        DIP_CHOICEMENU
+      ]
     }, {
       name: 'Fried Calamari',
       key: uuid(),
       price: 8.00,
+      choices: [
+        DIP_CHOICEMENU
+      ]
     }, {
       name: 'Fried Mushrooms',
       key: uuid(),
       price: 7.00,
+      choices: [
+        DIP_CHOICEMENU
+      ]
     }, {
       name: 'Cheese Sticks',
       key: uuid(),
       price: 7.00,
+      choices: [
+        DIP_CHOICEMENU
+      ]
     }, {
       name: 'Garlic Bread',
       key: uuid(),
       price: 3.00,
+      choices: [
+        MARINARA_CHOICEMENU
+      ]
     }, {
       name: 'Garlic Cheese Bread',
       key: uuid(),
       price: 4.00,
+      choices: [
+        MARINARA_CHOICEMENU
+      ]
     }]
   },
   [CATEGORY.SIDES]: {
@@ -417,6 +844,7 @@ export const MENU = {
     name: 'Slices',
     caption: 'Slice',
     type: MENU_TYPE.ITEMS_MENU,
+    modifiers: SLICES_MODIFIERS,
     key: uuid(),
     image: 'slice.png',
     row: 2,
@@ -424,31 +852,78 @@ export const MENU = {
     items: [{
       name: 'Cheese Slice',
       key: uuid(),
-      price: 2.50,
+      price: 3.00,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Pepperoni Slice',
       key: uuid(),
-      price: 3.00,
+      price: 3.50,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Pepperoni'
+      ]
     }, {
       name: 'Beef Sausage Slice',
       key: uuid(),
-      price: 3.00,
+      price: 3.50,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Beef Sausage',
+      ]
     }, {
       name: 'Supreme Slice',
       key: uuid(),
       price: 4.50,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Pepperoni',
+        'Beef Sausage',
+        'Canadian Bacon',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Black Olives',
+      ],
     }, {
       name: 'Meatlovers Slice',
       key: uuid(),
       price: 4.50,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Italian Sausage',
+        'Pepperoni',
+        'Beef Sausage',
+        'Canadian Bacon',
+      ],
     }, {
       name: 'Hawaiian Slice',
       key: uuid(),
-      price: 4.50,
+      price: 4.00,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Canadian Bacon',
+        'Pineapple',
+      ]
     }, {
       name: 'Veggie Slice',
       key: uuid(),
       price: 4.50,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Black Olives',
+      ],
     }]
   },
   [CATEGORY.SUBS]: {
@@ -456,6 +931,7 @@ export const MENU = {
     caption: 'Subs',
     type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
+    modifiers: SUBS_MODIFIERS,
     image: 'subs.png',
     row: 2,
     column: 2,
@@ -501,6 +977,7 @@ export const MENU = {
     name: 'Entrees',
     caption: 'Pasta',
     type: MENU_TYPE.ITEMS_MENU,
+    modifiers: ENTREE_MODIFIERS,
     key: uuid(),
     image: 'pasta.jpeg',
     row: 2,

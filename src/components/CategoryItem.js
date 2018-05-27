@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentMenu } from '../actions/menu';
+import { makeTopMenuCurrentMenu } from '../actions/menu';
 
 class CategoryItem extends React.Component {
   onClick = () => {
@@ -29,7 +29,7 @@ class CategoryItem extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentMenu: menu => dispatch(setCurrentMenu(menu))
+    setCurrentMenu: menu => dispatch(makeTopMenuCurrentMenu(menu))
   }
 }
 
