@@ -81,7 +81,17 @@ export const PIZZA_QUALIFIERS = [{
   ]
 }];
 
+export const MENU_TYPE = {
+  MODIFIERS_MENU: 'MODIFIERS_MENU',
+  ITEMS_MENU: 'ITEMS_MENU',
+  SUBITEMS_MENU: 'SUBITEMS_MENU'
+}
+
 export const PIZZA_MODIFIERS = {
+  name: 'Modifiers',
+  caption: 'Pizza',
+  type: MENU_TYPE.MODIFIERS_MENU,
+  key: uuid(),
   qualifiers: PIZZA_QUALIFIERS,
   items: [{
     name: 'Pepperoni',
@@ -192,6 +202,7 @@ export const MENU = {
     name: CATEGORY.PIZZA,
     caption: 'Pizza',
     key: uuid(),
+    type: MENU_TYPE.ITEMS_MENU,
     modifiers: PIZZA_MODIFIERS,
     qualifiers: PIZZA_GLOBAL_QUALIFIERS,
     sizes: PIZZA_SIZE,
@@ -210,7 +221,7 @@ export const MENU = {
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
       name: 'Spinach Tomato & Garlic',
-      conciseName: 'SPG',
+      conciseName: 'STG',
       key: uuid(),
       priceMatrix: SPECIALTY_PIZZA_PRICES,
     }, {
@@ -238,6 +249,7 @@ export const MENU = {
   [CATEGORY.SALADS]: {
     name: 'Salads',
     caption: 'Salads',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'salad.jpeg',
     row: 1,
@@ -295,6 +307,7 @@ export const MENU = {
   [CATEGORY.APPETIZERS]: {
     name: 'Appetizers',
     caption: 'Appetizers',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'appetizers.jpeg',
     row: 1,
@@ -332,6 +345,7 @@ export const MENU = {
   [CATEGORY.SIDES]: {
     name: 'Sides and Sauces',
     caption: 'Sides',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'sides.jpeg',
     row: 1,
@@ -384,6 +398,7 @@ export const MENU = {
   [CATEGORY.BEVERAGES]: {
     name: 'Beverages',
     caption: 'Beverages',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'beverages.jpeg',
     row: 1,
@@ -401,6 +416,7 @@ export const MENU = {
   [CATEGORY.SLICES]: {
     name: 'Slices',
     caption: 'Slice',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'slice.png',
     row: 2,
@@ -438,6 +454,7 @@ export const MENU = {
   [CATEGORY.SUBS]: {
     name: 'Subs and Calzones',
     caption: 'Subs',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'subs.png',
     row: 2,
@@ -483,6 +500,7 @@ export const MENU = {
   [CATEGORY.PASTA]: {
     name: 'Entrees',
     caption: 'Pasta',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'pasta.jpeg',
     row: 2,
@@ -528,6 +546,7 @@ export const MENU = {
   [CATEGORY.DESSERTS]: {
     name: 'Desserts',
     caption: 'Desserts',
+    type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
     image: 'cannoli.jpeg',
     row: 2,

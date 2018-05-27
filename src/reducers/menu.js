@@ -3,9 +3,7 @@ import { MENU, getTopMenu } from '../data/menu';
 
 const menuDefault = {
   menu: getTopMenu(),
-  currentMenu: {
-    ...MENU.Pizza
-  }
+  currentMenu: MENU['Pizza']
 }
 
 const menuReducer = (menu = menuDefault, action) => {

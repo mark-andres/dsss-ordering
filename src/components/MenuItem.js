@@ -29,10 +29,6 @@ class MenuItem extends React.Component {
     };
 
     this.props.toggleItem(item);
-    // if (this.props.scratchPad.completedItem) {
-    //   this.props.addItem(this.props.scratchPad.completedItem);
-    //   this.props.resetScratch();
-    // }
   }
 
   render() {

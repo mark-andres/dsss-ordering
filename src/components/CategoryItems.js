@@ -1,6 +1,7 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import { connect } from 'react-redux';
+import { setCurrentMenu } from '../actions/menu';
 
 class CategoryItems extends React.Component {
   renderMenuItems() {
@@ -24,6 +25,9 @@ class CategoryItems extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  setCurrentMenu: menu => dispatch(setCurrentMenu())
+});
 
 const mapStateToProps = state => {
   return {
@@ -32,4 +36,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, null)(CategoryItems);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItems);

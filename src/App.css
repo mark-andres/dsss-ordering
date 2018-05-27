@@ -309,6 +309,7 @@ p {
 
 .qualifier-panel {
   border-top: 3px lightgrey inset;
+  background-color: #8FAECF;
   grid-row: 3;
 }
 

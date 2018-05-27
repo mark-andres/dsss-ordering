@@ -4,7 +4,7 @@ export const defaultScratchPad = {
   items: [],
   halfOrdering: false,
   completedItem: null,
-  sizeRequired: false
+  sizeRequired: true
 }
 
 const getPrice = (size, item) => {
@@ -25,7 +25,9 @@ const computeCompletedItem = scratchPad => {
   let completedItem;
 
   if (sizeRequired && !size) {
-    return scratchPad;
+    return {
+      ...scratchPad
+    };
   }
 
   if (halfOrdering) {

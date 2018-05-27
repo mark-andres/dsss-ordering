@@ -1,31 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SelectionMenu from './SelectionMenu';
-import SizeMenu from './SizeMenu';
+import ItemsMenu from './ItemsMenu';
+import ModifiersMenu from './ModifiersMenu';
+import { MENU_TYPE } from '../data/menu';
 
 class SelectionPanel extends React.Component {
   render() {
-    const sizes = this.props.currentMenu.sizes;
-    let sizeNames = [];
-    let classes = "main-grid-cell ";
-    if (sizes) {
-      classes += 'selection-panel-2';
-    } else {
-      classes += 'selection-panel';
-    }
+    switch (this.props.currentMenu.type) {
+      case MENU_TYPE.ITEMS_MENU:
+        return <ItemsMenu menu={this.props.currentMenu} />;
 
-    if (sizes) {
-      for (const size in sizes) {
-        sizeNames.push(sizes[size]);
-      }
+      case MENU_TYPE.MODIFIERS_MENU:
+        return <ModifiersMenu menu={this.props.currentMenu} />;
+
+      default:
+        return <h1>Unknown Menu Type</h1>
     }
-    
-    return (
-      <div className={classes}>
-        {!!sizes && <SizeMenu sizes={sizeNames} />}
-        <SelectionMenu menu={this.props.currentMenu} />
-      </div>
-    );
   }
 }
 
