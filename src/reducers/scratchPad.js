@@ -4,7 +4,8 @@ export const defaultScratchPad = {
   items: [],
   halfOrdering: false,
   completedItem: null,
-  sizeRequired: true
+  sizeRequired: true,
+  size: undefined
 }
 
 const getPrice = (size, item) => {
@@ -143,7 +144,6 @@ const scratchPadReducer = (scratchPad = defaultScratchPad, action) => {
         items: [],
         halfOrdering: false,
         completedItem: null,
-        sizeRequired: false
       };
 
     default:

@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendOrder } from '../actions/order';
-import { resetCurrentMenu } from '../actions/menu';
-import { resetScratch } from '../actions/scratchPad';
+import { restoreTopMenu } from '../actions/menu';
 
 class OrderOperations extends React.Component {
   onSendOrder = () => {
     this.props.sendOrder();
-    this.props.resetCurrentMenu();
-    this.props.resetScratch();
+    this.props.restoreTopMenu();
   };
 
   render() {
@@ -49,8 +47,7 @@ class OrderOperations extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
-  resetCurrentMenu: () => dispatch(resetCurrentMenu()),
-  resetScratch: () => dispatch(resetScratch())
+  restoreTopMenu: () => dispatch(restoreTopMenu()),
 });
 
 export default connect(null, mapDispatchToProps)(OrderOperations);
