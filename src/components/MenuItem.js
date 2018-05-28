@@ -10,8 +10,7 @@ class MenuItem extends React.Component {
   }
 
   isSet() {
-    const { scratchPad } = this.props;
-    const { items } = scratchPad;
+    const items = this.props.scratchPadItems;
 
     if (items.length === 0) {
       return false;
@@ -55,7 +54,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  scratchPad: state.scratchPad
+  scratchPadItems: state.scratchPad.items
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuItem);

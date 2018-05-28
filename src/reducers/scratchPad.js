@@ -72,6 +72,14 @@ const computeCompletedItem = scratchPad => {
 const addItemToScratch = (scratchPad, item) => {
   const items = scratchPad.items;
   const halfOrdering = scratchPad.halfOrdering;
+  
+  // Set default modifiers
+  if (item.includes) {
+    const defaultModifiers = item.includes.reduce((modifiers, modifierName) => {
+      return modifiers.concat({ name: modifierName, flags: {default: true }});
+    }, []);
+    item.modifiers = defaultModifiers;
+  }
 
   if (items.length === 0) {
     items[0] = item;

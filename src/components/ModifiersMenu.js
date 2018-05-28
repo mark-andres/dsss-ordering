@@ -34,6 +34,8 @@ class ModifiersMenu extends React.Component {
       return <div
         key={uuid()}
         style={style}
+        id={item.name}
+        onClick={e => console.log(e.target.id)}
       >
         <br />{item.name}
       </div>
