@@ -443,6 +443,7 @@ export const ENTREE_MODIFIERS = {
 
 export const ENTREE_SALAD_CHOICEMENU = {
   prompt: 'Please Select Salad',
+  type: MENU_TYPE.CHOICES_MENU,
   items: [
     { 
       name: 'Salad w Ranch',
@@ -476,6 +477,7 @@ export const ENTREE_SALAD_CHOICEMENU = {
 
 export const WINGSAUCE_CHOICEMENU = {
   prompt: 'Please choose wingsauce',
+  type: MENU_TYPE.CHOICES_MENU,
   items: [
     { 
       name: 'Hot',
@@ -503,6 +505,7 @@ export const WINGSAUCE_CHOICEMENU = {
 
 export const MARINARA_CHOICEMENU = {
   prompt: 'Please choose marinara or none',
+  type: MENU_TYPE.CHOICES_MENU,
   items: [
     {
       name: 'Marinara',
@@ -515,6 +518,7 @@ export const MARINARA_CHOICEMENU = {
 
 export const DIP_CHOICEMENU = {
   prompt: 'Please choose dip',
+  type: MENU_TYPE.CHOICES_MENU,
   items: [
     { 
       name: 'Ranch',
@@ -536,6 +540,7 @@ export const DIP_CHOICEMENU = {
 
 export const DIP2_CHOICEMENU = {
   prompt: 'Please choose dip',
+  type: MENU_TYPE.CHOICES_MENU,
   items: [
     { 
       name: 'Ranch',

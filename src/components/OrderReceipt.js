@@ -1,9 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
+import _ from 'lodash';
 import LineItem from './LineItem';
 
 class OrderReceipt extends React.Component {
+  renderLineItems(order) {
+    const lineItems = order.items.map(item => {
+      let subItems = [];
+      if (item.subItems) {
+        subItems = item.subItems.map(subItem => {
+          return <LineItem isSubItem={true} key={uuid()} item={{name: subItem}} />;
+        });
+      }
+
+      return [<LineItem isSubItem={false} key={item.id} item={item} />, ...subItems];
+    });
+    const flatItems = _.flatten(lineItems);
+    return flatItems;
+  }
+
   render() {
     const order = this.props.order;
     const header =
@@ -15,16 +31,12 @@ class OrderReceipt extends React.Component {
         </tr>
       </thead>;
 
-    const lineItems = order.items.map(item =>
-      <LineItem key={item.id} item={item} />
-    );
-
     return (
       <div className="main-grid-cell order-receipt">
         <table>
           {header}
           <tbody>
-            {lineItems}
+            {this.renderLineItems(order)}
             <LineItem key={uuid()} />
             {order.items.length > 0 && (
               <tr key={uuid()} className="receipt-summary-line">

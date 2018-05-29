@@ -22,11 +22,12 @@ class LineItem extends React.Component {
     const priceStr = price ? price.toFixed(2) : '';
     const selectedItem = this.props.selectedItem;
     const style = (selectedItem && selectedItem.id === item.id) ? selectedItemStyle : {};
+    const subItemStyle = this.props.isSubItem ? { paddingLeft: '2vw' } : {};
 
     return (
       <tr onClick={this.onClick} style={style}>
         <td>{quantityStr}</td>
-        <td>{name}</td>
+        <td style={subItemStyle}>{name}</td>
         <td>{priceStr}</td>
       </tr>
     );

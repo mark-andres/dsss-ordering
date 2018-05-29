@@ -1,4 +1,3 @@
-import './types';
 import types from './types';
 
 export const setCurrentMenu = menu => ({
