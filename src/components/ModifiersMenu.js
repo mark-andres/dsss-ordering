@@ -77,7 +77,9 @@ class ModifiersMenu extends React.Component {
                   height: '100%',
                   padding: '0',
                   margin: '0',
-                  backgroundColor: 'grey'
+                  backgroundColor: '#006900',
+                  color: 'white',
+                  fontWeight: 'bold'
                 }}
                 onClick={(e) => {
                   e.preventDefault();

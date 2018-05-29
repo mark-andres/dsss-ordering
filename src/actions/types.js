@@ -12,6 +12,7 @@ export const SET_SELECTED_ITEM = 'SET_SELECTED_ITEM';
 export const SEND_ORDER = 'SEND_ORDER';
 export const PRINT_ORDER = 'PRINT_ORDER';
 export const ADD_MODIFIER = 'ADD_MODIFIER';
+export const CHANGE_MODIFIER = 'CHANGE_MODIFIER';
 export const REMOVE_MODIFIER = 'REMOVE_MODIFIER';
 
 // Types for scratchPad
@@ -22,7 +23,6 @@ export const SET_ITEM_SIZE = 'SET_ITEM_SIZE';
 export const SET_HALF_ORDERING = 'SET_HALF_ORDERING';
 export const RESET_SCRATCH = 'RESET_SCRATCH';
 export const SET_SIZE_REQUIRED = 'SET_SIZE_REQUIRED';
-
 
 // Types for app
 export const SET_NEXT_CHOICE = 'SET_NEXT_CHOICE';
@@ -40,6 +40,7 @@ export default {
   SEND_ORDER,
   PRINT_ORDER,
   ADD_MODIFIER,
+  CHANGE_MODIFIER,
   REMOVE_MODIFIER,
   ADD_ITEM_TO_SCRATCH,
   REMOVE_ITEM_FROM_SCRATCH,

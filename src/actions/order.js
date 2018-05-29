@@ -34,6 +34,13 @@ export const addModifier = (item, modifier) => ({
   modifier
 });
 
+export const changeModifier = (item, modifier, options) => ({
+  type: types.CHANGE_MODIFIER,
+  item,
+  modifier,
+  options
+});
+
 export const removeModifier = (item, modifier) => ({
   type: types.REMOVE_MODIFIER,
   item,

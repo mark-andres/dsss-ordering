@@ -34,7 +34,7 @@ class OrderOperations extends React.Component {
             <p className="std-button-caption medium-caption caption-color-red">Exit</p>
           </div>
         </div>
-        <div onClick={this.onSendOrder} className="std-button grid-item-row1-col5">
+        <div className="std-button grid-item-row1-col5">
           <p className="std-button-caption caption-color-gold large-caption">Send</p>
         </div>
         <div className="std-button grid-item-row1-col6">

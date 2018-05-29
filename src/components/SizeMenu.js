@@ -30,7 +30,9 @@ class SizeMenu extends React.Component {
                   height: '100%',
                   padding: '0',
                   margin: '0',
-                  backgroundColor: halfOrdering? 'red' : 'grey'
+                  backgroundColor: halfOrdering? '#3daf3b' : '#006900',
+                  color: 'white',
+                  fontWeight: 'bold'
                 }}
                 onClick={(e) => {
                   e.preventDefault();

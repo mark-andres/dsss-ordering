@@ -52,8 +52,8 @@ export const PIZZA_QUALIFIERS = [{
   exclusionSet: 'HowMuch',
 }, {
   name: 'SIDE',
-  id: 'SIDE',
   receiptCaption: 'SD ',
+  id: 'SIDE',
   action: ['toggle', 'prefix', 'add-quantity'],
 }, {
   name: 'Half 1',
@@ -393,7 +393,7 @@ export const SLICES_MODIFIERS = {
 };
 
 export const PIZZA_GLOBAL_QUALIFIERS = [{
-  name: 'Half/Half'
+  name: 'Half / Half'
 }];
 
 export const ENTREE_MODIFIERS = {

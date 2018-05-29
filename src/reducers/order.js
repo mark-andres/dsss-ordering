@@ -95,23 +95,26 @@ const defaultModifierOptions = {
 }
 
 const getModifiersArray = (item, options) => {
-  if (!options.part) {        // if a part hasn't been specified
-    return item.modifiers;    // assume 'whole'
-  }
-
-  let modifiers;
-
+  let modifiersProp = 'modifiers';
   if (options.part === 'h1') {
-    modifiers = item.modifiersH1 || [];
+    modifiersProp = 'modifiersH1';
   } else if (options.part === 'h2') {
-    modifiers = item.modifiersH2 || [];
-  } else {
-    modifiers = item.modifiers || [];
+    modifiersProp = 'modifiersH2';
   }
-  return modifiers;
+  return item[modifiersProp]; 
 }
 
-const addModifier = (order, item, modifier, options = defaultModifierOptions) => {
+const setModifiersArray = (item, modifiers, options) => {
+  let modifiersProp = 'modifiers';
+  if (options.part === 'h1') {
+    modifiersProp = 'modifiersH1';
+  } else if (options.part === 'h2') {
+    modifiersProp = 'modifiersH2';
+  }
+  item[modifiersProp] = modifiers;
+}
+
+const addModifier = (order, item, modifier) => {
   const modifiers = item.modifiers || [];
   const newItem = {
     ...item,
@@ -119,6 +122,16 @@ const addModifier = (order, item, modifier, options = defaultModifierOptions) =>
       ...modifier,
     })
   };
+
+  return changeItem(order, newItem);
+}
+
+const removeModifier = (order, item, modifierToRemove) => {
+  const modifiers = item.modifiers.filter(modifier => modifier.name !== modifierToRemove.name);
+  const newItem = {
+    ...item,
+    modifiers
+  }
 
   return changeItem(order, newItem);
 }
@@ -132,33 +145,38 @@ const addModifier = (order, item, modifier, options = defaultModifierOptions) =>
 //        negate it
 //      
 //      Update the altered modifier
-//    If it's not a default modifier
+//    Else If it's not a default modifier
 //      remove it
 //
 // If the modifier doesn't exist... 
-//    Add it
+//    Add it with appropriate flags (extra, lite, side)
+//
 const changeModifier = (order, item, modifierToChange, options = defaultModifierOptions) => {
   // get the correct modifiers array depending on the value of options.part
   const modifiers = getModifiersArray(item, options);
   // find the index of the modifier
   const modifierIndex = item.modifiers.findIndex(mod => mod.name === modifierToChange.name);
   // get the modifier from the index
-  const modifier = modifierIndex === -1 ? undefined : item.modifiers[modifierIndex];
-
-  let flags = modifier.flags;
+  const modifier = modifierIndex !== -1 ? item.modifiers[modifierIndex] : undefined;
 
   if (modifier) {                         // if the modifier already exists
-    let { price, quantity } = modifier;   
-    price = price || 0;
-    quantity = quantity || 0;
+    let flags = modifier.flags || {};     // get existing modifier flags
 
-    if (options.extra) {                  // if extra is set
-      modifier.quantity = quantity + options.extra;       // increment the modifier quantity
-      flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
-    } else if (options.lite) {            // if lite is set
-      flags.lite = options.lite;              // indicate that the modifier is lite
-    } else if (flags.default) {
+    if (flags.default) {                  // if it's a default modifier
+      let { quantity } = modifier;
 
+      quantity = quantity || 0;
+
+      if (options.extra) {                  // if extra is set
+        modifier.quantity = quantity + options.extra;       // increment the modifier quantity
+        flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
+      } else if (options.lite) {            // if lite is set
+        flags.lite = options.lite;              // indicate that the modifier is lite
+      } else {
+        flags.negated = true;
+      }
+    } else {
+      return removeModifier(order, item, modifierToChange);
     }
 
     const newModifiers = [
@@ -167,29 +185,16 @@ const changeModifier = (order, item, modifierToChange, options = defaultModifier
         ...modifierToChange,
         flags: { ...flags }
       },
-      ...modifiers.slice(modifierIndex+1)
+      ...modifiers.slice(modifierIndex + 1)
     ];
 
-    if (options.part && options.part === 'h1') {
+    setModifiersArray(item, newModifiers, options);
 
-    }
-    
-    return changeItem(order, {
-      ...item,
-    })
+
+    return changeItem(order, { ...item });
   } else {
-    return addModifier()
+    return addModifier(order, item, { ...modifierToChange, flags: options });
   }
-}
-
-const removeModifier = (order, item, modifierToRemove) => {
-  const modifiers = item.modifiers.filter(modifier => modifier.name !== modifierToRemove.name);
-  const newItem = {
-    ...item,
-    modifiers
-  }
-
-  return changeItem(order, newItem);
 }
 
 function calculateTotals(items) {
@@ -251,6 +256,9 @@ const orderReducer = (order = orderDefault, action) => {
 
     case types.ADD_MODIFIER:
       return addModifier(order, action.item, action.modifier);
+
+    case types.CHANGE_MODIFIER:
+      return changeModifier(order, action.item, action.modifier, action.options);
 
     case types.REMOVE_MODIFIER:
       return removeModifier(order, action.item, action.modifier);
