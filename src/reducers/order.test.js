@@ -100,6 +100,10 @@ describe('orderReducer', () => {
         expect(order.items[0].modifiers.length).toBe(3);
         expect(order.total).toBe(18.50);
       });
+
+      it('should correctly change modifiers', () => {
+
+      });
     });
 
   });

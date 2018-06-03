@@ -161,12 +161,11 @@ const changeModifier = (order, item, modifierToChange, options = defaultModifier
 
   if (modifier) {                         // if the modifier already exists
     let flags = modifier.flags || {};     // get existing modifier flags
+    let { quantity } = modifier;
+
+    quantity = quantity || 0;
 
     if (flags.default) {                  // if it's a default modifier
-      let { quantity } = modifier;
-
-      quantity = quantity || 0;
-
       if (options.extra) {                  // if extra is set
         modifier.quantity = quantity + options.extra;       // increment the modifier quantity
         flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
@@ -176,7 +175,14 @@ const changeModifier = (order, item, modifierToChange, options = defaultModifier
         flags.negated = true;
       }
     } else {
-      return removeModifier(order, item, modifierToChange);
+      if (options.extra) {                  // if extra is set
+        modifier.quantity = quantity + options.extra;       // increment the modifier quantity
+        flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
+      } else if (options.lite) {            // if lite is set
+        flags.lite = options.lite;              // indicate that the modifier is lite
+      } else {
+        return removeModifier(order, item, modifierToChange);
+      }
     }
 
     const newModifiers = [

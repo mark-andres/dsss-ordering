@@ -16,6 +16,10 @@ describe('scratchPadReducer tests', () => {
 
   it('correctly adds a single item to a default scratch pad', () => {
     scratchPad = scratchPadReducer(scratchPad, {
+      type: types.SET_SIZE_REQUIRED, 
+      size: false
+    });
+    scratchPad = scratchPadReducer(scratchPad, {
       type: types.ADD_ITEM_TO_SCRATCH,
       item: {
         name: 'Cannoli',
@@ -32,7 +36,7 @@ describe('scratchPadReducer tests', () => {
     scratchPad = scratchPadReducer(scratchPad, { type: types.RESET_SCRATCH });
 
     expect(scratchPad.items.length).toBe(0);
-    expect(scratchPad.sizeRequired).toBe(false);
+    expect(scratchPad.sizeRequired).toBe(undefined);
     expect(scratchPad.halfOrdering).toBe(false);
     expect(scratchPad.completedItem).toBe(null);
   });
