@@ -219,6 +219,7 @@ function calculateSubTotals(items) {
     let modifiersSum = 0;
     let modifiersH1Sum = 0;
     let modifiersH2Sum = 0;
+    let subItemsSum = 0;
 
     price = price || 0;
     quantity = quantity || 0;
@@ -232,8 +233,18 @@ function calculateSubTotals(items) {
     if (item.modifiersH2) {
       modifiersSum = calculateSubTotals(item.modifiersH1);
     }
+    if (item.subItems) {
+      subItemsSum = item.subItems.reduce((total, subItem) => {
+        const { price } = subItem;
+        if (price) {
+          return total + price;
+        } else {
+          return total;
+        }
+      }, 0);
+    }
 
-    return total + quantity * (price + modifiersSum + modifiersH1Sum + modifiersH2Sum);
+    return total + quantity * (price + modifiersSum + modifiersH1Sum + modifiersH2Sum) + subItemsSum;
   }, 0);
 }
 
