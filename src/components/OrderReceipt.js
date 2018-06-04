@@ -10,7 +10,8 @@ class OrderReceipt extends React.Component {
       let subItems = [];
       if (item.subItems) {
         subItems = item.subItems.map(subItem => {
-          return <LineItem isSubItem={true} key={uuid()} item={{name: subItem}} />;
+          const { name, price } = subItem;
+          return <LineItem isSubItem={true} key={uuid()} item={{name, price}} />;
         });
       }
 
