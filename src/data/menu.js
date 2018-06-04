@@ -475,6 +475,37 @@ export const ENTREE_SALAD_CHOICEMENU = {
   ]
 };
 
+export const DRESSINGS_CHOICEMENU = {
+  prompt: 'Please Select Dressings',
+  type: MENU_TYPE.CHOICES_MENU,
+  items: [
+    {
+      name: 'Ranch',
+    },
+    {
+      name: 'Bleu Cheese',
+    },
+    {
+      name: 'Italian',
+    },
+    {
+      name: '1000 Island',
+    },
+    {
+      name: 'Vinaigrette',
+    },
+    {
+      name: 'Caesar',
+    },
+    {
+      name: 'No Dressing',
+    },
+    {
+      name: 'Mix Dressing',
+    },
+  ]
+};
+
 export const WINGSAUCE_CHOICEMENU = {
   prompt: 'Please choose wingsauce',
   type: MENU_TYPE.CHOICES_MENU,
@@ -503,34 +534,35 @@ export const WINGSAUCE_CHOICEMENU = {
   ]
 };
 
-export const MARINARA_CHOICEMENU = {
-  prompt: 'Please choose marinara or none',
+export const TOASTED_UNTOASTED_CHOICEMENU = {
+  prompt: 'Please select TOASTED or UNTOASTED',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
     {
-      name: 'Marinara',
+      name: 'Toasted',
     },
     {
-      name: 'No DIP',
+      name: 'Untoasted',
     },
   ]
 };
 
 export const DIP_CHOICEMENU = {
-  prompt: 'Please choose dip',
+  prompt: 'Please Select Dip',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
     { 
+      name: 'Marinara',
+    },
+    {
+      name: 'Ketchup',
+    },
+    {
       name: 'Ranch',
     },
     {
-      name: 'Blue Cheese',
-    },
-    {
-      name: 'Ranch and BC',
-    },
-    {
-      name: 'Marinara',
+      name: 'Marinara and Ranch',
+      price: 1.00,
     },
     {
       name: 'No DIP',
@@ -546,10 +578,11 @@ export const DIP2_CHOICEMENU = {
       name: 'Ranch',
     },
     {
-      name: 'Blue Cheese',
+      name: 'Bleu Cheese',
     },
     {
       name: 'Ranch and BC',
+      price: 1.00,
     },
     {
       name: 'No DIP',
@@ -668,50 +701,86 @@ export const MENU = {
       name: 'Side Salad',
       key: uuid(),
       price: 3.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Side Greek Salad',
       key: uuid(),
       price: 3.50,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Side Caesar Salad',
       key: uuid(),
       price: 3.50,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Half Order Cold Antipasto',
       key: uuid(),
       price: 5.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Dinner Salad',
       key: uuid(),
       price: 5.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Caesar Salad',
       key: uuid(),
       price: 7.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Greek Salad',
       key: uuid(),
       price: 7.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Cold Antipasto Salad',
       key: uuid(),
       price: 10.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Small Salad Tray for 10',
       key: uuid(),
       price: 10.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Large Salad Tray for 20',
       key: uuid(),
       price: 10.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Small Greek Tray for 10',
       key: uuid(),
       price: 10.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }, {
       name: 'Large Greek Tray for 20',
       key: uuid(),
       price: 10.00,
+      choices: [
+        DRESSINGS_CHOICEMENU 
+      ]
     }]
   },
   [CATEGORY.APPETIZERS]: {
@@ -763,14 +832,14 @@ export const MENU = {
       key: uuid(),
       price: 3.00,
       choices: [
-        MARINARA_CHOICEMENU
+        DIP_CHOICEMENU
       ]
     }, {
       name: 'Garlic Cheese Bread',
       key: uuid(),
       price: 4.00,
       choices: [
-        MARINARA_CHOICEMENU
+        DIP_CHOICEMENU
       ]
     }]
   },
@@ -956,6 +1025,9 @@ export const MENU = {
       name: 'Italian Sub',
       key: uuid(),
       price: 8.00,
+      choices: [
+        TOASTED_UNTOASTED_CHOICEMENU
+      ]
     }, {
       name: 'Italian Sausage Sub',
       key: uuid(),
