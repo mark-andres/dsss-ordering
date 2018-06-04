@@ -30,7 +30,7 @@ const setNextChoice = (state, chosenItem) => {
     state.currentChoiceIndex = currentChoiceIndex;
     state.menu.currentMenu = state.choices[state.currentChoiceIndex];
   } else {
-    const subItems = state.choiceItems.map(choice => choice.name);
+    const subItems = [...state.choiceItems];
     state.order = orderReducer(
       state.order,
       addItem({
@@ -39,7 +39,11 @@ const setNextChoice = (state, chosenItem) => {
         subItems
       })
     );
-    state.menu.currentMenu = state.returnMenu;
+    if (state.returnMenu.modifiers) {
+      state.menu.currentMenu = state.returnMenu.modifiers;
+    } else {
+      state.menu.currentMenu = state.returnMenu;
+    }
   }
 
   return { ...state };
