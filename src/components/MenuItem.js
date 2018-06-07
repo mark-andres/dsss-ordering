@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleItemInScratch } from '../actions/scratchPad';
 import uuid from 'uuid/v1';
+import { orderItemFromMenu } from '../lib';
 
 class MenuItem extends React.Component {
   constructor() {
@@ -20,14 +21,12 @@ class MenuItem extends React.Component {
   }
   
   onClick = () => {
-    const menuItem = this.props.menuItem;
-    const item = {
-      ...menuItem,
-      key: this.key,
-      quantity: 1,
-    };
-
-    this.props.toggleItem(item);
+    this.props.toggleItem(
+      orderItemFromMenu({
+        ...this.props.menuItem,
+        key: this.key
+      }, 1)
+    );
   }
 
   render() {
