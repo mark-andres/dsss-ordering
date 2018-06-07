@@ -1,6 +1,7 @@
 import orderReducer from './order';
 import menuReducer from './menu';
 import scratchPadReducer from './scratchPad';
+import qualifiersReducer from './qualifiers';
 import types from '../actions/types';
 import { addItem, setSelectedItem } from '../actions/order';
 import { resetScratch, setSizeRequired } from '../actions/scratchPad';
@@ -99,7 +100,8 @@ const appReducer = (state = {}, action) => {
       return {
         menu: menuReducer(state.menu, action),
         order: orderReducer(state.order, action),
-        scratchPad: scratchPadReducer(state.scratchPad, action)
+        scratchPad: scratchPadReducer(state.scratchPad, action),
+        qualifiers: qualifiersReducer(state.qualifiers, action)
       };
   }
 }

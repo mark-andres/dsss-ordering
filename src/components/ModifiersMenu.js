@@ -1,10 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
+import { initQualifiers } from '../actions/qualifiers';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
 
 class ModifiersMenu extends React.Component {
+  componentDidMount() {
+    const { qualifiers } = this.props.menu;
+    if (qualifiers) {
+      this.props.initQualifiers(qualifiers);
+    }
+  }
+
   renderModifierButtons(items) {
     return items.map(item => {
       const backgroundColor = this.props.selectedItem.includes &&
@@ -96,8 +104,12 @@ class ModifiersMenu extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  initQualifiers: qualifiersMenu => dispatch(initQualifiers(qualifiersMenu))
+});
+
 const mapStateToProps = state => ({
   selectedItem: state.order.selectedItem
 });
 
-export default connect(mapStateToProps)(ModifiersMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(ModifiersMenu);

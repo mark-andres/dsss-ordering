@@ -24,6 +24,16 @@ export const SET_HALF_ORDERING = 'SET_HALF_ORDERING';
 export const RESET_SCRATCH = 'RESET_SCRATCH';
 export const SET_SIZE_REQUIRED = 'SET_SIZE_REQUIRED';
 
+// Types for qualifiers
+export const INIT_QUALIFIERS = 'INIT_QUALIFIERS';
+export const SET_EXTRA = 'SET_EXTRA';
+export const SET_LITE = 'SET_LITE';
+export const SET_SIDE = 'SET_SIDE';
+export const SET_H1 = 'SET_H1';
+export const SET_H2 = 'SET_H2';
+export const SET_WHOLE = 'SET_WHOLE';
+export const SET_QUALIFIER = 'SET_QUALIFIER';
+
 // Types for app
 export const SET_NEXT_CHOICE = 'SET_NEXT_CHOICE';
 export const CANCEL_CHOICES = 'CANCEL_CHOICES';
@@ -49,6 +59,14 @@ export default {
   SET_SIZE_REQUIRED,
   SET_HALF_ORDERING,
   RESET_SCRATCH,
+  INIT_QUALIFIERS,
+  SET_EXTRA,
+  SET_LITE,
+  SET_SIDE,
+  SET_H1,
+  SET_H2,
+  SET_WHOLE,
+  SET_QUALIFIER,
   SET_NEXT_CHOICE,
   CANCEL_CHOICES
 };

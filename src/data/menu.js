@@ -38,27 +38,22 @@ export const SPECIALTY_PIZZA_PRICES = {
 
 export const SALAD_QUALIFIERS = [{
   name: 'EXTRA',
+  internalName: 'extra',
   receiptCaption: 'EXTRA',
   id: 'EXTRA',
-  exclusionSet: 'HowMuch',
-  action: ['toggle', 'prefix', 'update-quantity'],
-  quantity: 1,
-  quantityType: 'ADD'
 }, {
   name: 'LITE',
+  internalName: 'lite',
   receiptCaption: 'LITE',
   id: 'LITE',
-  action: ['toggle', 'prefix'],
-  exclusionSet: 'HowMuch',
 }, {
   name: 'SIDE',
+  internalName: 'side',
   receiptCaption: 'SD ',
   id: 'SIDE',
-  action: ['toggle', 'prefix', 'add-quantity'],
 }, {
   name: 'Prepare',
   id: 'PREPARE',
-  exclusionSet: 'CheckMenu',
   items: [
     'Add Oregano after cooked',
     'Well Done',
@@ -72,45 +67,37 @@ export const SALAD_QUALIFIERS = [{
 
 export const PIZZA_QUALIFIERS = [{
   name: 'EXTRA',
+  internalName: 'extra',
   receiptCaption: 'EXTRA',
   id: 'EXTRA',
-  exclusionSet: 'HowMuch',
-  action: ['toggle', 'prefix', 'update-quantity'],
-  quantity: 1,
-  quantityType: 'ADD'
 }, {
   name: 'LITE',
+  internalName: 'lite',
   receiptCaption: 'LITE',
   id: 'LITE',
-  action: ['toggle', 'prefix'],
-  exclusionSet: 'HowMuch',
 }, {
   name: 'SIDE',
+  internalName: 'side',
   receiptCaption: 'SD ',
   id: 'SIDE',
-  action: ['toggle', 'prefix', 'add-quantity'],
 }, {
   name: 'Half 1',
+  internalName: 'h1',
   receiptCaption: 'H1-',
   id: 'H1',
-  exclusionSet: 'WhichPart',
-  action: 'toggle;filter',
 }, {
   name: 'Half 2',
+  internalName: 'h2',
   receiptCaption: 'H2-',
   id: 'H2',
-  exclusionSet: 'WhichPart',
 }, {
   name: 'Whole',
+  internalName: 'whole',
   receiptCaption: '',
-  exclusionSet: 'WhichPart',
   id: 'WHOLE',
-  quantity: 0.5,
-  quantityType: 'MULTIPLY',
 }, {
   name: 'Prepare',
   id: 'PREPARE',
-  exclusionSet: 'CheckMenu',
   items: [
     'Add Oregano after cooked',
     'Well Done',
