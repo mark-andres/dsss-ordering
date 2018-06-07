@@ -145,25 +145,25 @@ export const SUBS_MODIFIERS = {
     price: 0.50
   }, {
     name: 'Italian Sausage',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Anchovies',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Meatballs',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Grilled Chicken',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Ham',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Salami',
     price: 1.00
   }, {
     name: 'Steak',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Bell Peppers',
     price: 0.50
@@ -181,52 +181,52 @@ export const SUBS_MODIFIERS = {
     price: 0.50
   }, {
     name: 'Eggplant',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Garlic',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Spinach',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Tomatoes',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Artichokes',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Green Olives',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Basil',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Pepperonchini',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Pineapple',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Provolone',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Pizza Sauce',
     price: 0.50
   }, {
     name: 'Olive Oil',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Ricotta',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Pizza Cheese',
     price: 0.50
   }, {
     name: 'Feta Cheese',
-    price: 0.50
+    price: 1.00
   }, {
     name: 'Lettuce',
-    prince: 0.50
+    prince: 1.00
   }, {
     name: 'Italian',
     price: 0.50
@@ -501,40 +501,38 @@ export const ENTREE_MODIFIERS = {
   qualifiers: PIZZA_QUALIFIERS,
   items: [{
     name: 'Breaded Chicken Fillet',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Eggplant',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Marinara',
-    price: 1.50,
+    price: 0.50,
   }, {
     name: 'Meatballs',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Mozzarella',
-    price: 1.50,
+    price: 0.50,
   }, {
     name: 'Ricotta',
-    price: 1.50,
+    price: 1.00,
   }, {
     name: 'Sausage',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Meat Sauce',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Spaghetti',
-    price: 1.50,
   }, {
     name: 'Penne',
-    price: 1.50,
   }, {
     name: 'Spinach',
-    price: 1.50,
+    price: 2.00,
   }, {
     name: 'Garlic',
-    price: 1.50,
+    price: 0.50,
   }]
 };
 
@@ -1188,6 +1186,12 @@ export const MENU = {
       name: 'Stromboli',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Pepperoni',
+        'Italian Sausage',
+        'Bell Peppers',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Meatball Sub',
       key: uuid(),
@@ -1215,10 +1219,24 @@ export const MENU = {
       name: 'Italian Sausage Sub',
       key: uuid(),
       price: 8.00,
+      includes: [
+        'Italian Sausage',
+        'Bell Peppers',
+        'Onions',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ],
     }, {
       name: 'Philly Cheese Steak',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Steak',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Chicken Parm Sub',
       key: uuid(),
