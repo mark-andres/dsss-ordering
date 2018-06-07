@@ -36,6 +36,40 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+export const SALAD_QUALIFIERS = [{
+  name: 'EXTRA',
+  receiptCaption: 'EXTRA',
+  id: 'EXTRA',
+  exclusionSet: 'HowMuch',
+  action: ['toggle', 'prefix', 'update-quantity'],
+  quantity: 1,
+  quantityType: 'ADD'
+}, {
+  name: 'LITE',
+  receiptCaption: 'LITE',
+  id: 'LITE',
+  action: ['toggle', 'prefix'],
+  exclusionSet: 'HowMuch',
+}, {
+  name: 'SIDE',
+  receiptCaption: 'SD ',
+  id: 'SIDE',
+  action: ['toggle', 'prefix', 'add-quantity'],
+}, {
+  name: 'Prepare',
+  id: 'PREPARE',
+  exclusionSet: 'CheckMenu',
+  items: [
+    'Add Oregano after cooked',
+    'Well Done',
+    'Extra Crispy',
+    'Undercooked',
+    'Do Not Cut',
+    'Dbl cut',
+    'Cut in Squares'
+  ]
+}];
+
 export const PIZZA_QUALIFIERS = [{
   name: 'EXTRA',
   receiptCaption: 'EXTRA',
@@ -198,6 +232,69 @@ export const SUBS_MODIFIERS = {
     price: 0.50
   }, {
     name: 'Breaded Chicken Fillet',
+    price: 1.00
+  }]
+};
+
+export const SALADS_MODIFIERS = {
+  name: 'Salads Modifiers',
+  caption: 'Salads Modifiers',
+  type: MENU_TYPE.MODIFIERS_MENU,
+  key: uuid(),
+  qualifiers: SALAD_QUALIFIERS,
+  items: [{
+    name: 'Tomatoes',
+    price: 0.50,
+  }, {
+    name: 'Pepperoni',
+    price: 0.50,
+  }, {
+    name: 'Ham',
+    price: 0.50,
+  }, {
+    name: 'Provolone',
+    price: 0.50,
+  }, {
+    name: 'Salami',
+    price: 1.00,
+  }, {
+    name: 'Green Peppers',
+    price: 0.50,
+  }, {
+    name: 'Onions',
+    price: 0.50,
+  }, {
+    name: 'Black Olives',
+    price: 0.50,
+  }, {
+    name: 'Mozzarella',
+    price: 0.50,
+  }, {
+    name: 'Chicken',
+    price: 1.00,
+  }, {
+    name: 'Lettuce',
+    price: 0.50,
+  }, {
+    name: 'Feta Cheese',
+    price: 1.00,
+  }, {
+    name: 'Croutons',
+    price: 0.50,
+  }, {
+    name: 'Pepperoncini',
+    price: 1.00,
+  }, {
+    name: 'Parmesan',
+    price: 0.50,
+  }, {
+    name: 'Greek Olives',
+    price: 1.00,
+  }, {
+    name: 'Mushroom',
+    price: 0.50,
+  }, {
+    name: 'Artichokes',
     price: 1.00
   }]
 };
@@ -694,6 +791,7 @@ export const MENU = {
     caption: 'Salads',
     type: MENU_TYPE.ITEMS_MENU,
     key: uuid(),
+    modifiers: SALADS_MODIFIERS,
     image: 'salad.jpeg',
     row: 1,
     column: 2,
@@ -701,6 +799,13 @@ export const MENU = {
       name: 'Side Salad',
       key: uuid(),
       price: 3.00,
+      includes: [
+        'Tomatoes',
+        'Pepperoni',
+        'Mozzarella',
+        'Lettuce',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -708,6 +813,16 @@ export const MENU = {
       name: 'Side Greek Salad',
       key: uuid(),
       price: 3.50,
+      includes: [
+        'Tomatoes',
+        'Onions',
+        'Lettuce',
+        'Feta Cheese',
+        'Croutons',
+        'Pepperoncini',
+        'Parmesan',
+        'Greek Olives',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -715,6 +830,15 @@ export const MENU = {
       name: 'Side Caesar Salad',
       key: uuid(),
       price: 3.50,
+      includes: [
+        'Tomatoes',
+        'Onions',
+        'Mozzarella',
+        'Lettuce',
+        'Croutons',
+        'Pepperoncini',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -722,6 +846,18 @@ export const MENU = {
       name: 'Half Order Cold Antipasto',
       key: uuid(),
       price: 5.00,
+      includes: [
+        'Tomatoes',
+        'Pepperoni',
+        'Ham',
+        'Salami',
+        'Green Peppers',
+        'Onions',
+        'Black Olives',
+        'Mozzarella',
+        'Lettuce',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -729,6 +865,15 @@ export const MENU = {
       name: 'Dinner Salad',
       key: uuid(),
       price: 5.00,
+      includes: [
+        'Tomatoes',
+        'Pepperoni',
+        'Salami',
+        'Black Olives',
+        'Mozzarella',
+        'Lettuce',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -736,6 +881,15 @@ export const MENU = {
       name: 'Caesar Salad',
       key: uuid(),
       price: 7.00,
+      includes: [
+        'Tomatoes',
+        'Onions',
+        'Mozzarella',
+        'Lettuce',
+        'Croutons',
+        'Pepperoncini',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -750,6 +904,18 @@ export const MENU = {
       name: 'Cold Antipasto Salad',
       key: uuid(),
       price: 10.00,
+      includes: [
+        'Tomatoes',
+        'Pepperoni',
+        'Ham',
+        'Salami',
+        'Green Peppers',
+        'Onions',
+        'Black Olives',
+        'Mozzarella',
+        'Lettuce',
+        'Parmesan',
+      ],
       choices: [
         DRESSINGS_CHOICEMENU 
       ]
@@ -1013,6 +1179,11 @@ export const MENU = {
       name: 'Calzone',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Canadian Bacon',
+        'Ricotta',
+        'Pizza Cheese'
+      ]
     }, {
       name: 'Stromboli',
       key: uuid(),
@@ -1021,10 +1192,22 @@ export const MENU = {
       name: 'Meatball Sub',
       key: uuid(),
       price: 8.00,
+      includes: [
+        'Meatballs',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Italian Sub',
       key: uuid(),
       price: 8.00,
+      includes: [
+        'Ham',
+        'Salami',
+        'Tomatoes',
+        'Provolone',
+        'Lettuce',
+      ],
       choices: [
         TOASTED_UNTOASTED_CHOICEMENU
       ]
@@ -1040,14 +1223,29 @@ export const MENU = {
       name: 'Chicken Parm Sub',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Eggplant Parm Sub',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Eggplant',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
     }, {
       name: 'Grilled Chicken Sub',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Grilled Chicken',
+        'Tomatoes',
+        'Provolone',
+        'Lettuce'
+      ]
     }]
   },
   [CATEGORY.PASTA]: {
@@ -1063,14 +1261,28 @@ export const MENU = {
       name: 'Spaghetti w Meatballs',
       key: uuid(),
       price: 10.00,
+      includes: [
+        'Marinara',
+        'Meatballs',
+        'Spaghetti',
+      ]
     }, {
       name: 'Spaghetti w Sausage',
       key: uuid(),
       price: 10.00,
+      includes: [
+        'Marinara',
+        'Sausage',
+        'Spaghetti',
+      ]
     }, {
       name: 'Spaghetti w Meat Sauce',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Meat Sauce',
+        'Spaghetti',
+      ]
     }, {
       name: 'Spaghetti w Sauce',
       key: uuid(),
@@ -1079,22 +1291,48 @@ export const MENU = {
       name: 'Cheese Ravioli',
       key: uuid(),
       price: 8.50,
+      includes: [
+        'Marinara',
+        'Mozzarella',
+      ]
     }, {
       name: 'Chicken Parmesan',
       key: uuid(),
       price: 12.50,
+      includes: [
+        'Breaded Chicken Fillet',
+        'Marinara',
+        'Mozzarella',
+        'Spaghetti',
+      ]
     }, {
       name: 'Eggplant Parmesan',
       key: uuid(),
       price: 12.50,
+      includes: [
+        'Eggplant',
+        'Marinara',
+        'Mozzarella',
+        'Spaghetti',
+      ]
     }, {
       name: 'Baked Ziti',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Marinara',
+        'Mozzarella',
+        'Ricotta',
+        'Penne',
+      ]
     }, {
       name: 'Lasagna',
       key: uuid(),
       price: 10.00,
+      includes: [
+        'Marinara',
+        'Mozzarella',
+      ]
     }]
   },
   [CATEGORY.DESSERTS]: {
