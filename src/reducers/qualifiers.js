@@ -11,18 +11,31 @@ const defaultQualifiers = {
   flags: {}
 };
 
-const initQualifiers = (qualifierMenu) => {
-  const obj = { };
+const initQualifiers = (qualifierMenu, initialPart) => {
+  const obj = { flags: {part: initialPart} };
   qualifierMenu.forEach(qualifier => {
     if (qualifier.name === 'Prepare') {
       obj.prepare = [...qualifier.items];
     } else {
-      obj[qualifier.internalName] = false;
+      if (qualifier.internalName === initialPart) {
+        obj[qualifier.internalName] = true;
+      } else {
+        obj[qualifier.internalName] = false;
+      }
     }
   });
-  obj.flags = {};
   return obj;
 };
+
+const setFlags = (qualifiers) => {
+  if (qualifiers.h1) {
+    qualifiers.flags.part = 'h1';
+  } else if (qualifiers.h2) {
+    qualifiers.flags.part = 'h2';
+  } else {
+    qualifiers.flags.part = 'whole';
+  }
+}
 
 const setExtra = (qualifiers, status) => {
   qualifiers.extra = status;
@@ -50,6 +63,7 @@ const setH1 = (qualifiers, status) => {
   if (qualifiers.h1) {
     qualifiers.h2 = qualifiers.whole = false;
   }
+  setFlags(qualifiers);
   return { ...qualifiers };
 }
 
@@ -58,6 +72,7 @@ const setH2 = (qualifiers, status) => {
   if (qualifiers.h2) {
     qualifiers.h1 = qualifiers.whole = false;
   }
+  setFlags(qualifiers);
   return { ...qualifiers };
 }
 
@@ -66,6 +81,7 @@ const setWhole = (qualifiers, status) => {
   if (qualifiers.whole) {
     qualifiers.h1 = qualifiers.h2 = false;
   }
+  setFlags(qualifiers);
   return { ...qualifiers };
 }
 
@@ -74,15 +90,15 @@ const setQualifier = (qualifiers, qualifierName, status) => {
     case 'extra':
       return setExtra(qualifiers, status);
     case 'lite':
-      return setExtra(qualifiers, status);
+      return setLite(qualifiers, status);
     case 'side':
-      return setExtra(qualifiers, status);
+      return setSide(qualifiers, status);
     case 'h1':
-      return setExtra(qualifiers, status);
+      return setH1(qualifiers, status);
     case 'h2':
-      return setExtra(qualifiers, status);
+      return setH2(qualifiers, status);
     case 'whole':
-      return setExtra(qualifiers, status);
+      return setWhole(qualifiers, status);
     default:
       return qualifiers;
   }
@@ -91,7 +107,7 @@ const setQualifier = (qualifiers, qualifierName, status) => {
 const qualifiersReducer = (qualifiers = defaultQualifiers, action) => {
   switch (action.type) {
     case types.INIT_QUALIFIERS:
-      return initQualifiers(action.qualifierMenu);
+      return initQualifiers(action.qualifierMenu, action.initialPart);
 
     case types.SET_EXTRA:
       return setExtra(qualifiers, action.status);

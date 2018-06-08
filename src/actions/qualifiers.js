@@ -1,8 +1,9 @@
 import types from './types';
 
-export const initQualifiers = qualifierMenu => ({
+export const initQualifiers = (qualifierMenu, initialPart) => ({
   type: types.INIT_QUALIFIERS,
-  qualifierMenu
+  qualifierMenu,
+  initialPart
 });
 
 export const setExtra = status => ({

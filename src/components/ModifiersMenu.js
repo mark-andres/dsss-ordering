@@ -8,15 +8,59 @@ import SelectionHeader from './SelectionHeader';
 class ModifiersMenu extends React.Component {
   componentDidMount() {
     const { qualifiers } = this.props.menu;
+    const { selectedItem } = this.props;
     if (qualifiers) {
-      this.props.initQualifiers(qualifiers);
+      let initialPart;
+      if (selectedItem.modifiers) {
+        initialPart = 'whole';
+      } else if (selectedItem.modifiersH1) {
+        initialPart = 'h1';
+      } else {
+        initialPart = 'whole';
+      }
+      this.props.initQualifiers(qualifiers, initialPart);
     }
   }
 
-  renderModifierButtons(items) {
-    return items.map(item => {
-      const backgroundColor = this.props.selectedItem.includes &&
-        this.props.selectedItem.includes.includes(item.name) ? '#006900' : '#0000d1';
+  getModifierBg(modifier, includedModifiers) {
+    let bgcolor = '#0000d1';       // a blue color for modifier not included
+    if (includedModifiers) {
+      const itemModifier = includedModifiers.find(included => included.name === modifier.name);
+      if (itemModifier) {
+        if (!itemModifier.flags.negated) {
+          bgcolor = '#006900';       // a green color means the modifier is included
+        }
+      }
+    }
+    return bgcolor;
+  }
+
+  renderModifierButtons(modifiers) {
+    let includedModifiers = [];
+    const { selectedItem, qualifiers } = this.props;
+    const { part } = qualifiers.flags;
+
+    if (part) {
+      switch (part) {
+        case 'h1':
+          includedModifiers = selectedItem.modifiersH1;
+          break;
+        case 'h2':
+          includedModifiers = selectedItem.modifiersH2;
+          break;
+        default:
+          includedModifiers = selectedItem.modifiers;
+      }
+    } else {
+      if (selectedItem.modifiers) {
+        includedModifiers = selectedItem.modifiers;
+      } else if (selectedItem.modifiersH1) {
+        includedModifiers = selectedItem.modifiersH1;
+      }
+    }
+
+    return modifiers.map(modifier => {
+      const backgroundColor = this.getModifierBg(modifier, includedModifiers);
       const style = {
           textAlign: 'center',
           borderRadius: '15%',
@@ -32,7 +76,7 @@ class ModifiersMenu extends React.Component {
         backgroundColor: 'transparent'
       };
       
-      if (item.name === '__blank__') {
+      if (modifier.name === '__blank__') {
         return <div
           key={uuid()}
           style={blankStyle}
@@ -42,16 +86,17 @@ class ModifiersMenu extends React.Component {
       return <div
         key={uuid()}
         style={style}
-        id={item.name}
+        id={modifier.name}
         onClick={e => console.log(e.target.id)}
       >
-        <br />{item.name}
+        <br />{modifier.name}
       </div>
     });
   }
 
   render() {
-    const { items, name, qualifiers } = this.props.menu;
+    const { name, qualifiers } = this.props.menu;
+    const modifiers = this.props.menu.items;
     const qualifierWidth = 100 / qualifiers.length;
 
     return (
@@ -72,7 +117,8 @@ class ModifiersMenu extends React.Component {
             gridRowGap: '10px',
             backgroundColor: '#8FAECF'
           }}
-        >{this.renderModifierButtons(items)}
+        >
+          {this.renderModifierButtons(modifiers)}
         </div>
         <QualifierPanel>
           {!!qualifiers && qualifiers.map((qualifier) => {
@@ -105,11 +151,12 @@ class ModifiersMenu extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  initQualifiers: qualifiersMenu => dispatch(initQualifiers(qualifiersMenu))
+  initQualifiers: (qualifiersMenu, initialPart) => dispatch(initQualifiers(qualifiersMenu, initialPart))
 });
 
 const mapStateToProps = state => ({
-  selectedItem: state.order.selectedItem
+  selectedItem: state.order.selectedItem,
+  qualifiers: state.qualifiers
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModifiersMenu);
