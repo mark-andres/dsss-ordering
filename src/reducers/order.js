@@ -172,7 +172,7 @@ const changeModifier = (order, item, modifierToChange, options = defaultModifier
       } else if (options.lite) {            // if lite is set
         flags.lite = options.lite;              // indicate that the modifier is lite
       } else {
-        flags.negated = true;
+        flags.negated = !flags.negated;     // toggle the negated flag
       }
     } else {
       if (options.extra) {                  // if extra is set
@@ -215,14 +215,17 @@ function calculateTotals(items) {
 
 function calculateSubTotals(items) {
   return items.reduce((total, item) => {
-    let { price, quantity } = item;
+    let { price, quantity, flags } = item;
     let modifiersSum = 0;
     let modifiersH1Sum = 0;
     let modifiersH2Sum = 0;
     let subItemsSum = 0;
 
     price = price || 0;
-    quantity = quantity || 0;
+    quantity = quantity || 1;
+    if (flags && flags.negated) {
+      price = 0;
+    }
 
     if (item.modifiers) {
       modifiersSum = calculateSubTotals(item.modifiers);

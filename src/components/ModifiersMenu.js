@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
-import { initQualifiers } from '../actions/qualifiers';
+import { initQualifiers, setQualifier } from '../actions/qualifiers';
+import { changeModifier } from '../actions/order';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
 
@@ -35,6 +36,17 @@ class ModifiersMenu extends React.Component {
     return bgcolor;
   }
 
+  getModifier(modifierId) {
+    const modifiers = this.props.menu.items;
+    return modifiers.find(modifier => modifier.name === modifierId);
+  }
+
+  handleModifierClick = e => {
+    e.preventDefault();
+    const { selectedItem, qualifiers } = this.props;
+    this.props.changeModifier(selectedItem, this.getModifier(e.target.id), qualifiers)
+  }
+
   renderModifierButtons(modifiers) {
     let includedModifiers = [];
     const { selectedItem, qualifiers } = this.props;
@@ -60,38 +72,40 @@ class ModifiersMenu extends React.Component {
     }
 
     return modifiers.map(modifier => {
-      const backgroundColor = this.getModifierBg(modifier, includedModifiers);
-      const style = {
-          textAlign: 'center',
-          borderRadius: '15%',
-          overflow: 'hidden',
-          color: '#e5e779',
-          backgroundColor,
-          fontSize: '0.9rem',
-          fontWeight: 'bold',
-          textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
-          letterSpacing: '1px'
-      };
-      const blankStyle = {
-        backgroundColor: 'transparent'
-      };
-      
       if (modifier.name === '__blank__') {
         return <div
           key={uuid()}
-          style={blankStyle}
-          />
+          style={{ backgroundColor: 'transparent' }}
+        />
       }
 
+      const backgroundColor = this.getModifierBg(modifier, includedModifiers);
+
       return <div
+        className='modifiers-button'
         key={uuid()}
-        style={style}
+        style={{ backgroundColor }}
         id={modifier.name}
-        onClick={e => console.log(e.target.id)}
+        onClick={this.handleModifierClick}
       >
         <br />{modifier.name}
       </div>
     });
+  }
+
+  isQualifierSet(qualifierId) {
+    if (qualifierId === 'prepare') {
+      return false;
+    }
+
+    const { qualifiers } = this.props;
+    return qualifiers[qualifierId];
+  }
+
+  toggleQualifier(qualifierId) {
+    const { qualifiers, setQualifier } = this.props;
+    
+    setQualifier(qualifierId, !qualifiers[qualifierId]);
   }
 
   render() {
@@ -102,42 +116,25 @@ class ModifiersMenu extends React.Component {
     return (
       <div className="selection-menu">
         <SelectionHeader caption={name} />
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(5, 19%)',
-            gridTemplateRows: 'repeat(6, 14%)',
-            overflow: 'hidden',
-            overflowY: 'scroll',
-            height: '100%',
-            paddingTop: '10px',
-            paddingRight: '66px',
-            paddingLeft: '5px',
-            gridColumnGap: '10px',
-            gridRowGap: '10px',
-            backgroundColor: '#8FAECF'
-          }}
-        >
+
+        <div className='modifiers-grid'>
           {this.renderModifierButtons(modifiers)}
         </div>
+
         <QualifierPanel>
           {!!qualifiers && qualifiers.map((qualifier) => {
             return (
               <button
-                key={uuid()}
+                className='qualifier-button'
+                key={qualifier.id}
                 id={qualifier.id}
                 style={{
                   width: `${qualifierWidth}%`,
-                  height: '100%',
-                  padding: '0',
-                  margin: '0',
-                  backgroundColor: '#006900',
-                  color: 'white',
-                  fontWeight: 'bold'
+                  backgroundColor: this.isQualifierSet(qualifier.id) ? '#3daf3b' : '#006900',
                 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log(`${e.target.id} clicked!`);
+                  this.toggleQualifier(e.target.id);
                 }}
               >
                 {qualifier.name}
@@ -151,7 +148,9 @@ class ModifiersMenu extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  initQualifiers: (qualifiersMenu, initialPart) => dispatch(initQualifiers(qualifiersMenu, initialPart))
+  initQualifiers: (qualifiersMenu, initialPart) => dispatch(initQualifiers(qualifiersMenu, initialPart)),
+  setQualifier: (qualifier, status) => dispatch(setQualifier(qualifier, status)),
+  changeModifier: (item, modifier, options) => dispatch(changeModifier(item, modifier, options))
 });
 
 const mapStateToProps = state => ({

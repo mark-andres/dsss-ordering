@@ -40,20 +40,20 @@ export const SALAD_QUALIFIERS = [{
   name: 'EXTRA',
   internalName: 'extra',
   receiptCaption: 'EXTRA',
-  id: 'EXTRA',
+  id: 'extra',
 }, {
   name: 'LITE',
   internalName: 'lite',
   receiptCaption: 'LITE',
-  id: 'LITE',
+  id: 'lite',
 }, {
   name: 'SIDE',
   internalName: 'side',
   receiptCaption: 'SD ',
-  id: 'SIDE',
+  id: 'side',
 }, {
   name: 'Prepare',
-  id: 'PREPARE',
+  id: 'prepare',
   items: [
     'Add Oregano after cooked',
     'Well Done',
@@ -69,35 +69,35 @@ export const PIZZA_QUALIFIERS = [{
   name: 'EXTRA',
   internalName: 'extra',
   receiptCaption: 'EXTRA',
-  id: 'EXTRA',
+  id: 'extra',
 }, {
   name: 'LITE',
   internalName: 'lite',
   receiptCaption: 'LITE',
-  id: 'LITE',
+  id: 'lite',
 }, {
   name: 'SIDE',
   internalName: 'side',
   receiptCaption: 'SD ',
-  id: 'SIDE',
+  id: 'side',
 }, {
   name: 'Half 1',
   internalName: 'h1',
   receiptCaption: 'H1-',
-  id: 'H1',
+  id: 'h1',
 }, {
   name: 'Half 2',
   internalName: 'h2',
   receiptCaption: 'H2-',
-  id: 'H2',
+  id: 'h2',
 }, {
   name: 'Whole',
   internalName: 'whole',
   receiptCaption: '',
-  id: 'WHOLE',
+  id: 'whole',
 }, {
   name: 'Prepare',
-  id: 'PREPARE',
+  id: 'prepare',
   items: [
     'Add Oregano after cooked',
     'Well Done',

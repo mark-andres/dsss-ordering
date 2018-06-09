@@ -24,15 +24,11 @@ class SizeMenu extends React.Component {
           { !!qualifiers && qualifiers.map((qualifier) => {
             return (
               <button
+                className='qualifier-button'
                 key={uuid()}
                 style={{
                   width: '100%',
-                  height: '100%',
-                  padding: '0',
-                  margin: '0',
                   backgroundColor: halfOrdering? '#3daf3b' : '#006900',
-                  color: 'white',
-                  fontWeight: 'bold'
                 }}
                 onClick={(e) => {
                   e.preventDefault();

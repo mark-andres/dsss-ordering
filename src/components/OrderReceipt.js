@@ -5,17 +5,52 @@ import _ from 'lodash';
 import LineItem from './LineItem';
 
 class OrderReceipt extends React.Component {
+  renderSubItems(subItemList, item) {
+    return subItemList.map(subItem => {
+      const { name, price } = subItem;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} />;
+    });
+  }
+
+  renderModifiers(modifiers, item) {
+    const modifiersList = modifiers.reduce((newList, modifier) => {
+      if (modifier.flags && modifier.flags.default && modifier.flags.negated) {
+        return newList.concat({ name: 'NO ' + modifier.name });
+      } else if (modifier.flags && !modifier.flags.default){
+        return newList.concat(modifier);
+      } else {
+        return newList;
+      }
+    }, []);
+
+    return modifiersList.map(subItem => {
+      const { name, price } = subItem;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} />;
+    });
+  }
+
   renderLineItems(order) {
     const lineItems = order.items.map(item => {
-      let subItems = [];
+      let subItems, modifiers, modifiersH1, modifiersH2;
+      subItems = modifiers = modifiersH1 = modifiersH2 = [];
+
       if (item.subItems) {
-        subItems = item.subItems.map(subItem => {
-          const { name, price } = subItem;
-          return <LineItem isSubItem={true} key={uuid()} item={{name, price}} />;
-        });
+        subItems = this.renderSubItems(item.subItems, item);
+      }
+      if (item.modifiers) {
+        modifiers = this.renderModifiers(item.modifiers, item);
+      }
+      if (item.modifiersH1) {
+        modifiersH1 = this.renderModifiers(item.modifiersH1, item);
+      }
+      if (item.modifiersH2) {
+        modifiersH2 = this.renderModifiers(item.modifiersH2, item);
       }
 
-      return [<LineItem isSubItem={false} key={item.id} item={item} />, ...subItems];
+      return [
+        <LineItem isSubItem={false} key={item.id} item={item} />,
+        ...subItems, ...modifiers, ...modifiersH1, ...modifiersH2
+      ];
     });
     const flatItems = _.flatten(lineItems);
     return flatItems;
