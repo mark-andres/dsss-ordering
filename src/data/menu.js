@@ -213,7 +213,7 @@ export const SUBS_MODIFIERS = {
     price: 1.00
   }, {
     name: 'Lettuce',
-    prince: 1.00
+    price: 1.00
   }, {
     name: 'Italian',
     price: 0.50
