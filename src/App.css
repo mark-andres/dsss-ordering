@@ -488,9 +488,9 @@ p {
 .modifiers-grid {
   display: grid;
   grid-template-columns: repeat(5, 19%);
-  grid-template-rows: repeat(6, 14%);
-  overflow: 'hidden';
-  overflow-y: 'scroll';
+  /* grid-template-rows: repeat(6, 14%); */
+  overflow: hidden;
+  overflow-y: scroll;
   height: 100%;
   padding-top: 10px;
   padding-right: 66px;
@@ -510,6 +510,7 @@ p {
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   letter-spacing: 1px;
+  height: 7vh;
 }
 
 .qualifier-button {
