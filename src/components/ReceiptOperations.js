@@ -1,18 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendOrder } from '../actions/order';
+import { sendOrder, removeItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 
 class ReceiptOperations extends React.Component {
+  removeItem = () => {
+    const { selectedItem, removeItem, restoreTopMenu } = this.props;
+
+    if (selectedItem) {
+      restoreTopMenu();
+      removeItem(selectedItem);
+    }
+  }
+
   resetAll = () => {
-    this.props.sendOrder();
-    this.props.restoreTopMenu();
+    const { sendOrder, restoreTopMenu } = this.props;
+
+    sendOrder();
+    restoreTopMenu();
   }
 
   render() {
     return (
       <div className="main-grid-cell receipt-ops">
-        <div className="std-button grid-item-row1-col1">
+        <div 
+          className="std-button grid-item-row1-col1"
+          onClick={this.removeItem}
+        >
           <p className="std-button-caption">Remove Item</p>
         </div>
         <div
@@ -43,7 +57,12 @@ class ReceiptOperations extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
-  restoreTopMenu: () => dispatch(restoreTopMenu())
+  restoreTopMenu: () => dispatch(restoreTopMenu()),
+  removeItem: item => dispatch(removeItem(item))
 });
 
-export default connect(null, mapDispatchToProps)(ReceiptOperations);
+const mapStateToProps = state => ({
+  selectedItem: state.order.selectedItem
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptOperations);
