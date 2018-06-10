@@ -1,4 +1,5 @@
 import uuid from 'uuid/v1';
+import _ from 'lodash';
 
 import { TAX_RATE } from '../data';
 import types from '../actions/types';
@@ -261,6 +262,9 @@ const orderReducer = (order = orderDefault, action) => {
 
     case types.CHANGE_ITEM:
       return changeItem(order, action.item);
+
+    case types.COPY_ITEM:
+      return addItem(order, _.cloneDeep(action.item));
 
     case types.SET_SELECTED_ITEM:
       return {

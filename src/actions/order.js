@@ -15,6 +15,11 @@ export const changeItem = item => ({
   item
 });
 
+export const copyItem = item => ({
+  type: types.COPY_ITEM,
+  item
+});
+
 export const setSelectedItem = item => ({
   type: types.SET_SELECTED_ITEM,
   item

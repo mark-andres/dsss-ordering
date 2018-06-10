@@ -1,9 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendOrder, removeItem } from '../actions/order';
+import { sendOrder, removeItem, copyItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 
 class ReceiptOperations extends React.Component {
+  repeatItem = () => {
+    const { selectedItem, copyItem } = this.props;
+
+    if (selectedItem) {
+      copyItem(selectedItem);
+    }
+  }
+
   removeItem = () => {
     const { selectedItem, removeItem, restoreTopMenu } = this.props;
 
@@ -47,7 +55,10 @@ class ReceiptOperations extends React.Component {
         <div className="std-button grid-item-row2-col3">
           <p className="std-button-caption">Coupons</p>
         </div>
-        <div className="std-button grid-item-row2-col4">
+        <div 
+          className="std-button grid-item-row2-col4"
+          onClick={this.repeatItem}
+        >
           <p className="std-button-caption">Repeat Item</p>
         </div>
       </div>
@@ -58,7 +69,8 @@ class ReceiptOperations extends React.Component {
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
   restoreTopMenu: () => dispatch(restoreTopMenu()),
-  removeItem: item => dispatch(removeItem(item))
+  removeItem: item => dispatch(removeItem(item)),
+  copyItem: item => dispatch(copyItem(item))
 });
 
 const mapStateToProps = state => ({
