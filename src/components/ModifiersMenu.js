@@ -28,7 +28,10 @@ class ModifiersMenu extends React.Component {
     if (includedModifiers) {
       const itemModifier = includedModifiers.find(included => included.name === modifier.name);
       if (itemModifier) {
-        if (!itemModifier.flags.negated) {
+        if (itemModifier.flags.negated) {
+          bgcolor = 'darkred';       // some shade of red for a negated modifier
+        }
+        else {
           bgcolor = '#006900';       // a green color means the modifier is included
         }
       }
