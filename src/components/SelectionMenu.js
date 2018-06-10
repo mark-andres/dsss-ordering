@@ -5,12 +5,13 @@ import SelectionHeader from './SelectionHeader';
 
 class SelectionMenu extends React.Component {
   render() {
-    const { items, name } = this.props.menu;
+    const { menu } = this.props;
+    const { items, name } = menu;
 
     return (
       <div className="selection-menu">
         <SelectionHeader caption={name}/>
-        <MenuItems items={items} />
+        <MenuItems items={items} menu={menu} />
         <QualifierPanel />
       </div>
     );

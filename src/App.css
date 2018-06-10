@@ -26,7 +26,21 @@ p {
   background-color: #fde5c0;
 }
 
-.order-receipt table {
+.order-receipt > table {
+  width: 100%;
+  height: 100%;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-collapse: collapse;
+}
+
+.order-receipt-body {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.order-receipt > table table {
   width: 100%;
   height: 100%;
   font-size: 0.9rem;
@@ -43,9 +57,13 @@ p {
   padding: 5px 10px;
 }
 
+.order-receipt table tbody {
+  vertical-align: top;
+}
+
 /* The border between columns */
 
-.order-receipt table td+td {
+.order-receipt table table td+td {
   border-left: 1px solid grey;
 }
 
@@ -55,33 +73,41 @@ p {
   width: 10%;
 }
 
+.order-receipt table table td:nth-child(1) {
+  width: 10%;
+}
+
 /* Set width of Price column */
 
 .order-receipt table thead th:nth-child(3) {
   width: 18%;
 }
 
+.order-receipt table table td:nth-child(3) {
+  width: 18%;
+}
+
 /* Center align the quantity */
 
-.order-receipt table tr td:nth-child(1) {
+.order-receipt table table tr td:nth-child(1) {
   text-align: center;
 }
 
 /* Right align the price */
 
-.order-receipt table tr td:nth-child(3) {
+.order-receipt table table tr td:nth-child(3) {
   text-align: right;
 }
 
-.order-receipt table tr {
+.order-receipt table table tr {
   height: 3vh;
 }
 
-.order-receipt table tr:hover {
+.order-receipt table table tr:hover {
   cursor: pointer;
 }
 
-.order-receipt table tbody tr:last-child {
+.order-receipt table table tr:last-child {
   height: 100%;
 }
 

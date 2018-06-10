@@ -8,7 +8,7 @@ class OrderReceipt extends React.Component {
   renderSubItems(subItemList, item) {
     return subItemList.map(subItem => {
       const { name, price } = subItem;
-      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} />;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} subItemOwner={item}/>;
     });
   }
 
@@ -25,7 +25,7 @@ class OrderReceipt extends React.Component {
 
     return modifiersList.map(subItem => {
       const { name, price } = subItem;
-      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} />;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} subItemOwner={item}/>;
     });
   }
 
@@ -72,6 +72,11 @@ class OrderReceipt extends React.Component {
         <table>
           {header}
           <tbody>
+            <tr>
+            <td colSpan="3">
+            <div className="order-receipt-body">
+            <table>
+            <tbody>
             {this.renderLineItems(order)}
             <LineItem key={uuid()} />
             {order.items.length > 0 && (
@@ -96,6 +101,11 @@ class OrderReceipt extends React.Component {
               </tr>
             )}
             <LineItem key={uuid()} />
+            </tbody>
+            </table>
+            </div>
+            </td>
+            </tr>
           </tbody>
         </table>
       </div>

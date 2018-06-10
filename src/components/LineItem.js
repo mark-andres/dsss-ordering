@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import { setCurrentMenu } from '../actions/menu';
 import { setSelectedItem } from '../actions/order';
 import { selectedItemStyle } from '../styles/LineItem';
+import { isEmpty } from '../lib';
 
 class LineItem extends React.Component {
   onClick = () => {
-    this.props.setCurrentMenu(this.props.item.menu);
-    this.props.setSelectedItem(this.props.item);
+    const { isSubItem, subItemOwner, setCurrentMenu, setSelectedItem, item } = this.props;
+    if (isSubItem) {
+      setCurrentMenu(subItemOwner.menu);
+      setSelectedItem(subItemOwner);
+    } else {
+      setCurrentMenu(item.menu);
+      setSelectedItem(item);
+    }
   }
 
   render() {
@@ -21,7 +28,7 @@ class LineItem extends React.Component {
     const quantityStr = quantity ? quantity.toString() : '';
     const priceStr = price ? price.toFixed(2) : '';
     const selectedItem = this.props.selectedItem;
-    const style = (selectedItem && selectedItem.id === item.id) ? selectedItemStyle : {};
+    const style = (!isEmpty(selectedItem) && selectedItem.id === item.id) ? selectedItemStyle : {};
     const subItemStyle = this.props.isSubItem ? { paddingLeft: '2vw' } : {};
 
     return (

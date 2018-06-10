@@ -21,10 +21,12 @@ class MenuItem extends React.Component {
   }
   
   onClick = () => {
+    const { modifiers } = this.props.menu;
     this.props.toggleItem(
       orderItemFromMenu({
         ...this.props.menuItem,
-        key: this.key
+        key: this.key,
+        menu: modifiers ? modifiers : this.props.menu
       }, 1)
     );
   }
