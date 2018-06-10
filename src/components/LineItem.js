@@ -2,19 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentMenu } from '../actions/menu';
 import { setSelectedItem } from '../actions/order';
+import { resetScratch } from '../actions/scratchPad';
 import { selectedItemStyle } from '../styles/LineItem';
 import { isEmpty } from '../lib';
 
 class LineItem extends React.Component {
   onClick = () => {
-    const { isSubItem, subItemOwner, setCurrentMenu, setSelectedItem, item } = this.props;
-    if (isSubItem) {
-      setCurrentMenu(subItemOwner.menu);
-      setSelectedItem(subItemOwner);
-    } else {
-      setCurrentMenu(item.menu);
-      setSelectedItem(item);
-    }
+    const { isSubItem, subItemOwner, setCurrentMenu, setSelectedItem, resetScratch, item } = this.props;
+    const targetItem = isSubItem ? subItemOwner : item;
+
+    setCurrentMenu(targetItem.menu);
+    resetScratch(targetItem.scratchPad);
+    setSelectedItem(targetItem);
   }
 
   render() {
@@ -43,7 +42,8 @@ class LineItem extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   setCurrentMenu: menu => dispatch(setCurrentMenu(menu)),
-  setSelectedItem: item => dispatch(setSelectedItem(item))
+  setSelectedItem: item => dispatch(setSelectedItem(item)),
+  resetScratch: scratchPad => dispatch(resetScratch(scratchPad))
 });
 
 const mapStateToProps = state => ({

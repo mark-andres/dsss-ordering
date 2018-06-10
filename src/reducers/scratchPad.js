@@ -148,6 +148,9 @@ const scratchPadReducer = (scratchPad = defaultScratchPad, action) => {
       };
 
     case types.RESET_SCRATCH:
+      if (action.scratchPad) {
+        return action.scratchPad;
+      }
       return {
         items: [],
         halfOrdering: false,

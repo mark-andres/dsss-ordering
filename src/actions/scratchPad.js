@@ -38,6 +38,7 @@ export const setHalfOrdering = halfOrdering => ({
   halfOrdering
 });
 
-export const resetScratch = () => ({
-  type: RESET_SCRATCH
+export const resetScratch = scratchPad => ({
+  type: RESET_SCRATCH,
+  scratchPad
 });
