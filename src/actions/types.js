@@ -4,6 +4,10 @@ export const RESET_CURRENT_MENU = 'RESET_CURRENT_MENU';
 export const MAKE_TOP_MENU_CURRENT = 'MAKE_TOP_MENU_CURRENT';
 export const RESTORE_TOP_MENU = 'RESTORE_TOP_MENU';
 
+// Types for modal
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+
 // Types for order
 export const ADD_ITEM = 'ADD_ITEM';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
@@ -44,6 +48,8 @@ export default {
   RESET_CURRENT_MENU,
   MAKE_TOP_MENU_CURRENT,
   RESTORE_TOP_MENU,
+  SHOW_MODAL,
+  HIDE_MODAL,
   ADD_ITEM,
   REMOVE_ITEM,
   COPY_ITEM,

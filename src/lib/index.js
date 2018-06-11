@@ -1,3 +1,4 @@
+export const MESSAGE_MODAL = 'MESSAGE_MODAL';
 
 export const orderItemFromMenu = (menuItem, quantity) => {
   return {

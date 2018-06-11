@@ -8,19 +8,23 @@ import OrderReceipt from './components/OrderReceipt';
 import SelectionPanel from './components/SelectionPanel';
 import ReceiptOperations from './components/ReceiptOperations';
 import OrderOperations from './components/OrderOperations';
+import ModalContainer from './components/ModalContainer';
 
 class App extends Component {
   render() {
     return (
       <Provider store={configStore()}>
-        <div className="main-grid">
-          <OrderInfo />
-          <CategorySelection />
-          <OrderReceipt />
-          <SelectionPanel />
-          <ReceiptOperations />
-          <OrderOperations />
-        </div>
+        <React.Fragment>
+          <div className="main-grid">
+            <OrderInfo />
+            <CategorySelection />
+            <OrderReceipt />
+            <SelectionPanel />
+            <ReceiptOperations />
+            <OrderOperations />
+          </div>
+          <ModalContainer />
+        </React.Fragment>
       </Provider>
     );
   }

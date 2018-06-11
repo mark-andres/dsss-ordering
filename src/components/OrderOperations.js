@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sendOrder } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
+import { loadModal } from '../actions/modal';
+import { MESSAGE_MODAL } from '../lib';
 
 class OrderOperations extends React.Component {
   onSendOrder = () => {
@@ -9,13 +11,20 @@ class OrderOperations extends React.Component {
     this.props.restoreTopMenu();
   };
 
+  onNoSaleClicked = e => {
+    this.props.loadModal(MESSAGE_MODAL, { message: 'No Sale has not been implemented.'});
+  }
+
   render() {
     return (
       <div className="main-grid-cell order-ops">
         <div className="std-button grid-item-row1-col1">
           <p className="std-button-caption caption-color-red large-caption">Logoff</p>
         </div>
-        <div className="std-button grid-item-row1-col2">
+        <div 
+          className="std-button grid-item-row1-col2"
+          onClick={this.onNoSaleClicked}
+        >
           <p className="std-button-caption caption-color-green large-caption">No Sale</p>
         </div>
         <div className="button-stack grid-item-row1-col3">
@@ -48,6 +57,7 @@ class OrderOperations extends React.Component {
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
   restoreTopMenu: () => dispatch(restoreTopMenu()),
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
 });
 
 export default connect(null, mapDispatchToProps)(OrderOperations);
