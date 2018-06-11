@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sendOrder, removeItem, copyItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
+import { loadModal } from '../actions/modal';
+import { MESSAGE_MODAL } from './MessageModal';
+import { CONFIRM_DIALOG } from './ConfirmDialog';
 
 class ReceiptOperations extends React.Component {
   repeatItem = () => {
@@ -16,22 +19,34 @@ class ReceiptOperations extends React.Component {
     const { selectedItem, removeItem, restoreTopMenu } = this.props;
 
     if (selectedItem) {
-      restoreTopMenu();
-      removeItem(selectedItem);
+      this.props.loadModal(CONFIRM_DIALOG, {
+        message: 'Would you like to remove the selected item?',
+        onYes: () => {
+          restoreTopMenu();
+          removeItem(selectedItem);
+        }
+      });
+    } else {
+      this.props.loadModal(MESSAGE_MODAL, { message: 'No item has been selected.' });
     }
   }
 
   resetAll = () => {
-    const { sendOrder, restoreTopMenu } = this.props;
+    const { sendOrder, restoreTopMenu, loadModal } = this.props;
 
-    sendOrder();
-    restoreTopMenu();
+    loadModal(CONFIRM_DIALOG, {
+      message: 'Would you like to clear all items?',
+      onYes: () => {
+        sendOrder();
+        restoreTopMenu();
+      }
+    });
   }
 
   render() {
     return (
       <div className="main-grid-cell receipt-ops">
-        <div 
+        <div
           className="std-button grid-item-row1-col1"
           onClick={this.removeItem}
         >
@@ -55,7 +70,7 @@ class ReceiptOperations extends React.Component {
         <div className="std-button grid-item-row2-col3">
           <p className="std-button-caption">Coupons</p>
         </div>
-        <div 
+        <div
           className="std-button grid-item-row2-col4"
           onClick={this.repeatItem}
         >
@@ -70,7 +85,8 @@ const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
   restoreTopMenu: () => dispatch(restoreTopMenu()),
   removeItem: item => dispatch(removeItem(item)),
-  copyItem: item => dispatch(copyItem(item))
+  copyItem: item => dispatch(copyItem(item)),
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
 });
 
 const mapStateToProps = state => ({

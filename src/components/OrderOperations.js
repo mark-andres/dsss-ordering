@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { sendOrder } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
-import { MESSAGE_MODAL } from '../lib';
+import { MESSAGE_MODAL } from '../components/MessageModal';
 
 class OrderOperations extends React.Component {
   onSendOrder = () => {

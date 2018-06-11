@@ -19,6 +19,8 @@ const OkButton = styled.button`
   font-size: 1.1em;
 `;
 
+export const MESSAGE_MODAL = 'MESSAGE_MODAL';
+
 class MessageModal extends React.Component {
   onClose = () => {
     this.props.hideModal();

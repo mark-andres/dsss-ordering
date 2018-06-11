@@ -21,10 +21,14 @@ const YesButton = styled.button`
 
 const NoButton = YesButton;
 
+export const CONFIRM_DIALOG = 'CONFIRM_DIALOG';
+
 class ConfirmDialog extends React.Component {
   onYesClicked = () => {
     this.props.hideModal();
-    this.props.onYes();
+    if (this.props.onYes) {
+      this.props.onYes();
+    }
   }
 
   onClose = () => {

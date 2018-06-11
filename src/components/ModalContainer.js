@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MessageModal from './MessageModal';
-
-import { MESSAGE_MODAL } from '../lib';
+import MessageModal, { MESSAGE_MODAL } from './MessageModal';
+import ConfirmDialog, { CONFIRM_DIALOG } from './ConfirmDialog';
 
 const MODAL_COMPONENTS = {
-  [MESSAGE_MODAL]: MessageModal
+  [MESSAGE_MODAL]: MessageModal,
+  [CONFIRM_DIALOG]: ConfirmDialog
 };
 
 const ModalContainer = (props) => {
