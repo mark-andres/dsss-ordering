@@ -21,7 +21,10 @@ export const changeItem = item => ({
 
 export const copyItem = item => ({
   type: types.COPY_ITEM,
-  item
+  item: {
+    ...item,
+    id: uuid()
+  }
 });
 
 export const setSelectedItem = item => ({
