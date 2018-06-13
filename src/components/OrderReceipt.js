@@ -5,6 +5,13 @@ import _ from 'lodash';
 import LineItem from './LineItem';
 
 class OrderReceipt extends React.Component {
+  renderComments(comments, item) {
+    return comments.map(comment => {
+      const { name } = comment;
+      return <LineItem isComment={true} key={uuid()} item={{ name }} subItemOwner={item}/>;
+    });
+  }
+
   renderSubItems(subItemList, item) {
     return subItemList.map(subItem => {
       const { name, price } = subItem;
@@ -31,9 +38,12 @@ class OrderReceipt extends React.Component {
 
   renderLineItems(order) {
     const lineItems = order.items.map(item => {
-      let subItems, modifiers, modifiersH1, modifiersH2;
-      subItems = modifiers = modifiersH1 = modifiersH2 = [];
+      let subItems, modifiers, modifiersH1, modifiersH2, comments;
+      subItems = modifiers = modifiersH1 = modifiersH2 = comments = [];
 
+      if (item.comments) {
+        comments = this.renderComments(item.comments, item);
+      }
       if (item.subItems) {
         subItems = this.renderSubItems(item.subItems, item);
       }
@@ -49,9 +59,10 @@ class OrderReceipt extends React.Component {
 
       return [
         <LineItem isSubItem={false} key={item.id} item={item} />,
-        ...subItems, ...modifiers, ...modifiersH1, ...modifiersH2
+        ...comments, ...subItems, ...modifiers, ...modifiersH1, ...modifiersH2
       ];
     });
+
     const flatItems = _.flatten(lineItems);
     return flatItems;
   }
