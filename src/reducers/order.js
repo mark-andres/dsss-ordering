@@ -1,4 +1,3 @@
-import uuid from 'uuid/v1';
 import _ from 'lodash';
 
 import { TAX_RATE } from '../data';
@@ -17,7 +16,6 @@ const addItem = (order, item) => {
   // Create new item
   const selectedItem = {
     ...item,
-    id: uuid(),
   };
 
   // Create new items array with the new item

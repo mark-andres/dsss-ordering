@@ -1,8 +1,12 @@
+import uuid from 'uuid/v1';
 import types from './types';
 
 export const addItem = item => ({
   type: types.ADD_ITEM,
-  item
+  item: {
+    ...item,
+    id: uuid()
+  }
 });
 
 export const removeItem = item => ({
