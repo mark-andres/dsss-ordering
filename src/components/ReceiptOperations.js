@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendOrder, removeItem, copyItem } from '../actions/order';
+import { sendOrder, changeItem, removeItem, copyItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
 import { MESSAGE_MODAL } from './MessageModal';
 import { CONFIRM_DIALOG } from './ConfirmDialog';
+import { QUANTITY_DIALOG } from './QuantityDialog';
 
 class ReceiptOperations extends React.Component {
   repeatItem = () => {
@@ -43,6 +44,23 @@ class ReceiptOperations extends React.Component {
     });
   }
 
+  changeQuantity = () => {
+    const { selectedItem, changeItem, loadModal } = this.props;
+
+    if (selectedItem) {
+      loadModal(QUANTITY_DIALOG, {
+        onOk: quantity => {
+          changeItem({
+            ...selectedItem,
+            quantity
+          });
+        }
+      });
+    } else {
+      this.props.loadModal(MESSAGE_MODAL, { message: 'No item has been selected.' });
+    }
+  }
+
   render() {
     return (
       <div className="main-grid-cell receipt-ops">
@@ -58,7 +76,10 @@ class ReceiptOperations extends React.Component {
         >
           <p className="std-button-caption caption-color-green">Clear All</p>
         </div>
-        <div className="std-button grid-item-row1-col3">
+        <div 
+          className="std-button grid-item-row1-col3"
+          onClick={this.changeQuantity}
+        >
           <p className="std-button-caption">Quantity</p>
         </div>
         <div className="std-button grid-item-row2-col1">
@@ -84,6 +105,7 @@ class ReceiptOperations extends React.Component {
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
   restoreTopMenu: () => dispatch(restoreTopMenu()),
+  changeItem: item => dispatch(changeItem(item)),
   removeItem: item => dispatch(removeItem(item)),
   copyItem: item => dispatch(copyItem(item)),
   loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
