@@ -246,7 +246,7 @@ function calculateSubTotals(items) {
       }, 0);
     }
 
-    return total + quantity * (price + modifiersSum + modifiersH1Sum + modifiersH2Sum) + subItemsSum;
+    return total + quantity * (price + modifiersSum + modifiersH1Sum + modifiersH2Sum + subItemsSum);
   }, 0);
 }
 
