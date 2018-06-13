@@ -17,18 +17,30 @@ class LineItem extends React.Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, selectedItem, isSubItem, isComment, subItemOwner } = this.props;
 
     if (!item) {
       return <tr><td></td><td></td><td></td></tr>;
     }
 
     const { quantity, name, price } = item;
-    const quantityStr = quantity ? quantity.toString() : '';
-    const priceStr = price ? price.toFixed(2) : '';
-    const selectedItem = this.props.selectedItem;
+    let quantityStr = quantity ? quantity.toString() : '';
+    let priceStr;
+
     const style = (!isEmpty(selectedItem) && selectedItem.id === item.id) ? selectedItemStyle : {};
-    const subItemStyle = this.props.isSubItem ? { paddingLeft: '2vw' } : {};
+    let subItemStyle = {};
+
+    if (isSubItem) {
+      quantityStr = '';
+      priceStr = price ? (subItemOwner.quantity * price).toFixed(2) : '';
+      subItemStyle = { paddingLeft: '2vw' };
+    } else if (isComment) {
+      priceStr = '';
+      quantityStr = '';
+      subItemStyle = { paddingLeft: '1vw' };
+    } else {
+      priceStr = (quantity * price).toFixed(2);
+    }
 
     return (
       <tr onClick={this.onClick} style={style}>
