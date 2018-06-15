@@ -1,28 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
+import _ from 'lodash';
 import { initQualifiers, setQualifier } from '../actions/qualifiers';
 import { changeModifier } from '../actions/order';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
 
 class ModifiersMenu extends React.Component {
-  componentDidMount() {
-    const { qualifiers } = this.props.menu;
-    const { selectedItem } = this.props;
-    if (qualifiers) {
-      let initialPart;
-      if (selectedItem.modifiers) {
-        initialPart = 'whole';
-      } else if (selectedItem.modifiersH1) {
-        initialPart = 'h1';
-      } else {
-        initialPart = 'whole';
-      }
-      this.props.initQualifiers(qualifiers, initialPart);
-    }
-  }
-
   getModifierBg(modifier, includedModifiers) {
     let bgcolor = '#0000d1';       // a blue color for modifier not included
     if (includedModifiers) {
@@ -96,55 +81,27 @@ class ModifiersMenu extends React.Component {
     });
   }
 
-  isQualifierSet(qualifierId) {
-    if (qualifierId === 'prepare') {
-      return false;
-    }
-
-    const { qualifiers } = this.props;
-    return qualifiers[qualifierId];
-  }
-
-  toggleQualifier(qualifierId) {
-    const { qualifiers, setQualifier } = this.props;
-    
-    setQualifier(qualifierId, !qualifiers[qualifierId]);
-  }
-
   render() {
+    const { selectedItem } = this.props;
     const { name, qualifiers } = this.props.menu;
     const modifiers = this.props.menu.items;
-    const qualifierWidth = 100 / qualifiers.length;
 
     return (
       <div className="selection-menu">
-        <SelectionHeader caption={name} />
+        <SelectionHeader caption={`${name} - ${selectedItem.name}`} />
 
         <div className='modifiers-grid'>
           {this.renderModifierButtons(modifiers)}
         </div>
 
-        <QualifierPanel>
-          {!!qualifiers && qualifiers.map((qualifier) => {
-            return (
-              <button
-                className='qualifier-button'
-                key={qualifier.id}
-                id={qualifier.id}
-                style={{
-                  width: `${qualifierWidth}%`,
-                  backgroundColor: this.isQualifierSet(qualifier.id) ? '#3daf3b' : '#006900',
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.toggleQualifier(e.target.id);
-                }}
-              >
-                {qualifier.name}
-              </button>
-            )
-          })}
-        </QualifierPanel>
+        <QualifierPanel 
+          menuQualifiers={qualifiers} 
+          qualifiers={this.props.qualifiers}
+          halfOrdering={this.props.halfOrdering} 
+          setQualifier={this.props.setQualifier}
+          selectedItem={selectedItem}
+          initQualifiers={this.props.initQualifiers}
+        />
       </div>
     );
   }
@@ -158,7 +115,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   selectedItem: state.order.selectedItem,
-  qualifiers: state.qualifiers
+  qualifiers: state.qualifiers,
+  halfOrdering: _.property('order.selectedItem.scratchPad.halfOrdering')(state)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModifiersMenu);
