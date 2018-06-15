@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { restoreTopMenu } from '../actions/menu';
 
-class PlaceholderPanel extends React.Component {
+class QuickNavPanel extends React.Component {
+  cancelButtonActive() {
+    return this.props.currentMenuType !== 'ITEMS_MENU';
+  }
+
   render() {
     return (
       <div className="placeholder-panel">
@@ -27,7 +31,15 @@ class PlaceholderPanel extends React.Component {
         <div className="nav-item grid-item-row1-col5">
           <p>Preferences</p>
         </div>
-        <div className="nav-item nav-item-canceled grid-item-row1-col6">
+        <div 
+          className={"nav-item grid-item-row1-col6" + (this.cancelButtonActive() ? ' nav-item-canceled' : '')}
+          onClick={e => {
+            e.preventDefault();
+            if (this.cancelButtonActive()) {
+              this.props.restoreTopMenu();
+            }
+          }}
+        >
           <p>Cancel</p>
         </div>
       </div>
@@ -39,4 +51,8 @@ const mapDispatchToProps = dispatch => ({
   restoreTopMenu: () => dispatch(restoreTopMenu())
 });
 
-export default connect(null, mapDispatchToProps)(PlaceholderPanel);
+const mapStateToProps = state => ({
+  currentMenuType: state.menu.currentMenu.type
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuickNavPanel);
