@@ -213,7 +213,7 @@ export const SUBS_MODIFIERS = {
     price: 1.00
   }, {
     name: 'Lettuce',
-    price: 1.00
+    price: 0.50
   }, {
     name: 'Italian',
     price: 0.50
@@ -287,7 +287,7 @@ export const SALADS_MODIFIERS = {
 };
 
 export const PIZZA_MODIFIERS = {
-  name: 'Modifiers',
+  name: 'Pizza Modifiers',
   caption: 'Pizza Modifiers',
   type: MENU_TYPE.MODIFIERS_MENU,
   key: uuid(),
@@ -527,32 +527,40 @@ export const ENTREE_SALAD_CHOICEMENU = {
   prompt: 'Please Select Salad',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
-    { 
+    {
       name: 'Salad w Ranch',
+      add: 'Garlic Bread',
     },
     {
       name: 'Salad w Blue Chz',
+      add: 'Garlic Bread',
     },
     {
       name: 'Salad w Vin',
+      add: 'Garlic Bread',
     },
     {
       name: 'Salad w 1000 Isle',
+      add: 'Garlic Bread',
     },
     {
       name: 'Salad w Caesar',
+      add: 'Garlic Bread',
     },
     {
       name: 'Salad w NO Dress',
+      add: 'Garlic Bread',
     },
     {
       name: 'NO Salad',
+      add: 'Garlic Bread',
     },
     {
       name: 'NO Salad Xtra Brd',
     },
     {
       name: 'Salad w Italian',
+      add: 'Garlic Bread',
     },
   ]
 };
@@ -592,7 +600,7 @@ export const WINGSAUCE_CHOICEMENU = {
   prompt: 'Please choose wingsauce',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
-    { 
+    {
       name: 'Hot',
     },
     {
@@ -633,7 +641,7 @@ export const DIP_CHOICEMENU = {
   prompt: 'Please Select Dip',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
-    { 
+    {
       name: 'Marinara',
     },
     {
@@ -656,7 +664,7 @@ export const DIP2_CHOICEMENU = {
   prompt: 'Please choose dip',
   type: MENU_TYPE.CHOICES_MENU,
   items: [
-    { 
+    {
       name: 'Ranch',
     },
     {
@@ -670,6 +678,24 @@ export const DIP2_CHOICEMENU = {
       name: 'No DIP',
     },
   ]
+};
+
+export const TWOLITER_CHOICEMENU = {
+  prompt: 'Please Select 2LT',
+  type: MENU_TYPE.CHOICES_MENU,
+  items: [{
+    name: 'Pepsi'
+  }, {
+    name: 'DietPepsi'
+  }, {
+    name: 'Sierra Mist'
+  }, {
+    name: 'MUG Root Beer'
+  }, {
+    name: 'Orange Crush'
+  }, {
+    name: 'Mountain Dew'
+  }]
 };
 
 export const MENU = {
@@ -792,7 +818,7 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Side Greek Salad',
@@ -809,7 +835,7 @@ export const MENU = {
         'Greek Olives',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Side Caesar Salad',
@@ -825,7 +851,7 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Half Order Cold Antipasto',
@@ -844,7 +870,7 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Dinner Salad',
@@ -860,7 +886,7 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Caesar Salad',
@@ -876,14 +902,14 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Greek Salad',
       key: uuid(),
       price: 7.00,
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Cold Antipasto Salad',
@@ -902,35 +928,35 @@ export const MENU = {
         'Parmesan',
       ],
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Small Salad Tray for 10',
       key: uuid(),
       price: 10.00,
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Large Salad Tray for 20',
       key: uuid(),
       price: 10.00,
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Small Greek Tray for 10',
       key: uuid(),
       price: 10.00,
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Large Greek Tray for 20',
       key: uuid(),
       price: 10.00,
       choices: [
-        DRESSINGS_CHOICEMENU 
+        DRESSINGS_CHOICEMENU
       ]
     }]
   },
@@ -1059,11 +1085,14 @@ export const MENU = {
       name: '2-Liters',
       key: uuid(),
       price: 3.00,
+      choices: [
+        TWOLITER_CHOICEMENU
+      ]
     }, {
       name: 'Bottled Water',
       key: uuid(),
       price: 1.50,
-    }]
+    }],
   },
   [CATEGORY.SLICES]: {
     name: 'Slices',
@@ -1270,6 +1299,9 @@ export const MENU = {
         'Marinara',
         'Meatballs',
         'Spaghetti',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Spaghetti w Sausage',
@@ -1279,6 +1311,9 @@ export const MENU = {
         'Marinara',
         'Sausage',
         'Spaghetti',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Spaghetti w Meat Sauce',
@@ -1287,11 +1322,17 @@ export const MENU = {
       includes: [
         'Meat Sauce',
         'Spaghetti',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Spaghetti w Sauce',
       key: uuid(),
       price: 9.00,
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
+      ]
     }, {
       name: 'Cheese Ravioli',
       key: uuid(),
@@ -1299,6 +1340,9 @@ export const MENU = {
       includes: [
         'Marinara',
         'Mozzarella',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Chicken Parmesan',
@@ -1309,6 +1353,9 @@ export const MENU = {
         'Marinara',
         'Mozzarella',
         'Spaghetti',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Eggplant Parmesan',
@@ -1319,6 +1366,9 @@ export const MENU = {
         'Marinara',
         'Mozzarella',
         'Spaghetti',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Baked Ziti',
@@ -1329,6 +1379,9 @@ export const MENU = {
         'Mozzarella',
         'Ricotta',
         'Penne',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }, {
       name: 'Lasagna',
@@ -1337,6 +1390,9 @@ export const MENU = {
       includes: [
         'Marinara',
         'Mozzarella',
+      ],
+      choices: [
+        ENTREE_SALAD_CHOICEMENU
       ]
     }]
   },

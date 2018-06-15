@@ -23,7 +23,7 @@ class LineItem extends React.Component {
       return <tr><td></td><td></td><td></td></tr>;
     }
 
-    const { quantity, name, price } = item;
+    const { quantity, name, price, add } = item;
     let quantityStr = quantity ? quantity.toString() : '';
     let priceStr;
 
@@ -43,11 +43,20 @@ class LineItem extends React.Component {
     }
 
     return (
-      <tr onClick={this.onClick} style={style}>
-        <td>{quantityStr}</td>
-        <td style={subItemStyle}>{name}</td>
-        <td>{priceStr}</td>
-      </tr>
+      <React.Fragment>
+        <tr onClick={this.onClick} style={style}>
+          <td>{quantityStr}</td>
+          <td style={subItemStyle}>{name}</td>
+          <td>{priceStr}</td>
+        </tr>
+        {!!add && (
+          <tr onClick={this.onClick} style={style}>
+            <td></td>
+            <td style={subItemStyle}>{add}</td>
+            <td></td>
+          </tr>
+        )}
+      </React.Fragment>
     );
   }
 }
