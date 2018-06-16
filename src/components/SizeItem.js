@@ -17,10 +17,6 @@ class SizeItem extends React.Component {
   onClick = () => {
     const size = this.props.size;
     this.props.setItemSize(size);
-    // if (this.props.scratchPad.completedItem) {
-    //   this.props.addItem(this.props.scratchPad.completedItem);
-    //   this.props.resetScratch();
-    // }
   }
 
   render() {
@@ -34,6 +30,7 @@ class SizeItem extends React.Component {
     return (
       <div 
         className={classes}
+        style={this.props.style}
         onClick={this.onClick}
       >
         <p>{size}</p>

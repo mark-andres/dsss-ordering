@@ -1,12 +1,14 @@
+import _ from 'lodash';
 import orderReducer from './order';
 import menuReducer from './menu';
 import scratchPadReducer from './scratchPad';
 import qualifiersReducer from './qualifiers';
 import modalReducer from './modal';
 import types from '../actions/types';
-import { addItem, setSelectedItem } from '../actions/order';
+import { addItem, changeItem, setSelectedItem } from '../actions/order';
 import { resetScratch, setSizeRequired } from '../actions/scratchPad';
 import { setCurrentMenu } from '../actions/menu';
+import { MENU_TYPE } from '../data/menu';
 
 
 const setChoices = (state, choices, modifierMenu) => {
@@ -80,13 +82,19 @@ const appReducer = (state = {}, action) => {
       if (state.scratchPad.completedItem) {
         const { choices } = state.scratchPad.completedItem;
         const modifiersMenu = state.menu.currentMenu.modifiers;
+        const menuType = state.menu.currentMenu.type;
         if (choices) {
           state = setChoices(state, choices, modifiersMenu);
         } else {
+          let orderOp = addItem;
+          if (menuType === MENU_TYPE.SIZES_MENU) {
+            orderOp = changeItem;
+          }
           state.order = orderReducer(
             state.order,
-            addItem({
+            orderOp({
               ...state.scratchPad.completedItem,
+              id: _.property('order.selectedItem.id')(state),
               scratchPad: state.scratchPad
             })
           );

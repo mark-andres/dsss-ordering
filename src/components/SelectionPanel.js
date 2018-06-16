@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ItemsMenu from './ItemsMenu';
 import ModifiersMenu from './ModifiersMenu';
-import ChoicesMenu from './ChoicesMenu'
+import ChoicesMenu from './ChoicesMenu';
+import SizesMenu from './SizesMenu';
 import { MENU_TYPE } from '../data/menu';
 
 class SelectionPanel extends React.Component {
@@ -16,6 +17,9 @@ class SelectionPanel extends React.Component {
 
       case MENU_TYPE.CHOICES_MENU:
         return <ChoicesMenu menu={this.props.currentMenu} />;
+
+      case MENU_TYPE.SIZES_MENU:
+        return <SizesMenu menu={this.props.currentMenu} />;
 
       default:
         return <h1>Unknown Menu Type</h1>
