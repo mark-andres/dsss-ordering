@@ -19,12 +19,18 @@ class OrderReceipt extends React.Component {
     });
   }
 
-  renderModifiers(modifiers, item) {
+  renderModifiers(modifiers, item, prefix = '') {
     const modifiersList = modifiers.reduce((newList, modifier) => {
       if (modifier.flags && modifier.flags.default && modifier.flags.negated) {
-        return newList.concat({ name: 'NO ' + modifier.name });
+        return newList.concat({ 
+          name: prefix + 'NO ' + modifier.name, 
+        });
       } else if (modifier.flags && !modifier.flags.default){
-        return newList.concat(modifier);
+        return newList.concat({ 
+          name: prefix + modifier.name, 
+          price: modifier.price, 
+          quantity: modifier.quantity 
+        });
       } else {
         return newList;
       }
@@ -51,10 +57,10 @@ class OrderReceipt extends React.Component {
         modifiers = this.renderModifiers(item.modifiers, item);
       }
       if (item.modifiersH1) {
-        modifiersH1 = this.renderModifiers(item.modifiersH1, item);
+        modifiersH1 = this.renderModifiers(item.modifiersH1, item, 'H1-');
       }
       if (item.modifiersH2) {
-        modifiersH2 = this.renderModifiers(item.modifiersH2, item);
+        modifiersH2 = this.renderModifiers(item.modifiersH2, item, 'H2-');
       }
 
       return [

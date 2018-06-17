@@ -38,25 +38,13 @@ class ModifiersMenu extends React.Component {
   renderModifierButtons(modifiers) {
     let includedModifiers = [];
     const { selectedItem, qualifiers } = this.props;
-    const { part } = qualifiers.flags;
 
-    if (part) {
-      switch (part) {
-        case 'h1':
-          includedModifiers = selectedItem.modifiersH1;
-          break;
-        case 'h2':
-          includedModifiers = selectedItem.modifiersH2;
-          break;
-        default:
-          includedModifiers = selectedItem.modifiers;
-      }
+    if (qualifiers.h1) {
+      includedModifiers = selectedItem.modifiersH1;
+    } else if (qualifiers.h2) {
+      includedModifiers = selectedItem.modifiersH2;
     } else {
-      if (selectedItem.modifiers) {
-        includedModifiers = selectedItem.modifiers;
-      } else if (selectedItem.modifiersH1) {
-        includedModifiers = selectedItem.modifiersH1;
-      }
+      includedModifiers = selectedItem.modifiers;
     }
 
     return modifiers.map(modifier => {
@@ -94,10 +82,10 @@ class ModifiersMenu extends React.Component {
           {this.renderModifierButtons(modifiers)}
         </div>
 
-        <QualifierPanel 
-          menuQualifiers={qualifiers} 
+        <QualifierPanel
+          menuQualifiers={qualifiers}
           qualifiers={this.props.qualifiers}
-          halfOrdering={this.props.halfOrdering} 
+          halfOrdering={this.props.halfOrdering}
           setQualifier={this.props.setQualifier}
           selectedItem={selectedItem}
           initQualifiers={this.props.initQualifiers}
