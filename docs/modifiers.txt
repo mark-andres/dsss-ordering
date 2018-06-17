@@ -1,0 +1,735 @@
+'pepp', default, whole
+    change - 'pepp', whole
+        'pepp', default, negated, whole
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, h1
+        { remove 'pepp' from whole }
+
+'pepp', default, negated, whole
+    change - 'pepp', whole
+        'pepp', default, whole
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+    change - 'pepp', h1
+        'pepp', default, h1
+        'pepp', default, negated, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, negated, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, negated h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, negated h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', default, h2
+        'pepp', default, negated, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, negated, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, negated h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, negated h1
+        { remove 'pepp' from whole }
+
+'pepp', default, extra=1, whole
+    change - 'pepp', whole
+        'pepp', default, negated, whole
+    change - 'pepp', extra, whole
+        'pepp', default, extra=2, whole
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, extra=1, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=2, h1
+        'pepp', default, extra=1, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, extra=1, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, extra=1, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, extra=1, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=2, h2
+        'pepp', default, extra=1, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, extra=1, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, extra=1, h1
+        { remove 'pepp' from whole }
+    
+'pepp', default, lite, whole
+    change - 'pepp', whole
+        'pepp', default, negated, whole
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', default, whole
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, lite, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, lite, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', default, h1
+        'pepp', default, lite, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, lite, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, lite, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, lite, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', default, h2
+        'pepp', default, lite, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, lite, h1
+        { remove 'pepp' from whole }
+    
+'pepp', default, side, whole
+    change - 'pepp', whole
+        'pepp', default, negated, whole
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+    change - 'pepp', side, whole
+        'pepp', default, whole
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, side, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, side, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, side, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', default, negated, h1
+        'pepp', default, side, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, side, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, side, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, side, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', default, negated, h2
+        'pepp', default, side, h1
+        { remove 'pepp' from whole }
+
+'pepp', default, negated, h1
+'pepp', default, h2
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, whole
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, whole
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, whole
+        { remove 'pepp' from h2 }
+    change - 'pepp', h2
+        'pepp', default, negated, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, h2
+        'pepp', default, negated, h1
+        'pepp', default, extra=1, h2
+    change - 'pepp', lite, h2
+        'pepp', default, negated, h1
+        'pepp', default, lite, h2
+    change - 'pepp', side, h2
+        'pepp', default, negated, h1
+        'pepp', default, side, h2
+
+'pepp', default, extra=1, h1
+'pepp', default, h2
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, h2
+    change - 'pepp', extra, h1
+        'pepp', default, extra=2, h1
+        'pepp', default, h2
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, h2
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, h2
+    change - 'pepp', h2
+        'pepp', default, extra=1, h1
+        'pepp', default, negated, h2
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, h2
+        'pepp', default, extra=1, h1
+        'pepp', default, lite, h2
+    change - 'pepp', side, h2
+        'pepp', default, extra=1, h1
+        'pepp', default, side, h2
+
+'pepp', default, lite, h1
+'pepp', default, h2
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, h2
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, h2
+    change - 'pepp', lite, h1
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, h2
+    change - 'pepp', h2
+        'pepp', default, lite, h1
+        'pepp', default, negated, h2
+    change - 'pepp', extra, h2
+        'pepp', default, lite, h1
+        'pepp', default, extra=1, h2
+    change - 'pepp', lite, h2
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, h2
+        'pepp', default, lite, h1
+        'pepp', default, side, h2
+
+'pepp', default, side, h1
+'pepp', default, h2
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, negated, h1
+        'pepp', default, h2
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, h1
+        'pepp', default, h2
+    change - 'pepp', lite, h1
+        'pepp', default, lite, h1
+        'pepp', default, h2
+    change - 'pepp', side, h1
+        'pepp', default, side, h1
+        'pepp', default, h2
+    change - 'pepp', h2
+        'pepp', default, side, h1
+        'pepp', default, h2
+    change - 'pepp', extra, h2
+        'pepp', default, side, h1
+        'pepp', default, extra=1, h2
+    change - 'pepp', lite, h2
+        'pepp', default, side, h1
+        'pepp', default, lite, h2
+    change - 'pepp', side, h2
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+
+'pepp', default, negated, h2
+'pepp', default, h1
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, negated, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, h1
+        'pepp', default, negated, h2
+        'pepp', default, extra=1, h1
+    change - 'pepp', lite, h1
+        'pepp', default, negated, h2
+        'pepp', default, lite, h1
+    change - 'pepp', side, h1
+        'pepp', default, negated, h2
+        'pepp', default, side, h1
+    change - 'pepp', h2
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, h1
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, h1
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, h1
+
+'pepp', default, extra=1, h2
+'pepp', default, h1
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, extra=1, h2
+        'pepp', default, negated, h1
+    change - 'pepp', extra, h1
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, h1
+        'pepp', default, extra=1, h2
+        'pepp', default, lite, h1
+    change - 'pepp', side, h1
+        'pepp', default, extra=1, h2
+        'pepp', default, side, h1
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, h1
+    change - 'pepp', extra, h2
+        'pepp', default, extra=2, h2
+        'pepp', default, h1
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, h1
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, h1
+
+'pepp', default, lite, h2
+'pepp', default, h1
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, lite, h2
+        'pepp', default, negated, h1
+    change - 'pepp', extra, h1
+        'pepp', default, lite, h2
+        'pepp', default, extra=1, h1
+    change - 'pepp', lite, h1
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, h1
+        'pepp', default, lite, h2
+        'pepp', defeault, side, h1
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, h1
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, h1
+    change - 'pepp', lite, h2
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, h1
+
+'pepp', default, side, h2
+'pepp', default, h1
+    change - 'pepp', whole
+        'pepp', default, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', extra, whole
+        'pepp', default, extra=1, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', lite, whole
+        'pepp', default, lite, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', side, whole
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h1
+        'pepp', default, side, h2
+        'pepp', default, negated, h1
+    change - 'pepp', extra, h1
+        'pepp', default, side, h2
+        'pepp', default, extra=1, h1
+    change - 'pepp', lite, h1
+        'pepp', default, side, h2
+        'pepp', default, lite, h1
+    change - 'pepp', side, h1
+        'pepp', default, side, whole
+        { remove 'pepp' from h1 }
+        { remove 'pepp' from h2 }
+    change - 'pepp', h2
+        'pepp', default, negated, h2
+        'pepp', default, h1
+    change - 'pepp', extra, h2
+        'pepp', default, extra=1, h2
+        'pepp', default, h1
+    change - 'pepp', lite, h2
+        'pepp', default, lite, h2
+        'pepp', default, h1
+    change - 'pepp', side, h2
+        'pepp', default, side, h2
+        'pepp', default, h1
+
+
+'pepp' {null}
+    change - 'pepp', whole
+        'pepp', whole
+    change - 'pepp', extra, whole
+        'pepp', extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', lite, whole
+    change - 'pepp', side, whole
+        'pepp', side, whole
+    change - 'pepp', h1
+        'pepp', h1
+    change - 'pepp', extra, h1
+        'pepp', extra=1, h1
+    change - 'pepp', lite, h1
+        'pepp', lite, h1
+    change - 'pepp', side, h1
+        'pepp', side, h1
+    change - 'pepp', h2
+        'pepp', h2
+    change - 'pepp', extra, h2
+        'pepp', extra, h2
+    change - 'pepp', lite, h2
+        'pepp', lite, h2
+    change - 'pepp', side, h2
+        'pepp', side, h2
+
+'pepp', whole
+    change - 'pepp', whole
+        { remove 'pepp' from whole }
+    change - 'pepp', h1
+        'pepp', h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', extra=1, h1
+        'pepp', h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', lite, h1
+        'pepp', h2
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', side, h1
+        'pepp', h2
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', extra=1, h2
+        'pepp', h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', lite, h2
+        'pepp', h1
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', side, h2
+        'pepp', h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, whole
+        'pepp', extra=1, whole
+    change - 'pepp', lite, whole
+        'pepp', lite, whole
+    change - 'pepp', side, whole
+        'pepp', side, whole
+
+'pepp', extra=1, whole
+    change - 'pepp', whole
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, whole
+        'pepp', extra=2, whole
+    change - 'pepp', lite, whole
+        'pepp', lite, whole
+    change - 'pepp', side, whole
+        'pepp', side, whole
+    change - 'pepp', h1
+        'pepp', h2
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h1
+        'pepp', extra=2, h1
+        'pepp', extra=1, h2
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h1
+        'pepp', lite, h1
+        'pepp', extra=1, h2,
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h1
+        'pepp', side, h1,
+        'pepp', extra=1, h2,
+        { remove 'pepp' from whole }
+    change - 'pepp', h2
+        'pepp', h1
+        { remove 'pepp' from whole }
+    change - 'pepp', extra, h2
+        'pepp', extra=2, h2
+        'pepp', extra=1, h1
+        { remove 'pepp' from whole }
+    change - 'pepp', lite, h2
+        'pepp', lite, h2
+        'pepp', extra=1, h1,
+        { remove 'pepp' from whole }
+    change - 'pepp', side, h2
+        'pepp', side, h2,
+        'pepp', extra=1, h1,
+        { remove 'pepp' from whole }
+
+'pepp', lite, whole
+
+'pepp', side, whole
+
+'pepp', h1
+    change - 'pepp', whole
+        { should not happen }
+    change - 'pepp', extra, whole
+        { should not happen }
+    change - 'pepp', lite, whole
+        { should not happen }
+    change - 'pepp', side, whole
+        { should not happen }
+    change - 'pepp', h1
+        { remove 'pepp' from h1 }
+    change - 'pepp', extra, h1
+        'pepp', extra=1, h1
+    change - 'pepp', lite, h1
+        'pepp', lite, h1
+    change - 'pepp', side, h1
+        'pepp', side, h1
+    change - 'pepp', h2
+        { should not happen }
+    change - 'pepp', extra, h2
+        { should not happen }
+    change - 'pepp', lite, h2
+        { should not happen }
+    change - 'pepp', side, h2
+        { should not happen }
+
+'pepp', extra=1, h1
+
+'pepp', lite, h1
+
+'pepp', side, h1
+
+'pepp', h2
+
+'pepp', extra=1, h2
+
+'pepp', lite, h2
+
+'pepp', side, h2
+
+
+Operations
+    change - 'pepp', whole
+    change - 'pepp', extra, whole
+    change - 'pepp', lite, whole
+    change - 'pepp', side, whole
+    change - 'pepp', h1
+    change - 'pepp', extra, h1
+    change - 'pepp', lite, h1
+    change - 'pepp', side, h1
+    change - 'pepp', h2
+    change - 'pepp', extra, h2
+    change - 'pepp', lite, h2
+    change - 'pepp', side, h2

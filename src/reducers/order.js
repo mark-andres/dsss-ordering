@@ -102,6 +102,15 @@ const getModifiersArray = (item, options) => {
   return item[modifiersProp]; 
 }
 
+const getModifier = (item, modifierName, options) => {
+  const modifiers = getModifiersArray(item, options);
+  return modifiers.find(modifier => modifier.name === modifierName);
+}
+
+const getAllModifiers = (item, modifierName) => {
+  return [...item.modifiers, ...item.modifiersH1, ...item.modifiersH2].filter(modifier.name === modifierName);
+}
+
 const setModifiersArray = (item, modifiers, options) => {
   let modifiersProp = 'modifiers';
   if (options.h1) {
@@ -162,98 +171,10 @@ const removeModifier = (order, item, modifierToRemove) => {
   return changeItem(order, newItem);
 }
 
-const changeIncludedWholeModifierInHalf = (item, modifierToChange, options) => {
-
-}
-
-const changeAddedWholeModifierInHalf = (item, modifierToChange, options) => {
-
-}
-
-const changeIncludedModifierInHalf = (item, modifierToChange, options) => {
-
-}
-
-const changeIncludedModifierInWhole = (item, modifierToChange, options) => {
-
-}
-
-const changeIncludedModifier = (item, modifierToChange, options) => {
-  if (options.h1 || options.h2) {
-    return changeIncludedModifierInHalf(item , modifierToChange, options);
-  } else {
-    return changeIncludedModifierInWhole(item, modifierToChange, options);
-  }
-}
-
-const changeAddedModifierInHalf = (item, modifierToChange, options) => {
-
-}
-
-const changeAddedModifierInWhole = (item, modifierToChange, options) => {
-
-}
-
-const changeAddedModifier = (item, modifierToChange, options) => {
-  if (options.h1 || options.h2) {
-    return changeAddedModifierInHalf(item , modifierToChange, options);
-  } else {
-    return changeAddedModifierInWhole(item, modifierToChange, options);
-  }
-}
-
 const changeModifier = (order, item, modifierToChange, options = defaultModifierOptions) => {
-  const newItem = _.merge({ modifiers: [], modifiersH1: [], modifiersH2: []}, item);
+  let newItem = _.merge({ modifiers: [], modifiersH1: [], modifiersH2: []}, item);
 
-  // get the correct modifiers array depending on the value of options.part
-  const modifiers = getModifiersArray(newItem, options);
-  // find the index of the modifier
-  const modifierIndex = modifiers.findIndex(mod => mod.name === modifierToChange.name);
-  // get the modifier from the index
-  const modifier = modifierIndex !== -1 ? modifiers[modifierIndex] : undefined;
-
-  if (modifier) {                         // if the modifier already exists
-    let flags = modifier.flags || {};     // get existing modifier flags
-    let { quantity } = modifier;
-
-    quantity = quantity || 0;
-
-    if (flags.default) {                  // if it's a default modifier
-      if (options.extra) {                  // if extra is set
-        modifier.quantity = quantity + options.extra;       // increment the modifier quantity
-        flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
-      } else if (options.lite) {            // if lite is set
-        flags.lite = options.lite;              // indicate that the modifier is lite
-      } else {
-        flags.negated = !flags.negated;     // toggle the negated flag
-      }
-    } else {
-      if (options.extra) {                  // if extra is set
-        modifier.quantity = quantity + options.extra;       // increment the modifier quantity
-        flags.extra = (flags.extra || 0) + options.extra;   // indicate HOW MUCH extra
-      } else if (options.lite) {            // if lite is set
-        flags.lite = options.lite;              // indicate that the modifier is lite
-      } else {
-        return removeModifier(order, newItem, { ...modifierToChange, flags });
-      }
-    }
-
-    const newModifiers = [
-      ...modifiers.slice(0, modifierIndex),
-      {
-        ...modifierToChange,
-        flags: { ...flags }
-      },
-      ...modifiers.slice(modifierIndex + 1)
-    ];
-
-    setModifiersArray(newItem, newModifiers, options);
-
-
-    return changeItem(order, { ...newItem });
-  } else {
-    return addModifier(order, newItem, { ...modifierToChange, flags: options });
-  }
+  
 }
 
 function calculateTotals(items) {
