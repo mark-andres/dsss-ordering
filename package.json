@@ -5,6 +5,7 @@
   "homepage": "https://www.mandresapps.com/ordering-demo",
   "dependencies": {
     "enzyme": "^3.3.0",
+    "immutable": "^3.8.2",
     "lodash": "^4.17.10",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

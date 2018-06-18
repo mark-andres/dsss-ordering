@@ -1,0 +1,66 @@
+
+Modifier(Request) OP Modifier(Existing) = Modifier(Result)
+
+Glossary:
+
+C = change operation
+M = Modifier
+W = whole
+Hm = one Half
+Hn = other Half
+{} = no attributes
+{l} = lite attribute
+{s} = side attribute
+{x} = extra attribute
+{xx} = extra extra attribute
+
+M{}W  C M0 = M{}W
+M{}W  C M{}W = M0
+M{l}W C M{}W = M{l}W
+M{l}W C M{l}W = M{}W
+M{s}W C M{s} = M{}W
+M{x}W C M{x}W = M{xx}W
+
+
+Request Modifier
+
+1. M{}W 
+2. M{x}W 
+3. M{l}W 
+4. M{s}W 
+5. M{}Hm 
+6. M{x}Hm 
+7. M{l}Hm
+8. M{s}Hm
+                                        R e q u e s t
+
+Existing       M{}W    M{x}W    M{l}W    M{s}W    M{}Hm    M{x}Hm     M{l}Hm      M{s}Hm 
+------------------------------------------------------------------------------------------
+ 0. M0         Mo{}W   Mo{x}W   Mo{l}W   Mo{s}W   Mo{}Hm   Mo{x}Hm    Mo{l}Hm     Mo{s}Hm
+ 1. Mo{}W      M0      Mo{x}W   Mo{l}W   Mo{s}W   M0Hm+    Mo{x}Hm+   Mo{l}Hm+    Mo{s}Hm+
+ 2. Mo{x}W     Mo{}W   Mo{xx}W  Mo{l}W   Mo{s}W   Mo{}Hm+  Mo{xx}Hm+  Mo{l}Hm+    Mo{s}Hm+
+ 3. Mo{l}W     Mo{}W   Mo{x}W   Mo{}W    Mo{s}W   Mo{}Hm+  Mo{x}Hm+   Mo{}Hm+     Mo{s}Hm+
+ 4. Mo{s}W     Mo{}W   Mo{x}W   Mo{l}W   Mo{}W    Mo{}Hm+  Mo{x}Hm+   Mo{l}Hm+    Mo{}Hm+
+ 5. Mo{}Hm     Mo{}W   Mo{x}W   Mo{l}W   Mo{}W    M0       Mo{x}Hm    Mo{l}Hm     Mo{s}Hm
+ 6. Mo{x}Hm    
+ 7. Mo{l}Hm
+ 8. Mo{s}Hm
+ 9. MI{}W 
+10. MI{x}W 
+11. MI{l}W 
+12. MI{s}W 
+13. MI{}Hm 
+14. MI{x}Hm 
+15. MI{l}Hm
+16. MI{s}Hm
+17. MX{}W 
+18. MX{x}W 
+19. MX{l}W 
+20. MX{s}W 
+21. MX{}Hm 
+22. MX{x}Hm 
+23. MX{l}Hm
+24. MX{s}Hm
+
+Split Whole
++ *W => *Hn

@@ -1,0 +1,48 @@
+
+Operations
+
+change - 'modifier', attibutes={none, extra, lite, side}, target={whole, h{m}}   ; m={1,2}
+
+A. change - 'modifier', attributes={},      target=whole
+B. change - 'modifier', attributes={extra}, target=whole
+C. change - 'modifier', attributes={lite},  target=whole
+D. change - 'modifier', attributes={side},  target=whole
+E. change - 'modifier', attributes={},      target=h{m}
+F. change - 'modifier', attributes={extra}, target=h{m}
+G. change - 'modifier', attributes={lite},  target=h{m}
+H. change - 'modifier', attributes={side},  target=h{m}
+
+State
+
+'modifier', status={none, included, excluded}, 
+    attributes={none, extra=n, lite, side}, 
+    target={whole, h{m}}    ; m={1, 2}, none={}
+
+Input/Output States
+
+ 0. no 'modifier'
+ 1. 'modifier', status={},         attributes={},        location=whole
+ 2. 'modifier', status={},         attributes={extra=n}, location=whole
+ 3. 'modifier', status={},         attributes={lite},    location=whole
+ 4. 'modifier', status={},         attributes={side},    location=whole
+ 5. 'modifier', status={},         attributes={},        location=h{m}
+ 6. 'modifier', status={},         attributes={extra=n}, location=h{m}
+ 7. 'modifier', status={},         attributes={lite},    location=h{m}
+ 8. 'modifier', status={},         attributes={side},    location=h{m}
+ 9. 'modifier', status={included}, attriubtes={},        location=whole
+10. 'modifier', status={included}, attributes={extra=n}, location=whole
+11. 'modifier', status={included}, attributes={lite},    location=whole
+12. 'modifier', status={included}, attributes={side},    location=whole
+13. 'modifier', status={included}, attriubtes={},        location=h{n}
+14. 'modifier', status={included}, attributes={extra=n}, location=h{n}
+15. 'modifier', status={included}, attributes={lite},    location=h{n}
+16. 'modifier', status={included}, attributes={side},    location=h{n}
+17. 'modifier', status={excluded}, attributes={},        location=whole
+18. 'modifier', status={excluded}, attributes={extra=n}, location=whole
+19. 'modifier', status={excluded}, attributes={lite},    location=whole
+20. 'modifier', status={excluded}, attributes={side},    location=whole
+21. 'modifier', status={excluded}, attributes={},        location=h{n}
+22. 'modifier', status={excluded}, attributes={extra=n}, location=h{n}
+23. 'modifier', status={excluded}, attributes={lite},    location=h{n}
+24. 'modifier', status={excluded}, attributes={side},    location=h{n}
+
