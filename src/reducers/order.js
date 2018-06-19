@@ -149,19 +149,31 @@ const applyAttributes = (modifierAttributes, changeAttributes) => {
   return { ...modifierAttributes };
 }
 
-export const addIncludedModifier = (modifiers, includedModifier, part) => {
+export const addIncludedModifiers = (modifiers, item, part) => {
+  const { includes, modifiersMenu } = item;
+  modifiersMenu.items.forEach(menuItem => {
+    if (includes.includes(menuItem.name)) {
+      modifiers = addIncludedModifier(modifiers, menuItem, part);
+    }
+  });
+
+  return modifiers;
+}
+
+const addIncludedModifier = (modifiers = [], includedModifier, part = 'whole') => {
   const modifier1 = {
     ...includedModifier,
     status: 'included',
     attributes: { extra: 0, lite: false, side: false },
     location: 'h1'
   };
+  modifier1.price = modifier1.price / 2;
   const modifier2 = {
     ...modifier1,
     location: 'h2'
   };
 
-  if (part) {
+  if (part && part !== 'whole') {
     modifiers.concat({
       ...modifier1,
       location: part

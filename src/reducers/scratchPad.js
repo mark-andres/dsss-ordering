@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { addIncludedModifier } from '../reducers/order';
+import { addIncludedModifiers } from '../reducers/order';
 
 export const defaultScratchPad = {
   items: [],
@@ -25,6 +25,7 @@ const computeCompletedItem = scratchPad => {
   const { items, halfOrdering, sizeRequired, size } = scratchPad;
   let allItemsEntered = false;
   let completedItem;
+  let modifiers;
 
   if (sizeRequired && !size) {
     return {
@@ -34,23 +35,31 @@ const computeCompletedItem = scratchPad => {
 
   if (halfOrdering) {
     if (items.length === 2) {
-      completedItem = {
-        name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
-        modifiersH1: items[0].modifiers,
-        modifiersH2: items[1].modifiers,
-        quantity: 1,
-        price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
-        size
+      if (scratchPad.completedItem) {
+        completedItem = scratchPad.completedItem;
+      } else {
+        completedItem = {
+          name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
+          modifiers: addIncludedModifiers(addIncludedModifiers(modifiers, items[0], 'h1'), items[1], 'h2'),
+          quantity: 1,
+          price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
+          size: size || ''
+        }
       }
       allItemsEntered = true;
     }
   } else {
     if (items.length === 1) {
-      completedItem = {
-        ...items[0],
-        quantity: 1,
-        price: getPrice(size, items[0]),
-        size: size || 0
+      if (scratchPad.completedItem) {
+        completedItem = scratchPad.completedItem;
+      } else {
+        completedItem = {
+          ...items[0],
+          modifiers: addIncludedModifiers(modifiers, items[0]),
+          quantity: 1,
+          price: getPrice(size, items[0]),
+          size: size || ''
+        }
       }
       allItemsEntered = true;
     }
@@ -74,14 +83,6 @@ const addItemToScratch = (scratchPad, item) => {
   const items = scratchPad.items;
   const halfOrdering = scratchPad.halfOrdering;
   
-  // Set default modifiers
-  if (item.includes) {
-    const defaultModifiers = item.includes.reduce((modifiers, modifierName) => {
-      return modifiers.concat({ name: modifierName, flags: {default: true }});
-    }, []);
-    item.modifiers = defaultModifiers;
-  }
-
   if (items.length === 0) {
     items[0] = item;
   } else if (halfOrdering) {
