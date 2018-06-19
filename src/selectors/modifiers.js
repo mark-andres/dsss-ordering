@@ -30,17 +30,13 @@ export const getModifierWholeList = (modifiers) => {
   return wholeModifierList;
 }
 
-export const getModifierLists = (modifiers, includeWhole = false) => {
-  const modifierLists = {};
-
-  if (!includeWhole) {
-    modifierLists.whole = getModifierWholeList(modifiers);
+// Utility function for ModifiersMenu.
+export const getModifiersList = (modifiers, location) => {
+  if (location === 'whole') {
+    return getModifierWholeList(modifiers);
+  } else {
+    return modifiers.filter(modifier => modifier.location === location);
   }
-
-  modifierLists.h1 = modifiers.filter(modifier => modifier.location === 'h1');
-  modifierLists.h2 = modifiers.filter(modifier => modifier.location === 'h2');
-
-  return modifierLists;
 }
 
 const includedModifiersFilter = modifier => {
@@ -51,16 +47,59 @@ const includedModifiersFilter = modifier => {
 }
 
 const getFormattedName = (modifier, part = 'whole') => {
-  
+  const { name, status, attributes } = modifier;
+  const { extra, lite, side } = attributes;
+  let location = '';
+  let attribute = '';
+  let statusStr = '';
+
+  if (part !== 'whole') {
+    location = part.toUpperCase() + '-';
+  }
+
+  if (extra) {
+    let digitStr = extra.toString();
+    if (digitStr === '1') {
+      digitStr = '';
+    }
+    attribute = `${digitStr}X-`;
+  } else if (lite) {
+    attribute = 'LITE-';
+  } else if (side) {
+    attribute = 'SD-';
+  }
+
+  if (status === 'excluded') {
+    statusStr = 'NO ';
+  }
+
+  return `${location}${statusStr}${attribute}${name}`;
 }
 
+const inWholeList = (wholeList, modifier) => wholeList.includes(modifier.name);
+
+// Utility function for OrderReceipt.
 export const getFormattedModifiers = (modifiers, includeWhole = false) => {
   const formattedModifiers = [];
   let wholeList = [], wholeNames = [];
+  let halfList = [];
   const filteredModifiers = modifiers.filter(modifier => !includedModifiersFilter(modifier));
   
   if (includeWhole) {
     wholeList = getModifierWholeList(filteredModifiers);
     wholeNames = wholeList.map(modifier => modifier.name);
+    wholeList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
   }
+
+  halfList = filteredModifiers.filter(
+    modifier => modifier.location === 'h1' && !inWholeList(wholeNames, modifier)
+  );  
+  halfList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
+
+  halfList = filteredModifiers.filter(
+    modifier => modifier.location === 'h2' && !inWholeList(wholeNames, modifier)
+  );  
+  halfList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
+
+  return formattedModifiers;
 }
