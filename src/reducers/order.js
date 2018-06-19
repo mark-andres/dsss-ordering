@@ -106,7 +106,7 @@ const addModifier = (modifiers, modifier) => {
   return modifiers.concat(modifier);
 }
 
-const changeModifier = (modifiers, index, updatedModifier) => {
+const updateModifier = (modifiers, index, updatedModifier) => {
   return [ 
     ...modifiers.slice(0, index),
     updatedModifier,
@@ -150,9 +150,13 @@ const applyAttributes = (modifierAttributes, changeAttributes) => {
 }
 
 export const addIncludedModifiers = (modifiers, item, part) => {
-  const { includes, modifiersMenu } = item;
-  modifiersMenu.items.forEach(menuItem => {
-    if (includes.includes(menuItem.name)) {
+  const { includes, menu } = item;
+  if (!menu) {
+    return null;
+  }
+
+  menu.items.forEach(menuItem => {
+    if (includes && includes.includes(menuItem.name)) {
       modifiers = addIncludedModifier(modifiers, menuItem, part);
     }
   });
@@ -169,9 +173,12 @@ const addIncludedModifier = (modifiers = [], includedModifier, part = 'whole') =
   };
   modifier1.price = modifier1.price / 2;
   const modifier2 = {
-    ...modifier1,
+    ...includedModifier,
+    status: 'included',
+    attributes: { extra: 0, lite: false, side: false },
     location: 'h2'
   };
+  modifier2.price = modifier2.price / 2;
 
   if (part && part !== 'whole') {
     modifiers.concat({
@@ -202,7 +209,7 @@ const changeHalfModifier = (modifiers, modifierToChange, changeAttributes, half)
     const status = applyModifierStatus(modifier, changeAttributes);
     const attributes = applyAttributes(modifier.attributes, changeAttributes);
 
-    return changeModifier(modifiers, {
+    return updateModifier(modifiers, {
       ...modifierToChange,
       status,
       attributes,
@@ -215,17 +222,17 @@ const changeModifier = (order, item, modifierToChange, qualifiers) => {
     const changeLocation = getModifierLocation(qualifiers);
     const changeAttributes = getModifierAttributes(qualifiers);
     let newModifiers;
-
-    modifierToChange.price = modifierToChange.price / 2;
+    const _modifierToChange = { ...modifierToChange };
+    _modifierToChange.price = _modifierToChange.price / 2;
     
     switch (changeLocation) {
       case 'whole':
-        newModifiers = changeHalfModifier(item.modifiers, modifierToChange, changeAttributes, 'H1');
-        newModifiers = changeHalfModifier(newModifiers, modifierToChange, changeAttributes, 'H2');
+        newModifiers = changeHalfModifier(item.modifiers, _modifierToChange, changeAttributes, 'h1');
+        newModifiers = changeHalfModifier(newModifiers, _modifierToChange, changeAttributes, 'h2');
         break;
       case 'h1':
       case 'h2':
-        newModifiers = changeHalfModifier(item.modifiers, modifierToChange, changeAttributes, changeLocation);
+        newModifiers = changeHalfModifier(item.modifiers, _modifierToChange, changeAttributes, changeLocation);
         break;
 
       default: 
@@ -234,7 +241,7 @@ const changeModifier = (order, item, modifierToChange, qualifiers) => {
 
     return changeItem(order, {
       ...item,
-      modifiers: { ...newModifiers }
+      modifiers: [ ...newModifiers ]
     });
 }
 
@@ -250,7 +257,7 @@ function calculateTotals(items) {
 
 function calculateSubTotals(items) {
   return items.reduce((total, item) => {
-    let { price, quantity, flags } = item;
+    let { price, quantity, status } = item;
     let modifiersSum = 0;
     let modifiersH1Sum = 0;
     let modifiersH2Sum = 0;
@@ -258,18 +265,12 @@ function calculateSubTotals(items) {
 
     price = price || 0;
     quantity = quantity || 1;
-    if (flags && flags.negated) {
+    if (status && (status === 'included' || status === 'excluded')) {
       price = 0;
     }
 
     if (item.modifiers) {
       modifiersSum = calculateSubTotals(item.modifiers);
-    }
-    if (item.modifiersH1) {
-      modifiersH1Sum = calculateSubTotals(item.modifiersH1);
-    }
-    if (item.modifiersH2) {
-      modifiersH2Sum = calculateSubTotals(item.modifiersH1);
     }
     if (item.subItems) {
       subItemsSum = item.subItems.reduce((total, subItem) => {

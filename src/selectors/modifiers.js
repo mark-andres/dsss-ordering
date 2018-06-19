@@ -1,27 +1,36 @@
-import { List, Map, OrderedSet } from 'immutable';
+import _ from 'lodash';
 
-export const getModifierWholeList = (modifiers) => {
-  const modifierList = modifiers.reduce((list, modifier) => {
-    return list.set(Map.of(modifier));
-  }, new List());
-  
-  const modifierNameSet = modifiers.reduce((nameSet, modifier) => {
-    return nameSet.set(modifier.name);
-  }, new OrderedSet());
+const mergeModifiers = (modifier1, modifier2) => {
+  let newModifier = {};
 
-  const wholeModifierList = modifierNameSet.reduce((wholeList, modifierName) => {
-    const foundModifiers = modifierList.find(modifier => modifier.name === modifierName);
-    if (foundModifiers.size === 2) {
-      if (foundModifiers.get(0).delete('location').equals(foundModifiers.get(1).delete('location'))) {
-        return wholeList.push(foundModifiers.get(0).mergeWith((val1, val2, key) => {
-          if (key === 'location') {
-            return 'whole';
-          } else if (key === price) {
-            return val1 + val2;
-          } else {
-            return val1;
-          }
-        }, foundModifiers.get(1)));
+  for (const key in modifier1) {
+    if (key === 'location') {
+      newModifier.location = 'whole';
+    } else if (key === 'attributes') {
+      newModifier.attributes = { ...modifier1.attributes }
+    } else if (key === 'price') {
+      newModifier.price = modifier1.price + modifier2.price;
+    } else {
+      newModifier[key] = modifier1[key];
+    }
+  }
+
+  return newModifier;
+}
+
+export const getModifierWholeList = (modifiers = []) => {
+  const modifierNames = _.uniq(modifiers.map(modifier => modifier.name));
+
+  const wholeModifierList = modifierNames.reduce((wholeList, modifierName) => {
+    const foundModifiers = modifiers.filter(modifier => modifier.name === modifierName);
+    if (foundModifiers.length === 2) {
+      if (_.isEqualWith(foundModifiers[0], foundModifiers[1], (val1, val2, key) => {
+        if (key === 'location') {
+          return true;
+        }
+      })) {
+        const mergedModifier = mergeModifiers(foundModifiers[0], foundModifiers[1]);
+        return wholeList.concat(mergedModifier);
       }
     }
     return wholeList;
@@ -31,7 +40,7 @@ export const getModifierWholeList = (modifiers) => {
 }
 
 // Utility function for ModifiersMenu.
-export const getModifiersList = (modifiers, location) => {
+export const getModifiersList = (modifiers = [], location) => {
   if (location === 'whole') {
     return getModifierWholeList(modifiers);
   } else {
@@ -79,27 +88,42 @@ const getFormattedName = (modifier, part = 'whole') => {
 const inWholeList = (wholeList, modifier) => wholeList.includes(modifier.name);
 
 // Utility function for OrderReceipt.
-export const getFormattedModifiers = (modifiers, includeWhole = false) => {
+export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   const formattedModifiers = [];
   let wholeList = [], wholeNames = [];
   let halfList = [];
   const filteredModifiers = modifiers.filter(modifier => !includedModifiersFilter(modifier));
-  
+
   if (includeWhole) {
     wholeList = getModifierWholeList(filteredModifiers);
     wholeNames = wholeList.map(modifier => modifier.name);
-    wholeList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
+    wholeList.forEach(modifier => {
+      formattedModifiers.push({
+        ...modifier,
+        name: getFormattedName(modifier)
+      });
+    });
   }
 
   halfList = filteredModifiers.filter(
     modifier => modifier.location === 'h1' && !inWholeList(wholeNames, modifier)
-  );  
-  halfList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
+  );
+  halfList.forEach(modifier => {
+    formattedModifiers.push({
+      ...modifier,
+      name: getFormattedName(modifier)
+    });
+  });
 
   halfList = filteredModifiers.filter(
     modifier => modifier.location === 'h2' && !inWholeList(wholeNames, modifier)
-  );  
-  halfList.forEach(modifier => formattedModifiers.push(getFormattedName(modifier)));
+  );
+  halfList.forEach(modifier => {
+    formattedModifiers.push({
+      ...modifier,
+      name: getFormattedName(modifier)
+    });
+  });
 
   return formattedModifiers;
 }

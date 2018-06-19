@@ -6,6 +6,7 @@ import { initQualifiers, setQualifier } from '../actions/qualifiers';
 import { changeModifier } from '../actions/order';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
+import { getModifiersList } from '../selectors/modifiers';
 
 class ModifiersMenu extends React.Component {
   getModifierBg(modifier, includedModifiers) {
@@ -13,7 +14,7 @@ class ModifiersMenu extends React.Component {
     if (includedModifiers) {
       const itemModifier = includedModifiers.find(included => included.name === modifier.name);
       if (itemModifier) {
-        if (itemModifier.flags.negated) {
+        if (itemModifier.status === 'excluded') {
           bgcolor = 'darkred';       // some shade of red for a negated modifier
         }
         else {
@@ -36,16 +37,7 @@ class ModifiersMenu extends React.Component {
   }
 
   renderModifierButtons(modifiers) {
-    let includedModifiers = [];
-    const { selectedItem, qualifiers } = this.props;
-
-    if (qualifiers.h1) {
-      includedModifiers = selectedItem.modifiersH1;
-    } else if (qualifiers.h2) {
-      includedModifiers = selectedItem.modifiersH2;
-    } else {
-      includedModifiers = selectedItem.modifiers;
-    }
+    const { includedModifiers } = this.props;
 
     return modifiers.map(modifier => {
       if (modifier.name === '__blank__') {
@@ -101,10 +93,25 @@ const mapDispatchToProps = dispatch => ({
   changeModifier: (item, modifier, options) => dispatch(changeModifier(item, modifier, options))
 });
 
-const mapStateToProps = state => ({
-  selectedItem: state.order.selectedItem,
-  qualifiers: state.qualifiers,
-  halfOrdering: _.property('order.selectedItem.scratchPad.halfOrdering')(state)
-});
+const mapStateToProps = state => {
+  const { selectedItem } = state.order;
+  const { modifiers } = selectedItem;
+  const { qualifiers } = state;
+  const halfOrdering = _.property('order.selectedItem.scratchPad.halfOrdering')(state);
+  let location = halfOrdering ? 'h1' : 'whole';
+
+  if (qualifiers.h1) {
+    location = 'h1';
+  } else if (qualifiers.h2) {
+    location = 'h2';
+  } 
+  
+  return {
+    selectedItem,
+    includedModifiers: getModifiersList(modifiers, location),
+    qualifiers,
+    halfOrdering
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModifiersMenu);

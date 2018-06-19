@@ -3,69 +3,49 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 import _ from 'lodash';
 import LineItem from './LineItem';
+import { getFormattedModifiers } from '../selectors/modifiers';
 
 class OrderReceipt extends React.Component {
   renderComments(comments, item) {
     return comments.map(comment => {
       const { name } = comment;
-      return <LineItem isComment={true} key={uuid()} item={{ name }} subItemOwner={item}/>;
+      return <LineItem isComment={true} key={uuid()} item={{ name }} subItemOwner={item} />;
     });
   }
 
   renderSubItems(subItemList, item) {
     return subItemList.map(subItem => {
       const { name, price, add } = subItem;
-      return <LineItem isSubItem={true} key={uuid()} item={{ name, price, add }} subItemOwner={item}/>;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price, add }} subItemOwner={item} />;
     });
   }
 
-  renderModifiers(modifiers, item, prefix = '') {
-    const modifiersList = modifiers.reduce((newList, modifier) => {
-      if (modifier.flags && modifier.flags.default && modifier.flags.negated) {
-        return newList.concat({ 
-          name: prefix + 'NO ' + modifier.name, 
-        });
-      } else if (modifier.flags && !modifier.flags.default){
-        return newList.concat({ 
-          name: prefix + modifier.name, 
-          price: modifier.price, 
-          quantity: modifier.quantity 
-        });
-      } else {
-        return newList;
-      }
-    }, []);
-
-    return modifiersList.map(subItem => {
+  renderModifiers(modifiers, item) {
+    return modifiers.map(subItem => {
       const { name, price } = subItem;
-      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} subItemOwner={item}/>;
+      return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} subItemOwner={item} />;
     });
   }
 
   renderLineItems(order) {
     const lineItems = order.items.map(item => {
-      let subItems, modifiers, modifiersH1, modifiersH2, comments;
-      subItems = modifiers = modifiersH1 = modifiersH2 = comments = [];
+      const halfOrdering = _.property('scratchPad.halfOrdering')(item);
+      const modifiers = getFormattedModifiers(item.modifiers, !halfOrdering);
+      let subItemLines = [], commentLines = [], modifierLines = [];
 
       if (item.comments) {
-        comments = this.renderComments(item.comments, item);
+        commentLines = this.renderComments(item.comments, item);
       }
       if (item.subItems) {
-        subItems = this.renderSubItems(item.subItems, item);
+        subItemLines = this.renderSubItems(item.subItems, item);
       }
       if (item.modifiers) {
-        modifiers = this.renderModifiers(item.modifiers, item);
-      }
-      if (item.modifiersH1) {
-        modifiersH1 = this.renderModifiers(item.modifiersH1, item, 'H1-');
-      }
-      if (item.modifiersH2) {
-        modifiersH2 = this.renderModifiers(item.modifiersH2, item, 'H2-');
+        modifierLines = this.renderModifiers(modifiers, item);
       }
 
       return [
         <LineItem isSubItem={false} key={item.id} item={item} />,
-        ...comments, ...subItems, ...modifiers, ...modifiersH1, ...modifiersH2
+        ...commentLines, ...subItemLines, ...modifierLines 
       ];
     });
 
@@ -90,38 +70,38 @@ class OrderReceipt extends React.Component {
           {header}
           <tbody>
             <tr>
-            <td colSpan="3">
-            <div className="order-receipt-body">
-            <table>
-            <tbody>
-            {this.renderLineItems(order)}
-            <LineItem key={uuid()} />
-            {order.items.length > 0 && (
-              <tr key={uuid()} className="receipt-summary-line">
-                <td></td>
-                <td><span className="receipt-summary-item">Subtotal</span></td>
-                <td>{order.subtotal.toFixed(2)}</td>
-              </tr>
-            )}
-            {order.items.length > 0 && (
-              <tr key={uuid()} className="receipt-summary-line">
-                <td></td>
-                <td><span className="receipt-summary-item">Tax</span></td>
-                <td>{order.tax.toFixed(2)}</td>
-              </tr>
-            )}
-            {order.items.length > 0 && (
-              <tr key={uuid()} className="receipt-summary-line">
-                <td></td>
-                <td><span className="receipt-summary-item">Total</span></td>
-                <td>{order.total.toFixed(2)}</td>
-              </tr>
-            )}
-            <LineItem key={uuid()} />
-            </tbody>
-            </table>
-            </div>
-            </td>
+              <td colSpan="3">
+                <div className="order-receipt-body">
+                  <table>
+                    <tbody>
+                      {this.renderLineItems(order)}
+                      <LineItem key={uuid()} />
+                      {order.items.length > 0 && (
+                        <tr key={uuid()} className="receipt-summary-line">
+                          <td></td>
+                          <td><span className="receipt-summary-item">Subtotal</span></td>
+                          <td>{order.subtotal.toFixed(2)}</td>
+                        </tr>
+                      )}
+                      {order.items.length > 0 && (
+                        <tr key={uuid()} className="receipt-summary-line">
+                          <td></td>
+                          <td><span className="receipt-summary-item">Tax</span></td>
+                          <td>{order.tax.toFixed(2)}</td>
+                        </tr>
+                      )}
+                      {order.items.length > 0 && (
+                        <tr key={uuid()} className="receipt-summary-line">
+                          <td></td>
+                          <td><span className="receipt-summary-item">Total</span></td>
+                          <td>{order.total.toFixed(2)}</td>
+                        </tr>
+                      )}
+                      <LineItem key={uuid()} />
+                    </tbody>
+                  </table>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -130,8 +110,10 @@ class OrderReceipt extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  order: state.order,
-});
+const mapStateToProps = state => {
+  return {
+    order: state.order
+  }
+};
 
 export default connect(mapStateToProps, null)(OrderReceipt);

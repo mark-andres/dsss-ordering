@@ -26,7 +26,6 @@ describe('orderReducer', () => {
       expect(order.items.length).toBe(1);
       expect(order.items[0]).toMatchObject(item);
       expect(order.selectedItem).toMatchObject(item);
-      expect(order.items[0].id).toBeTruthy();
       expect(order.total).toBe(14);
     });
 
@@ -57,53 +56,6 @@ describe('orderReducer', () => {
       order = orderReducer(order, { type: ADD_ITEM, item });
       expect(order.items.length).toBe(4);
       expect(order.total).toBe(item.price * 4);
-    });
-
-    describe('ADD_MODIFIER and REMOVE_MODIFIER', () => {
-      beforeEach(() => {
-        order = orderReducer(order, {
-          type: ADD_MODIFIER, 
-          item: order.items[0], 
-          modifier: { name: "pepperoni", price: 1.50, quantity: 1 }
-        });
-      });
-      
-      it('should correctly add a modifier to an item', () => {
-        expect(order.items[0].modifiers).toBeTruthy();
-        expect(order.items[0].modifiers.length).toBe(1);
-        expect(order.total).toBe(15.50);
-      });
-
-      it('should correctly remove a modifier to an item', () => {
-        order = orderReducer(order, {
-          type: REMOVE_MODIFIER, 
-          item: order.items[0], 
-          modifier: order.items[0].modifiers[0]
-        });
-
-        expect(order.items[0].modifiers.length).toBe(0);
-        expect(order.total).toBe(14);
-      });
-
-      it('should correctly add multiple modifiers to an item', () => {
-        order = orderReducer(order, {
-          type: ADD_MODIFIER, 
-          item: order.items[0], 
-          modifier: { name: "beef sausage", price: 1.50, quantity: 1 }
-        });
-        order = orderReducer(order, {
-          type: ADD_MODIFIER, 
-          item: order.items[0], 
-          modifier: { name: "onions", price: 1.50, quantity: 1 }
-        });
-
-        expect(order.items[0].modifiers.length).toBe(3);
-        expect(order.total).toBe(18.50);
-      });
-
-      it('should correctly change modifiers', () => {
-
-      });
     });
 
   });
