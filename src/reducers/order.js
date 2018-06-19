@@ -80,101 +80,150 @@ const changeItem = (order, itemToChange) => {
   };
 }
 
-// modifier options
-//   extra: 0, 1, 2 - meaning 0 'not extra', 1 'extra', 2 'extra extra'...n 'extra nTimes' (default - 0) 
-//   lite: false, true (default - false)
-//   
-const defaultModifierOptions = {
-  extra: 0,         // 'extra' n times
-  lite: false,      // false, true
-  whole: true,
-  h1: false,
-  h2: false,
-}
-
-const getModifiersArray = (item, options) => {
-  let modifiersProp = 'modifiers';
-  if (options.h1) {
-    modifiersProp = 'modifiersH1';
-  } else if (options.h2) {
-    modifiersProp = 'modifiersH2';
+const getModifierAttributes = qualifiers => {
+  const { extra, lite, side } = qualifiers;
+  return {
+    extra, lite, side
   }
-  return item[modifiersProp]; 
 }
 
-const getModifier = (item, modifierName, options) => {
-  const modifiers = getModifiersArray(item, options);
-  return modifiers.find(modifier => modifier.name === modifierName);
-}
-
-const getAllModifiers = (item, modifierName) => {
-  return [...item.modifiers, ...item.modifiersH1, ...item.modifiersH2].filter(modifier.name === modifierName);
-}
-
-const setModifiersArray = (item, modifiers, options) => {
-  let modifiersProp = 'modifiers';
-  if (options.h1) {
-    modifiersProp = 'modifiersH1';
-  } else if (options.h2) {
-    modifiersProp = 'modifiersH2';
-  }
-  item[modifiersProp] = modifiers;
-}
-
-const addModifier = (order, item, modifier) => {
-  const modifiers = getModifiersArray(item, modifier.flags).concat({ ...modifier });
-  let newItem;
-
-  if (modifier.flags.h1) {
-    newItem = {
-      ...item, 
-      modifiersH1: modifiers
-    }    
-  } else if (modifier.flags.h2) {
-    newItem = {
-      ...item, 
-      modifiersH2: modifiers
-    }    
+const getModifierLocation = qualifiers => {
+  const { h1, h2 } = qualifiers;
+  if (h1) {
+    return 'h1';
+  } else if (h2) {
+    return 'h2';
   } else {
-    newItem = {
-      ...item, 
-      modifiers: modifiers
-    }    
+    return 'whole';
   }
-
-  return changeItem(order, newItem);
 }
 
-const removeModifier = (order, item, modifierToRemove) => {
-  const modifiers = getModifiersArray(item, modifierToRemove.flags)
-    .filter(modifier => modifier.name !== modifierToRemove.name)
+const findModifierIndex = (modifiers, modifierName, location) => {
+  return modifiers.findIndex(modifier => modifier.name === modifierName && modifier.location === location);
+}
 
-  let newItem;
+const addModifier = (modifiers, modifier) => {
+  return modifiers.concat(modifier);
+}
 
-  if (modifierToRemove.flags.h1) {
-    newItem = {
-      ...item, 
-      modifiersH1: modifiers
-    }    
-  } else if (modifierToRemove.flags.h2) {
-    newItem = {
-      ...item, 
-      modifiersH2: modifiers
-    }    
+const changeModifier = (modifiers, index, updatedModifier) => {
+  return [ 
+    ...modifiers.slice(0, index),
+    updatedModifier,
+    ...modifiers.slice(index+1)
+  ]
+}
+
+const removeModifier = (modifiers, index) => {
+  return [
+    ...modifiers.slice(0, index),
+    ...modifiers.slice(index+1)
+  ];
+}
+
+const attributesAreClear = attributes => {
+  const { extra, lite, side } = attributes;
+  return extra === 0 && lite === false && side === false;
+}
+
+const applyModifierStatus = (modifier, changeAttributes) => {
+  if (attributesAreClear(changeAttributes) && modifier.status === 'included') {
+    return 'excluded';
   } else {
-    newItem = {
-      ...item, 
-      modifiers: modifiers
-    }    
+    return 'included';
   }
-
-  return changeItem(order, newItem);
 }
 
-const changeModifier = (order, item, modifierToChange, options = defaultModifierOptions) => {
-  let newItem = _.merge({ modifiers: [], modifiersH1: [], modifiersH2: []}, item);
+const applyAttributes = (modifierAttributes, changeAttributes) => {
+  if (changeAttributes.extra) {
+    modifierAttributes.extra++;
+    if (modifierAttributes > 4) {
+      modifierAttributes = 0;
+    }
+  } else if (changeAttributes.lite) {
+    modifierAttributes.lite = !modifierAttributes.lite;
+  } else if (changeAttributes.side) {
+    modifierAttributes.side = !modifierAttributes.side;
+  }
 
-  
+  return { ...modifierAttributes };
+}
+
+export const addIncludedModifier = (modifiers, includedModifier, part) => {
+  const modifier1 = {
+    ...includedModifier,
+    status: 'included',
+    attributes: { extra: 0, lite: false, side: false },
+    location: 'h1'
+  };
+  const modifier2 = {
+    ...modifier1,
+    location: 'h2'
+  };
+
+  if (part) {
+    modifiers.concat({
+      ...modifier1,
+      location: part
+    });
+  } else {
+    return modifiers.concat(modifier1).concat(modifier2);
+  }
+}
+
+const changeHalfModifier = (modifiers, modifierToChange, changeAttributes, half) => {
+  const modifierIndex = findModifierIndex(modifiers, modifierToChange.name, half);
+
+  if (modifierIndex === -1) {
+    return addModifier(modifiers, {
+      ...modifierToChange,
+      status: 'added',
+      attributes: { ...changeAttributes },
+      location: half
+    });
+  } else {
+    const modifier = modifiers[modifierIndex];
+    if (modifier.status === 'added' && attributesAreClear(changeAttributes)) {
+      return removeModifier(modifiers, modifierIndex);
+    }
+
+    const status = applyModifierStatus(modifier, changeAttributes);
+    const attributes = applyAttributes(modifier.attributes, changeAttributes);
+
+    return changeModifier(modifiers, {
+      ...modifierToChange,
+      status,
+      attributes,
+      location: half
+    });
+  }
+}
+
+const changeModifier = (order, item, modifierToChange, qualifiers) => {
+    const changeLocation = getModifierLocation(qualifiers);
+    const changeAttributes = getModifierAttributes(qualifiers);
+    let newModifiers;
+
+    modifierToChange.price = modifierToChange.price / 2;
+    
+    switch (changeLocation) {
+      case 'whole':
+        newModifiers = changeHalfModifier(item.modifiers, modifierToChange, changeAttributes, 'H1');
+        newModifiers = changeHalfModifier(newModifiers, modifierToChange, changeAttributes, 'H2');
+        break;
+      case 'h1':
+      case 'h2':
+        newModifiers = changeHalfModifier(item.modifiers, modifierToChange, changeAttributes, changeLocation);
+        break;
+
+      default: 
+        return order;
+    }
+
+    return changeItem(order, {
+      ...item,
+      modifiers: { ...newModifiers }
+    });
 }
 
 function calculateTotals(items) {
@@ -251,14 +300,8 @@ const orderReducer = (order = orderDefault, action) => {
     case types.PRINT_ORDER:
       return orderDefault;
 
-    case types.ADD_MODIFIER:
-      return addModifier(order, action.item, action.modifier);
-
     case types.CHANGE_MODIFIER:
       return changeModifier(order, action.item, action.modifier, action.options);
-
-    case types.REMOVE_MODIFIER:
-      return removeModifier(order, action.item, action.modifier);
 
     default:
       return order;
