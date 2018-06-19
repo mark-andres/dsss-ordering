@@ -1,4 +1,5 @@
 import types from '../actions/types';
+import { addIncludedModifier } from '../reducers/order';
 
 export const defaultScratchPad = {
   items: [],
