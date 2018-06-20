@@ -98,6 +98,9 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     wholeList = getModifierWholeList(filteredModifiers);
     wholeNames = wholeList.map(modifier => modifier.name);
     wholeList.forEach(modifier => {
+      if (modifier.status === 'excluded') {
+        delete modifier.price;
+      }
       formattedModifiers.push({
         ...modifier,
         name: getFormattedName(modifier)
@@ -109,9 +112,12 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     modifier => modifier.location === 'h1' && !inWholeList(wholeNames, modifier)
   );
   halfList.forEach(modifier => {
+    if (modifier.status === 'excluded') {
+      delete modifier.price;
+    }
     formattedModifiers.push({
       ...modifier,
-      name: getFormattedName(modifier)
+      name: getFormattedName(modifier, 'h1')
     });
   });
 
@@ -119,9 +125,12 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     modifier => modifier.location === 'h2' && !inWholeList(wholeNames, modifier)
   );
   halfList.forEach(modifier => {
+    if (modifier.status === 'excluded') {
+      delete modifier.price;
+    }
     formattedModifiers.push({
       ...modifier,
-      name: getFormattedName(modifier)
+      name: getFormattedName(modifier, 'h2')
     });
   });
 

@@ -202,14 +202,14 @@ const changeHalfModifier = (modifiers, modifierToChange, changeAttributes, half)
     });
   } else {
     const modifier = modifiers[modifierIndex];
-    if (modifier.status === 'added' && attributesAreClear(changeAttributes)) {
+    if (modifier.status === 'added' && attributesAreClear(modifier.attributes)) {
       return removeModifier(modifiers, modifierIndex);
     }
 
     const status = applyModifierStatus(modifier, changeAttributes);
     const attributes = applyAttributes(modifier.attributes, changeAttributes);
 
-    return updateModifier(modifiers, {
+    return updateModifier(modifiers, modifierIndex, {
       ...modifierToChange,
       status,
       attributes,

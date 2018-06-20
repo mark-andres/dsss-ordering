@@ -1,7 +1,7 @@
 import types from '../actions/types';
 
 const defaultQualifiers = {
-  extra: false,
+  extra: 0,
   lite: false,
   side: false,
   h1: false,
@@ -15,6 +15,8 @@ const initQualifiers = (qualifierMenu, initialPart) => {
   qualifierMenu.forEach(qualifier => {
     if (qualifier.name === 'Prepare') {
       obj.prepare = [...qualifier.items];
+    } else if (qualifier.name === 'EXTRA') {
+      obj.extra = 0;
     } else {
       if (qualifier.internalName === initialPart) {
         obj[qualifier.internalName] = true;
