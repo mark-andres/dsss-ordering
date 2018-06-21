@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleItemInScratch } from '../actions/scratchPad';
 import uuid from 'uuid/v1';
+import { MenuItemButton } from './common/MenuItemButton';
 import { orderItemFromMenu } from '../lib';
 
 class MenuItem extends React.Component {
@@ -33,19 +34,14 @@ class MenuItem extends React.Component {
 
   render() {
     const menuItem = this.props.menuItem;
-    let classes = 'menu-item';
-
-    if (this.isSet()) {
-      classes += ' menu-item-set';
-    }
 
     return (
-      <div 
-        className={classes}
+      <MenuItemButton 
+        active={this.isSet()}
         onClick={this.onClick}
       >
-        <p>{menuItem.name}</p>
-      </div>
+        {menuItem.name}
+      </MenuItemButton>
     );
   }
 }
