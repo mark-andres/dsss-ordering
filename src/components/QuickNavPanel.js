@@ -23,7 +23,7 @@ class QuickNavPanel extends React.Component {
     return (
       <div className="placeholder-panel">
         <div
-          className="nav-item nav-item-active grid-item-row1-col1"
+          className="nav-item nav-item-active"
           onClick={(e) => {
             e.preventDefault();
             this.props.restoreTopMenu();
@@ -32,7 +32,7 @@ class QuickNavPanel extends React.Component {
           <p>Items</p>
         </div>
         <div
-          className={"nav-item grid-item-row1-col2" + (this.modifiersButtonActive() ? ' nav-item-active' : '')}
+          className={"nav-item" + (this.modifiersButtonActive() ? ' nav-item-active' : '')}
           onClick={e => {
             const { topMenu, setCurrentMenu } = this.props;
 
@@ -45,7 +45,7 @@ class QuickNavPanel extends React.Component {
           <p>Modifiers</p>
         </div>
         <div 
-          className={"nav-item grid-item-row1-col3" + (this.sizesButtonActive() ? ' nav-item-active' : '')}
+          className={"nav-item" + (this.sizesButtonActive() ? ' nav-item-active' : '')}
           onClick={e => {
             const { topMenu, setCurrentMenu } = this.props;
 
@@ -61,14 +61,16 @@ class QuickNavPanel extends React.Component {
         >
           <p>Sizes</p>
         </div>
-        <div className="nav-item grid-item-row1-col4">
+        <div 
+          className="nav-item"
+        >
           <p>Styles</p>
         </div>
-        <div className="nav-item grid-item-row1-col5">
+        <div className="nav-item">
           <p>Preferences</p>
         </div>
         <div
-          className={"nav-item grid-item-row1-col6" + (this.cancelButtonActive() ? ' nav-item-canceled' : '')}
+          className={"nav-item" + (this.cancelButtonActive() ? ' nav-item-canceled' : '')}
           onClick={e => {
             e.preventDefault();
             if (this.cancelButtonActive()) {

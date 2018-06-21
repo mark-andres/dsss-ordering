@@ -10,14 +10,14 @@ class CategoryItem extends React.Component {
 
   render() {
     const { menu, isActive, row, column } = this.props;
-    const rowColumn = `grid-item-row${row}-col${column}`;
     const specialClass = menu.caption.toLowerCase() + '-background';
     const classes = "category-item imaged-background";
     const active = isActive ? "category-item-selected" : "";
 
     return (
       <div 
-        className={`${classes} ${active} ${specialClass} ${rowColumn}`}
+        style={{gridRow: row, gridColumn: column}}
+        className={`${classes} ${active} ${specialClass}`}
         onClick={this.onClick}
       >
         <p>{menu.caption}</p>
