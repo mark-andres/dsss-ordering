@@ -2,7 +2,7 @@ import React from 'react';
 
 class QualifierPanel extends React.Component {
   componentDidMount() {
-    const { menuQualifiers, selectedItem } = this.props;
+    const { menuQualifiers } = this.props;
     if (menuQualifiers) {
       let initialPart;
       if (this.props.halfOrdering) {

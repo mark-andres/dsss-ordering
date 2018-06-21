@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/order';
-import { setItemSize, resetScratch } from '../actions/scratchPad';
+import { setItemSize } from '../actions/scratchPad';
 
 class SizeItem extends React.Component {
   isSet() {
@@ -41,8 +40,6 @@ class SizeItem extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   setItemSize: size => dispatch(setItemSize(size)),
-  resetScratch: () => dispatch(resetScratch()),
-  addItem: item => dispatch(addItem(item))
 });
 
 const mapStateToProps = state => ({
