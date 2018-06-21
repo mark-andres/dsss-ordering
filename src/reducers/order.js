@@ -181,7 +181,7 @@ const addIncludedModifier = (modifiers = [], includedModifier, part = 'whole') =
   modifier2.price = modifier2.price / 2;
 
   if (part && part !== 'whole') {
-    modifiers.concat({
+    return modifiers.concat({
       ...modifier1,
       location: part
     });

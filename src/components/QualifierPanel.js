@@ -5,9 +5,7 @@ class QualifierPanel extends React.Component {
     const { menuQualifiers, selectedItem } = this.props;
     if (menuQualifiers) {
       let initialPart;
-      if (selectedItem.modifiers) {
-        initialPart = 'whole';
-      } else if (selectedItem.modifiersH1) {
+      if (this.props.halfOrdering) {
         initialPart = 'h1';
       } else {
         initialPart = 'whole';
