@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { StandardButton } from './common/StandardButton';
 import { sendOrder, changeItem, removeItem, copyItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
@@ -64,39 +65,45 @@ class ReceiptOperations extends React.Component {
   render() {
     return (
       <div className="main-grid-cell receipt-ops">
-        <div
-          className="std-button grid-item-row1-col1"
+        <StandardButton
+          style={{gridRow: 1, gridColumn: 1}}
           onClick={this.removeItem}
         >
-          <p className="std-button-caption">Remove Item</p>
-        </div>
-        <div
-          className="std-button grid-item-row1-col2"
+          Remove Item
+        </StandardButton>
+        <StandardButton
+          style={{color: 'green', gridRow: 1, gridColumn: 2}}
           onClick={this.resetAll}
         >
-          <p className="std-button-caption caption-color-green">Clear All</p>
-        </div>
-        <div 
-          className="std-button grid-item-row1-col3"
+          Clear All
+        </StandardButton>
+        <StandardButton 
+          style={{gridRow: 1, gridColumn: 3}}
           onClick={this.changeQuantity}
         >
-          <p className="std-button-caption">Quantity</p>
-        </div>
-        <div className="std-button grid-item-row2-col1">
-          <p className="std-button-caption caption-color-red">Manager Functions</p>
-        </div>
-        <div className="std-button grid-item-row2-col2">
-          <p className="std-button-caption">Order Note</p>
-        </div>
-        <div className="std-button grid-item-row2-col3">
-          <p className="std-button-caption">Coupons</p>
-        </div>
-        <div
-          className="std-button grid-item-row2-col4"
+          Quantity
+        </StandardButton>
+        <StandardButton 
+          style={{color: 'red', gridRow: 2, gridColumn: 1}}
+        >
+          Manager Functions
+        </StandardButton>
+        <StandardButton 
+          style={{gridRow: 2, gridColumn: 2}}
+        >
+          Order Note
+        </StandardButton>
+        <StandardButton
+          style={{gridRow: 2, gridColumn: 3}}
+        >
+          Coupons
+        </StandardButton>
+        <StandardButton
+          style={{gridRow: 2, gridColumn: 4}}
           onClick={this.repeatItem}
         >
-          <p className="std-button-caption">Repeat Item</p>
-        </div>
+          Repeat Item
+        </StandardButton>
       </div>
     );
   }
