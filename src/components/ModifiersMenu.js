@@ -4,6 +4,7 @@ import uuid from 'uuid/v1';
 import _ from 'lodash';
 import { initQualifiers, setQualifier } from '../actions/qualifiers';
 import { changeModifier } from '../actions/order';
+import { ModifiersButton } from './common/ModifiersButton';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
 import { getModifiersList } from '../selectors/modifiers';
@@ -18,7 +19,7 @@ class ModifiersMenu extends React.Component {
           bgcolor = 'darkred';       // some shade of red for a negated modifier
         }
         else {
-          bgcolor = '#006900';       // a green color means the modifier is included
+          bgcolor = '#3daf3b';       // a green color means the modifier is included
         }
       }
     }
@@ -49,15 +50,14 @@ class ModifiersMenu extends React.Component {
 
       const backgroundColor = this.getModifierBg(modifier, includedModifiers);
 
-      return <div
-        className='modifiers-button'
+      return <ModifiersButton
         key={uuid()}
         style={{ backgroundColor }}
         id={modifier.name}
         onClick={this.handleModifierClick}
       >
-        <br />{modifier.name}
-      </div>
+        {modifier.name}
+      </ModifiersButton>
     });
   }
 
