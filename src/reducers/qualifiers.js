@@ -31,7 +31,11 @@ const initQualifiers = (qualifierMenu, initialPart) => {
 const setExtra = (qualifiers, status) => {
   qualifiers.extra = status;
   if (qualifiers.extra) {
+    qualifiers.extra = 1;
     qualifiers.lite = false;
+    qualifiers.side = false;
+  } else {
+    qualifiers.extra = 0;
   }
   return { ...qualifiers };
 }
@@ -39,13 +43,18 @@ const setExtra = (qualifiers, status) => {
 const setLite = (qualifiers, status) => {
   qualifiers.lite = status;
   if (qualifiers.lite) {
-    qualifiers.extra = false;
+    qualifiers.extra = 0;
+    qualifiers.side = false;
   }
   return { ...qualifiers };
 }
 
 const setSide = (qualifiers, status) => {
   qualifiers.side = status;
+  if (qualifiers.side) {
+    qualifiers.extra = 0;
+    qualifiers.lite = false;
+  }
   return { ...qualifiers };
 }
 

@@ -2,12 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 import _ from 'lodash';
-import { initQualifiers, setQualifier } from '../actions/qualifiers';
+import styled from 'styled-components';
+import { initQualifiers, setQualifier, setExtra, setLite, setSide } from '../actions/qualifiers';
 import { changeModifier } from '../actions/order';
-import { ModifiersButton } from './common/ModifiersButton';
+import { ModifiersButton, ModifiersButtonText } from './common/ModifiersButton';
 import QualifierPanel from './QualifierPanel';
 import SelectionHeader from './SelectionHeader';
 import { getModifiersList } from '../selectors/modifiers';
+
+const ModifierPrefix = styled.span`
+  color: ${({extra}) => extra? 'red':'white'};
+  font-size: 1.0rem;
+  font-weight: bold;
+`;
 
 class ModifiersMenu extends React.Component {
   getModifierBg(modifier, includedModifiers) {
@@ -26,15 +33,47 @@ class ModifiersMenu extends React.Component {
     return bgcolor;
   }
 
+  modifierString(name, modifier) {
+    if (!modifier) {
+      return <ModifiersButtonText>{name}</ModifiersButtonText>;
+    }
+
+    const { status, attributes } = modifier;
+    const { extra, lite, side } = attributes;
+
+    if (status === 'excluded') {
+      return <ModifierPrefix>NO<br/><ModifiersButtonText>{name}</ModifiersButtonText></ModifierPrefix>;
+    } else if (extra > 0) {
+      let digitStr = extra.toString();
+      if (digitStr === '1') {
+        digitStr = '';
+      }
+      return <ModifierPrefix extra>{digitStr}X<br/><ModifiersButtonText>{name}</ModifiersButtonText></ModifierPrefix>;
+    } else if (lite) {
+      return <ModifierPrefix>LITE<br/><ModifiersButtonText>{name}</ModifiersButtonText></ModifierPrefix>;
+    } else if (side) {
+      return <ModifierPrefix>SD<br/><ModifiersButtonText>{name}</ModifiersButtonText></ModifierPrefix>;
+    } 
+
+    return <ModifiersButtonText>{name}</ModifiersButtonText>;
+  }
+
   getModifier(modifierId) {
     const modifiers = this.props.menu.items;
     return modifiers.find(modifier => modifier.name === modifierId);
   }
 
-  handleModifierClick = e => {
-    e.preventDefault();
+  getIncludedModifier(modifierName) {
+    return this.props.includedModifiers.find(modifier => modifier.name === modifierName);
+  }
+
+  handleModifierClick = name => {
     const { selectedItem, qualifiers } = this.props;
-    this.props.changeModifier(selectedItem, this.getModifier(e.target.id), qualifiers)
+    const modifier = this.getModifier(name);
+    this.props.changeModifier(selectedItem, modifier, qualifiers);
+    this.props.setExtra(0);
+    this.props.setLite(false);
+    this.props.setSide(false);
   }
 
   renderModifierButtons(modifiers) {
@@ -54,9 +93,12 @@ class ModifiersMenu extends React.Component {
         key={uuid()}
         style={{ backgroundColor }}
         id={modifier.name}
-        onClick={this.handleModifierClick}
+        onClick={e => {
+          e.preventDefault();
+          this.handleModifierClick(modifier.name);
+        }}
       >
-        {modifier.name}
+        {this.modifierString(modifier.name, this.getIncludedModifier(modifier.name))}
       </ModifiersButton>
     });
   }
@@ -90,6 +132,9 @@ class ModifiersMenu extends React.Component {
 const mapDispatchToProps = dispatch => ({
   initQualifiers: (qualifiersMenu, initialPart) => dispatch(initQualifiers(qualifiersMenu, initialPart)),
   setQualifier: (qualifier, status) => dispatch(setQualifier(qualifier, status)),
+  setExtra: status => dispatch(setExtra(status)),
+  setLite: status => dispatch(setLite(status)),
+  setSide: status => dispatch(setSide(status)),
   changeModifier: (item, modifier, options) => dispatch(changeModifier(item, modifier, options))
 });
 
