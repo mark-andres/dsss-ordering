@@ -95,7 +95,7 @@ const appReducer = (state = {}, action) => {
             orderOp({
               ...state.scratchPad.completedItem,
               id: _.property('order.selectedItem.id')(state),
-              scratchPad: state.scratchPad
+              scratchPad: state.scratchPad,
             })
           );
           if (modifiersMenu) {

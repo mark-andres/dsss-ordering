@@ -21,11 +21,36 @@ const getPrice = (size, item) => {
   return 0;
 }
 
+const recomputeCompletedItem = scratchPad => {
+  let completedItem;
+  const { size, items } = scratchPad;
+
+  if (items.length === 2) {
+    completedItem = {
+      completedItem: { ...scratchPad.completedItem },
+      name: `${size} H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
+      price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
+      size
+    }
+  } else {
+    completedItem = {
+      completedItem: { ...scratchPad.completedItem },
+      name: `${size} ${items[0].name}`,
+      price: getPrice(size, items[0]),
+      size
+    }
+  }
+
+  return {
+    ...scratchPad,
+    completedItem
+  }
+}
+
 const computeCompletedItem = scratchPad => {
   const { items, halfOrdering, sizeRequired, size } = scratchPad;
   let allItemsEntered = false;
   let completedItem;
-  let modifiers;
 
   if (sizeRequired && !size) {
     return {
@@ -35,31 +60,23 @@ const computeCompletedItem = scratchPad => {
 
   if (halfOrdering) {
     if (items.length === 2) {
-      if (scratchPad.completedItem) {
-        completedItem = scratchPad.completedItem;
-      } else {
-        completedItem = {
-          name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
-          modifiers: addIncludedModifiers(addIncludedModifiers(modifiers, items[0], 'h1'), items[1], 'h2'),
-          quantity: 1,
-          price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
-          size: size || ''
-        }
+      completedItem = {
+        name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
+        modifiers: addIncludedModifiers(addIncludedModifiers(undefined, items[0], 'h1'), items[1], 'h2'),
+        quantity: 1,
+        price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
+        size: size || ''
       }
       allItemsEntered = true;
     }
   } else {
     if (items.length === 1) {
-      if (scratchPad.completedItem) {
-        completedItem = scratchPad.completedItem;
-      } else {
-        completedItem = {
-          ...items[0],
-          modifiers: addIncludedModifiers(modifiers, items[0]),
-          quantity: 1,
-          price: getPrice(size, items[0]),
-          size: size || ''
-        }
+      completedItem = {
+        ...items[0],
+        modifiers: addIncludedModifiers(undefined, items[0]),
+        quantity: 1,
+        price: getPrice(size, items[0]),
+        size: size || ''
       }
       allItemsEntered = true;
     }
@@ -82,7 +99,7 @@ const computeCompletedItem = scratchPad => {
 const addItemToScratch = (scratchPad, item) => {
   const items = scratchPad.items;
   const halfOrdering = scratchPad.halfOrdering;
-  
+
   if (items.length === 0) {
     items[0] = item;
   } else if (halfOrdering) {
@@ -117,10 +134,17 @@ const toggleItemInScratch = (scratchPad, itemToToggle) => {
 }
 
 const setItemSize = (scratchPad, size) => {
-  return computeCompletedItem({
-    ...scratchPad,
-    size
-  });
+  if (scratchPad.completedItem) {
+    return recomputeCompletedItem({
+      ...scratchPad,
+      size
+    });
+  } else {
+    return computeCompletedItem({
+      ...scratchPad,
+      size
+    });
+  }
 }
 
 const scratchPadReducer = (scratchPad = defaultScratchPad, action) => {
