@@ -87,6 +87,24 @@ const getFormattedName = (modifier, part = 'whole') => {
 
 const inWholeList = (wholeList, modifier) => wholeList.includes(modifier.name);
 
+const adjustModifier = (modifierIn) => {
+  const modifier = _.cloneDeep(modifierIn);
+  if (modifier.status === 'excluded') {
+    delete modifier.price;
+  } else if (modifier.attributes.extra > 0) {
+    if (modifier.status === 'included') {
+      modifier.price = modifier.price * modifier.attributes.extra;
+    } else {
+      modifier.price = modifier.price + (modifier.price * modifier.attributes.extra);
+    }
+  } else if (modifier.attributes.lite) {
+    if (modifier.status === 'included') {
+      delete modifier.price;
+    }
+  }
+  return modifier;
+}
+
 // Utility function for OrderReceipt.
 export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   const formattedModifiers = [];
@@ -98,11 +116,8 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     wholeList = getModifierWholeList(filteredModifiers);
     wholeNames = wholeList.map(modifier => modifier.name);
     wholeList.forEach(modifier => {
-      if (modifier.status === 'excluded') {
-        delete modifier.price;
-      }
       formattedModifiers.push({
-        ...modifier,
+        modifier: adjustModifier(modifier),
         name: getFormattedName(modifier)
       });
     });
@@ -116,7 +131,7 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
       delete modifier.price;
     }
     formattedModifiers.push({
-      ...modifier,
+      modifier: adjustModifier(modifier),
       name: getFormattedName(modifier, 'h1')
     });
   });
@@ -129,7 +144,7 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
       delete modifier.price;
     }
     formattedModifiers.push({
-      ...modifier,
+      modifier: adjustModifier(modifier),
       name: getFormattedName(modifier, 'h2')
     });
   });

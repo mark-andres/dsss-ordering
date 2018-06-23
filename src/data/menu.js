@@ -367,7 +367,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Topping Cheese',
-    price: 1.50
+    price: 2.50
   }, {
     name: 'Pizza Sauce',
     price: 1.50
@@ -379,7 +379,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Pizza Cheese',
-    price: 1.50
+    price: 2.50
   }, {
     name: 'Feta Cheese',
     price: 2.50

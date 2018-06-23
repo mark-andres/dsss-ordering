@@ -127,23 +127,36 @@ const attributesAreClear = attributes => {
 }
 
 const applyModifierStatus = (modifier, changeAttributes) => {
-  if (attributesAreClear(changeAttributes) && modifier.status === 'included') {
-    return 'excluded';
-  } else {
-    return 'included';
-  }
+  if (attributesAreClear(changeAttributes)) {
+    if (modifier.status === 'excluded') {
+      modifier.status = 'included'; 
+    } else if (modifier.status === 'included') {
+      modifier.status = 'excluded';
+    }
+  } 
+  return modifier.status;
 }
 
 const applyAttributes = (modifierAttributes, changeAttributes) => {
   if (changeAttributes.extra) {
     modifierAttributes.extra++;
-    if (modifierAttributes > 4) {
-      modifierAttributes = 0;
+    if (modifierAttributes.extra > 4) {
+      modifierAttributes.extra = 0;
     }
+    modifierAttributes.lite = false;
+    modifierAttributes.side = false;
   } else if (changeAttributes.lite) {
     modifierAttributes.lite = !modifierAttributes.lite;
+    modifierAttributes.side = false;
+    modifierAttributes.extra = 0;
   } else if (changeAttributes.side) {
     modifierAttributes.side = !modifierAttributes.side;
+    modifierAttributes.lite = false;
+    modifierAttributes.extra = 0;
+  } else {
+    modifierAttributes.extra = 0;
+    modifierAttributes.lite = false;
+    modifierAttributes.side = false;
   }
 
   return { ...modifierAttributes };
@@ -202,7 +215,7 @@ const changeHalfModifier = (modifiers, modifierToChange, changeAttributes, half)
     });
   } else {
     const modifier = modifiers[modifierIndex];
-    if (modifier.status === 'added' && attributesAreClear(modifier.attributes)) {
+    if (modifier.status === 'added' && attributesAreClear(changeAttributes)) {
       return removeModifier(modifiers, modifierIndex);
     }
 
@@ -257,20 +270,26 @@ function calculateTotals(items) {
 
 function calculateSubTotals(items) {
   return items.reduce((total, item) => {
-    let { price, quantity, status } = item;
+    let { price, quantity } = item;
     let modifiersSum = 0;
-    let modifiersH1Sum = 0;
-    let modifiersH2Sum = 0;
     let subItemsSum = 0;
 
     price = price || 0;
     quantity = quantity || 1;
-    if (status && (status === 'included' || status === 'excluded')) {
-      price = 0;
-    }
 
     if (item.modifiers) {
-      modifiersSum = calculateSubTotals(item.modifiers);
+      modifiersSum = item.modifiers.reduce((total, modifier) => {
+        const { status, attributes, price } = modifier;
+        const { extra } = attributes;
+        let cost = 0;
+        if (status === 'included') {
+          cost = price * extra;
+        } else if (status !== 'excluded') {
+          cost = price * (extra + 1)
+        }
+        
+        return total + cost;        
+      }, 0);
     }
     if (item.subItems) {
       subItemsSum = item.subItems.reduce((total, subItem) => {
@@ -283,7 +302,7 @@ function calculateSubTotals(items) {
       }, 0);
     }
 
-    return total + quantity * (price + modifiersSum + modifiersH1Sum + modifiersH2Sum + subItemsSum);
+    return total + quantity * (price + modifiersSum + subItemsSum);
   }, 0);
 }
 

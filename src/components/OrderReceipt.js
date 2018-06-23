@@ -20,9 +20,10 @@ class OrderReceipt extends React.Component {
     });
   }
 
-  renderModifiers(modifiers, item) {
-    return modifiers.map(subItem => {
-      const { name, price } = subItem;
+  renderModifiers(formattedModifiers, item) {
+    return formattedModifiers.map(subItem => {
+      const { name, modifier } = subItem;
+      const { price } = modifier;
       return <LineItem isSubItem={true} key={uuid()} item={{ name, price }} subItemOwner={item} />;
     });
   }
@@ -30,7 +31,7 @@ class OrderReceipt extends React.Component {
   renderLineItems(order) {
     const lineItems = order.items.map(item => {
       const halfOrdering = _.property('scratchPad.halfOrdering')(item);
-      const modifiers = getFormattedModifiers(item.modifiers, !halfOrdering);
+      const formattedModifiers = getFormattedModifiers(item.modifiers, !halfOrdering);
       let subItemLines = [], commentLines = [], modifierLines = [];
 
       if (item.comments) {
@@ -40,7 +41,7 @@ class OrderReceipt extends React.Component {
         subItemLines = this.renderSubItems(item.subItems, item);
       }
       if (item.modifiers) {
-        modifierLines = this.renderModifiers(modifiers, item);
+        modifierLines = this.renderModifiers(formattedModifiers, item);
       }
 
       return [
