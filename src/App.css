@@ -17,10 +17,6 @@ p {
   background-color: #8FAECF;
 }
 
-.order-info {
-  grid-area: order-info;
-}
-
 .order-receipt {
   grid-area: order-receipt;
   background-color: #fde5c0;
@@ -342,21 +338,6 @@ p {
   bottom: 25%;
   left: 0;
   right: 0;
-}
-
-.order-info-header {
-  background-color: #0000d1;
-  color: white;
-  width: 100%;
-  padding: 3px 1px;
-}
-
-#order-no {
-  font-weight: bold;
-}
-
-#order-no-label {
-  font-size: 0.8rem;
 }
 
 .modifiers-grid {

@@ -39,6 +39,9 @@ export const SET_H2 = 'SET_H2';
 export const SET_WHOLE = 'SET_WHOLE';
 export const SET_QUALIFIER = 'SET_QUALIFIER';
 
+// Types for clock
+export const SET_TIME = 'SET_TIME';
+
 // Types for app
 export const SET_NEXT_CHOICE = 'SET_NEXT_CHOICE';
 export const CANCEL_CHOICES = 'CANCEL_CHOICES';
@@ -75,6 +78,7 @@ export default {
   SET_H2,
   SET_WHOLE,
   SET_QUALIFIER,
+  SET_TIME,
   SET_NEXT_CHOICE,
   CANCEL_CHOICES
 };

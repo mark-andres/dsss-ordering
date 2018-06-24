@@ -4,6 +4,7 @@ import menuReducer from './menu';
 import scratchPadReducer from './scratchPad';
 import qualifiersReducer from './qualifiers';
 import modalReducer from './modal';
+import clockReducer from './clock';
 import types from '../actions/types';
 import { addItem, changeItem, setSelectedItem } from '../actions/order';
 import { resetScratch, setSizeRequired } from '../actions/scratchPad';
@@ -111,7 +112,8 @@ const appReducer = (state = {}, action) => {
         order: orderReducer(state.order, action),
         scratchPad: scratchPadReducer(state.scratchPad, action),
         qualifiers: qualifiersReducer(state.qualifiers, action),
-        modal: modalReducer(state.modal, action)
+        modal: modalReducer(state.modal, action),
+        clock: clockReducer(state.clock, action)
       };
   }
 }
