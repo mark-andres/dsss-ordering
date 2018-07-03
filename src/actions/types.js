@@ -42,6 +42,10 @@ export const SET_QUALIFIER = 'SET_QUALIFIER';
 // Types for clock
 export const SET_TIME = 'SET_TIME';
 
+// Types for user
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+
 // Types for app
 export const SET_NEXT_CHOICE = 'SET_NEXT_CHOICE';
 export const CANCEL_CHOICES = 'CANCEL_CHOICES';
@@ -79,6 +83,8 @@ export default {
   SET_WHOLE,
   SET_QUALIFIER,
   SET_TIME,
+  LOGIN_USER,
+  LOGOUT_USER,
   SET_NEXT_CHOICE,
   CANCEL_CHOICES
 };

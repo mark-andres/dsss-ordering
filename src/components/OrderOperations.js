@@ -6,9 +6,19 @@ import { ButtonStack } from './common/ButtonStack';
 import { sendOrder } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
+import { logoutUser } from '../actions/user';
 import { MESSAGE_MODAL } from '../components/MessageModal';
+import { LOGIN_DIALOG } from './modals/LoginDialog';
 
 class OrderOperations extends React.Component {
+  logInOut = () => {
+    if (this.props.loggedIn) {
+      this.props.logoutUser();
+    } else {
+      this.props.loadModal(LOGIN_DIALOG);
+    }
+  }
+
   onSendOrder = () => {
     this.props.sendOrder();
     this.props.restoreTopMenu();
@@ -21,13 +31,12 @@ class OrderOperations extends React.Component {
   render() {
     return (
       <div className="main-grid-cell order-ops">
-        <Link to='/'>
-          <StandardButton
-            style={{ height: '100%', color: 'red', fontSize: '1.4rem', gridRow: 1, gridColumn: 1 }}
-          >
-            Logoff
+        <StandardButton
+          style={{ height: '100%', color: 'red', fontSize: '1.4rem', gridRow: 1, gridColumn: 1 }}
+          onClick={this.logInOut}
+        >
+          { this.props.loggedIn ? 'Logoff' : 'Login' }
         </StandardButton>
-        </Link>
         <StandardButton
           style={{ color: 'green', fontSize: '1.4rem', gridRow: 1, gridColumn: 2 }}
           onClick={this.onNotImplementedClicked}
@@ -87,7 +96,12 @@ class OrderOperations extends React.Component {
 const mapDispatchToProps = dispatch => ({
   sendOrder: () => dispatch(sendOrder()),
   restoreTopMenu: () => dispatch(restoreTopMenu()),
-  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
-export default connect(null, mapDispatchToProps)(OrderOperations);
+const mapStateToProps = state => ({
+  loggedIn: state.user.loggedIn
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderOperations);

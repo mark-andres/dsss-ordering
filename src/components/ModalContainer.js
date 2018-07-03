@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import MessageModal, { MESSAGE_MODAL } from './MessageModal';
 import ConfirmDialog, { CONFIRM_DIALOG } from './ConfirmDialog';
 import QuantityDialog, { QUANTITY_DIALOG } from './QuantityDialog';
+import LoginDialog, { LOGIN_DIALOG } from './modals/LoginDialog';
 
 const MODAL_COMPONENTS = {
   [MESSAGE_MODAL]: MessageModal,
   [CONFIRM_DIALOG]: ConfirmDialog,
-  [QUANTITY_DIALOG]: QuantityDialog
+  [QUANTITY_DIALOG]: QuantityDialog,
+  [LOGIN_DIALOG]: LoginDialog
 };
 
 const ModalContainer = (props) => {

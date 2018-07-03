@@ -3,6 +3,7 @@
   "version": "0.10.2",
   "private": true,
   "homepage": "https://www.mandresapps.com/ordering-demo",
+  "proxy": "http://localhost",
   "dependencies": {
     "connected-react-router": "^4.3.0",
     "enzyme": "^3.3.0",
