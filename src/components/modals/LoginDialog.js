@@ -49,8 +49,11 @@ class LoginDialog extends React.Component {
 
   onLoginClicked = () => {
     const { username, password } = this.state;
-    this.props.loginUser(username, password);
-    this.props.hideModal();
+    this.props.loginUser(username, password, success => {
+      if (success) {
+        this.props.hideModal();
+      }
+    });
   }
 
   onClose = () => {
@@ -95,7 +98,7 @@ class LoginDialog extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   hideModal: () => dispatch(hideModal()),
-  loginUser: (username, password) => dispatch(loginUser(username, password))
+  loginUser: (username, password, callback) => dispatch(loginUser(username, password, callback))
 });
 
 const mapStateToProps = state => ({

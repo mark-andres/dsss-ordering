@@ -1,7 +1,7 @@
 import types from './types';
 
-export const loginUser = (username, password) => dispatch => {
-  const timezone = (new Date().getTimezoneOffset()/60).toFixed(0);
+export const loginUser = (username, password, callback) => dispatch => {
+  const timezone = (new Date().getTimezoneOffset() / 60).toFixed(0);
 
   fetch('/dsssv1-services/servicesLogin.php', {
     method: 'POST',
@@ -11,19 +11,24 @@ export const loginUser = (username, password) => dispatch => {
     },
     body: `username=${username}&pwd=${password}&timezone=${timezone}`
   })
-  .then(res => res.json())
-  .then(userInfo => dispatch({
-    type: types.LOGIN_USER,
-    userInfo
-  }))
-  .catch(err => console.error(err));
+    .then(res => res.json())
+    .then(userInfo => {
+      dispatch({
+        type: types.LOGIN_USER,
+        userInfo
+      });
+      if (callback) {
+        callback(!userInfo.error);
+      }
+    })
+    .catch(err => console.error(err));
 };
 
 export const logoutUser = () => dispatch => {
   fetch('/dsssv1-services/logout.php')
-  .then(res => res.json())
-  .then(() => dispatch({
-    type: types.LOGOUT_USER
-  }))
-  .catch(err => console.log(err));
+    .then(res => res.json())
+    .then(() => dispatch({
+      type: types.LOGOUT_USER
+    }))
+    .catch(err => console.log(err));
 }
