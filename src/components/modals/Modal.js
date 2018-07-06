@@ -22,7 +22,7 @@ const Content = styled.div`
   z-index: 10000;
   overflow: auto;
   text-align: center;
-  padding: 4px;
+  padding: 0;
   cursor: pointer;
 
   &:after {

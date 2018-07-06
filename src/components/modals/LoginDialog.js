@@ -10,28 +10,44 @@ import { loginUser } from '../../actions/user';
 const LoginDiv = styled.div`
   border: 0.5vw inset grey;
   border-radius: 3%;
-  background-color: white;
-  padding: 4vw;
+  background-color: #8FAECF;
 `;
 
 const Header = styled.div`
-  height: 7vh;
+  height: 4vh;
   width: 100%;
   background-color: #000061;
   color: white;
   margin: 0;
+  margin-bottom: 1vh;
+  padding-top: 1vh;
+  padding-left: 1vw;
+  text-align: left;
+  font-weight: bold;
+`;
+
+const LoginForm = styled.form`
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 2vh;
 `;
 
 const Label = styled.label`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: darkblue;
+  text-align: left;
 `;
 
 const Input = styled.input`
+  font-size: 1.3rem;
+  margin: 1vh 0;
 `;
 
 const Button = styled.button`
   width: 8vw;
   height: 4vh;
-  margin-top: 2vw;
+  margin: 2vh 1vw;
   font-size: 1.1em;
 `;
 
@@ -47,7 +63,9 @@ class LoginDialog extends React.Component {
     password: ''
   }
 
-  onLoginClicked = () => {
+  onLoginClicked = e => {
+    e.preventDefault();
+
     const { username, password } = this.state;
     this.props.loginUser(username, password, success => {
       if (success) {
@@ -68,9 +86,12 @@ class LoginDialog extends React.Component {
       <Modal onClose={this.onClose}>
         <LoginDiv>
           <Header>DSSS Login</Header>
-          <form autoComplete='off'>
+          <LoginForm
+            autoComplete='off'
+            onSubmit={this.onLoginClicked}
+          >
             {this.props.error && <ErrorMessage>{this.props.error}</ErrorMessage>}
-            <Label htmlFor={usernameTag}>Username:</Label>
+            <Label htmlFor={usernameTag}>Username</Label>
             <Input
               name={usernameTag}
               type='text' placeholder='Enter username' value={this.state.username}
@@ -78,18 +99,18 @@ class LoginDialog extends React.Component {
               onChange={e => {
                 this.setState({ username: e.target.value });
               }}
-            />
-            <Label htmlFor={passwordTag}>Password:</Label>
+            /><br/>
+            <Label htmlFor={passwordTag}>Password</Label>
             <Input
               name={passwordTag}
               type='password' value={this.state.password}
               onChange={e => {
                 this.setState({ password: e.target.value });
               }}
-            />
-          </form>
-          <Button onClick={this.onLoginClicked}>Login</Button>
-          <Button onClick={this.onClose}>Cancel</Button>
+            /><br/>
+            <Button onClick={this.onLoginClicked}>Login</Button>
+            <Button onClick={this.onClose}>Cancel</Button>
+          </LoginForm>
         </LoginDiv>
       </Modal>
     );
