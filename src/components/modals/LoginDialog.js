@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Modal from '../Modal';
+import Modal from '../modals/Modal';
 import { hideModal } from '../../actions/modal';
 import { loginUser } from '../../actions/user';
 

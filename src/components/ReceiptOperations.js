@@ -4,9 +4,9 @@ import { StandardButton } from './common/StandardButton';
 import { sendOrder, changeItem, removeItem, copyItem } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
-import { MESSAGE_MODAL } from './MessageModal';
-import { CONFIRM_DIALOG } from './ConfirmDialog';
-import { QUANTITY_DIALOG } from './QuantityDialog';
+import { MESSAGE_MODAL } from './modals/MessageModal';
+import { CONFIRM_DIALOG } from './modals/ConfirmDialog';
+import { QUANTITY_DIALOG } from './modals/QuantityDialog';
 
 class ReceiptOperations extends React.Component {
   repeatItem = () => {

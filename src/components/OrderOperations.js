@@ -7,7 +7,7 @@ import { sendOrder } from '../actions/order';
 import { restoreTopMenu } from '../actions/menu';
 import { loadModal } from '../actions/modal';
 import { logoutUser } from '../actions/user';
-import { MESSAGE_MODAL } from '../components/MessageModal';
+import { MESSAGE_MODAL } from '../components/modals/MessageModal';
 import { LOGIN_DIALOG } from './modals/LoginDialog';
 
 class OrderOperations extends React.Component {

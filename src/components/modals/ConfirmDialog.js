@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Modal from './Modal';
-import { hideModal } from '../actions/modal';
+import { hideModal } from '../../actions/modal';
 
 const ConfirmDiv = styled.div`
   border: 0.5vw inset grey;
