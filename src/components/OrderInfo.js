@@ -21,7 +21,15 @@ const OrderNumber = styled.span`
 `;
 
 const OrderNumberLabel = styled.span`
-  font-size: 0.8rem;
+`;
+
+const UserName = styled.span`
+  font-weight: bold;
+`;
+
+const UserNameLabel = styled.span`
+  padding-left: 3vw;
+  padding-right: 0.5vw;
 `;
 
 class OrderInfo extends React.Component {
@@ -29,14 +37,14 @@ class OrderInfo extends React.Component {
     this.setClock();
   }
 
-setClock = () => {
-  const { setTime } = this.props;
-  const now = moment();
-  const ticks = moment(now).add(1, 'm').startOf('m').diff(now);
+  setClock = () => {
+    const { setTime } = this.props;
+    const now = new Date();
+    const ticks = moment(now).add(1, 'm').startOf('m').diff(now);
 
-  setTime(now);
-  setTimeout(this.setClock, ticks);
-}
+    setTime(now);
+    setTimeout(this.setClock, ticks);
+  }
 
   render() {
     return (
@@ -44,8 +52,10 @@ setClock = () => {
         <OrderInfoHeader>
           <OrderNumberLabel>Order #: </OrderNumberLabel>
           <OrderNumber>{' '}New</OrderNumber>
+          <UserNameLabel>User:</UserNameLabel>
+          <UserName>{this.props.userName}</UserName>
+          <Clock time={this.props.clock} />
         </OrderInfoHeader>
-        <Clock time={this.props.clock} />
       </StyledOrderInfo>
     );
   }
@@ -55,4 +65,9 @@ const mapDispatchToProps = dispatch => ({
   setTime: time => dispatch(setTime(time))
 });
 
-export default connect(state => state.clock, mapDispatchToProps)(OrderInfo);
+const mapStateToProps = state => ({
+  clock: state.clock.time,
+  userName: state.user.loggedIn ? `${state.user.firstname} ${state.user.lastname}` : ''
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderInfo);

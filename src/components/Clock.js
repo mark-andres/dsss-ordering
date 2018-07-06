@@ -3,21 +3,19 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 const StyledClock = styled.p`
-  background: black;
-  color: lightgreen;
-  text-align: right;
-  position: absolute;
-  top: 4vh;
-  right: 6vh;
-  font-size: 1.5rem;
+  background: transparent;
+  color: white;
+  float: right;
   font-weight: bold;
-  padding: 0.5vh 0.5vw;
-  width: 5.6vw;
+  margin-bottom: 0.5vh;
+  padding-right: 0.5vw;
 `;
 
 const Clock = ({time}) => {
+  const timeStr = moment(time).format('h:mm a');
+
   return (
-    <StyledClock>{moment(time).format('h:mm')}</StyledClock>
+    <StyledClock>{timeStr}</StyledClock>
   );
 }
 
