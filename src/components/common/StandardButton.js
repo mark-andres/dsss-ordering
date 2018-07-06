@@ -7,7 +7,6 @@ export const StandardButton = styled.button`
   overflow: hidden;
   width: 100%;
   background: linear-gradient(to right, #dadada, #aeaeae);
-  position: relative;
   color: darkblue;
   font-size: 0.95rem;
   font-weight: bold;
