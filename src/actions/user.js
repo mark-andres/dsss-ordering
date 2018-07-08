@@ -1,4 +1,5 @@
 import types from './types';
+import { loadAddressNames, loadLocationTypes, loadPhoneTypes, loadDrivers } from './supportInfo';
 
 export const loginUser = (username, password, callback) => dispatch => {
   const timezone = (new Date().getTimezoneOffset() / 60).toFixed(0);
@@ -19,6 +20,12 @@ export const loginUser = (username, password, callback) => dispatch => {
       });
       if (callback) {
         callback(!userInfo.error);
+      }
+      if (!userInfo.error) {
+        dispatch(loadAddressNames());
+        dispatch(loadLocationTypes());
+        dispatch(loadPhoneTypes());
+        dispatch(loadDrivers());
       }
     })
     .catch(err => console.error(err));

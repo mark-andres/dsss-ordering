@@ -46,6 +46,12 @@ export const SET_TIME = 'SET_TIME';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+// Types for supportInfo
+export const LOAD_ADDRESS_NAMES = 'LOAD_ADDRESS_NAMES';
+export const LOAD_PHONE_TYPES = 'LOAD_PHONE_TYPES';
+export const LOAD_LOCATION_TYPES = 'LOAD_LOCATION_TYPES';
+export const LOAD_DRIVERS = 'LOAD_DRIVERS';
+
 // Types for app
 export const SET_NEXT_CHOICE = 'SET_NEXT_CHOICE';
 export const CANCEL_CHOICES = 'CANCEL_CHOICES';
@@ -85,6 +91,10 @@ export default {
   SET_TIME,
   LOGIN_USER,
   LOGOUT_USER,
+  LOAD_ADDRESS_NAMES,
+  LOAD_LOCATION_TYPES,
+  LOAD_PHONE_TYPES,
+  LOAD_DRIVERS,
   SET_NEXT_CHOICE,
   CANCEL_CHOICES
 };
