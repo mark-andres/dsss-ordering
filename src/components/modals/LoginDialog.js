@@ -44,7 +44,18 @@ const Input = styled.input`
   margin: 1vh 0;
 `;
 
-const Button = styled.button`
+const SubmitButton = styled.input.attrs({
+  type: 'submit'
+})`
+  width: 8vw;
+  height: 4vh;
+  margin: 2vh 1vw;
+  font-size: 1.1em;
+`;
+
+const CancelButton = styled.input.attrs({
+  type: 'reset'
+})`
   width: 8vw;
   height: 4vh;
   margin: 2vh 1vw;
@@ -70,12 +81,17 @@ class LoginDialog extends React.Component {
     this.props.loginUser(username, password, success => {
       if (success) {
         this.props.hideModal();
+        if (this.props.onSuccess) {
+          this.props.onSuccess();
+        }
       }
     });
   }
 
   onClose = () => {
-    this.props.hideModal();
+    if (this.props.allowCancel) {
+      this.props.hideModal();
+    }
   }
 
   render() {
@@ -87,6 +103,7 @@ class LoginDialog extends React.Component {
         <LoginDiv>
           <Header>DSSS Login</Header>
           <LoginForm
+            id='loginForm'
             autoComplete='off'
             onSubmit={this.onLoginClicked}
           >
@@ -108,8 +125,8 @@ class LoginDialog extends React.Component {
                 this.setState({ password: e.target.value });
               }}
             /><br/>
-            <Button onClick={this.onLoginClicked}>Login</Button>
-            <Button onClick={this.onClose}>Cancel</Button>
+            <SubmitButton onClick={this.onLoginClicked} value='Login' />
+            <CancelButton onClick={this.onClose} value='Cancel' />
           </LoginForm>
         </LoginDiv>
       </Modal>

@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { setTime } from '../actions/clock';
 import Clock from './Clock';
 import { StandardButton } from './common/StandardButton';
+import { loadModal } from '../actions/modal';
+import { LOGIN_DIALOG } from './modals/LoginDialog';
 
 const StyledOrderInfo = styled.div`
 `;
@@ -39,18 +41,12 @@ const DisplayArea = styled.div`
   position: relative;
 `;
 
-const StyledLink = styled(Link)`
+const CustomerButton = StandardButton.extend`
   width: 8vw;
   height: 5vh;
   position: absolute;
   top: 1.5vh;
   right: 1.5vw;
-`;
-
-const CustomerButton = StandardButton.extend`
-/*  width: 7vw; */
-/*  height: 4vh; */
-/*  float: right; */
 `;
 
 class OrderInfo extends React.Component {
@@ -67,6 +63,25 @@ class OrderInfo extends React.Component {
     setTimeout(this.setClock, ticks);
   }
 
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  onCustomerButtonClick = e => {
+    e.preventDefault();
+
+    if (this.props.userName === '') {
+      this.props.loadModal(LOGIN_DIALOG, { 
+        allowCancel: true, 
+        onSuccess: () => {
+          this.context.router.history.push('/customer');
+        }
+      });
+    } else {
+      this.context.router.history.push('/customer');
+    }
+  }
+
   render() {
     return (
       <StyledOrderInfo className="main-grid-cell">
@@ -78,9 +93,7 @@ class OrderInfo extends React.Component {
           <Clock time={this.props.clock} />
         </OrderInfoHeader>
         <DisplayArea>
-          <StyledLink to='/customer'>
-            <CustomerButton>Customer</CustomerButton>
-          </StyledLink>
+          <CustomerButton onClick={this.onCustomerButtonClick}>Customer</CustomerButton>
         </DisplayArea>
       </StyledOrderInfo>
     );
@@ -88,7 +101,8 @@ class OrderInfo extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setTime: time => dispatch(setTime(time))
+  setTime: time => dispatch(setTime(time)),
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps)),
 });
 
 const mapStateToProps = state => ({

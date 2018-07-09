@@ -5,6 +5,8 @@ import { normalize } from 'react-phone-input-auto-format';
 import { connect } from 'react-redux';
 
 import SearchPhone from './SearchPhone';
+import { loadModal } from '../../actions/modal';
+import { LOGIN_DIALOG } from '../modals/LoginDialog';
 
 const StyledCustomerInfo = styled.div`
   background-color: #8FAECF;
@@ -284,6 +286,9 @@ class CustomerInfo extends React.Component {
 
   componentDidMount() {
     this.initMap();
+    if (!this.props.loggedIn) {
+      this.props.loadModal(LOGIN_DIALOG, { allowCancel: false });
+    }
   }
 
   onSearchPhoneChange = (phoneNumber) => {
@@ -318,7 +323,12 @@ class CustomerInfo extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  addressNames: state.supportInfo.addressNames
+  addressNames: state.supportInfo.addressNames,
+  loggedIn: state.user.loggedIn
 });
 
-export default connect(mapStateToProps)(CustomerInfo);
+const mapDispatchToProps = dispatch => ({
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerInfo);

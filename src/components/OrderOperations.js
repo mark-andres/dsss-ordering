@@ -15,7 +15,7 @@ class OrderOperations extends React.Component {
     if (this.props.loggedIn) {
       this.props.logoutUser();
     } else {
-      this.props.loadModal(LOGIN_DIALOG);
+      this.props.loadModal(LOGIN_DIALOG, { allowCancel: true });
     }
   }
 
