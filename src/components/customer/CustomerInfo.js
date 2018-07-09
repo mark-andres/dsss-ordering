@@ -65,6 +65,16 @@ const CustomerForm = styled.form`
 `;
 
 class CustomerInfo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.map = null;
+    this.directionsDisplay = null;
+    this.directionsService = null;
+    this.DirectionsRenderer = null;
+    this.geocoder = null;
+    
+  }
   state = {
     placeFormatted: '',
     placeId: '',
@@ -178,8 +188,73 @@ class CustomerInfo extends React.Component {
     console.log('address:', address);
   }
 
-  componentDidMount() {
+  getRouteToAddress = (address, place) => {
+    let request = {
+      destination: address.str,
+      origin: this.state.storeAddress,
+      travelMode: window.google.maps.DirectionsTravelMode.DRIVING
+    };
+
+    this.directionsService.route(request, (response, status) => {
+      switch (status) {
+        case window.google.maps.DirectionsStatus.OK:
+          this.directionsDisplay.setDirections(response);
+          address.miles = response.routes[0].legs.reduce((total, leg) => total + leg.distance.value, 0) / 1609.0;
+          console.log('route result', address);
+          break;
+
+        case window.google.maps.DirectionsStatus.NOT_FOUND:
+        case window.google.maps.DirectionsStatus.ZERO_RESULTS:
+        case window.google.maps.DirectionsStatus.INVALID_REQUEST:
+        case window.google.maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
+        case window.google.maps.DirectionsStatus.OVER_QUERY_LIMIT:
+        case window.google.maps.DirectionsStatus.REQUEST_DENIED:
+        case window.google.maps.DirectionsStatus.UNKNOWN_ERROR:
+        default:
+          console.error('Route status: ' + status);
+      }
+    });
+
+    // bring the selected place in view on the map
+    this.map.fitBounds(place.geometry.viewport);
+  }
+
+  handleAddressEntry = place => {
+    let location = place.geometry.location;
     const { addressNames } = this.props;
+
+    this.setState({
+      placeFormatted: place.formatted_address,
+      placeId: place.place_id,
+      placeLocation: location.toString(),
+    });
+
+    /*
+     * Invoke the geocoder to get more information about the address.
+     */
+    this.geocoder.geocode({ address: this.state.placeFormatted }, (result, status) => {
+      let address;
+      if (status === window.google.maps.GeocoderStatus.OK) {
+        place = result[0];
+
+        // Examine result to see if this address could be invalid
+        if (place.geometry.location_type !== 'ROOFTOP') {
+          console.warn('WARNING: This may be an invalid address! Please check the street number with the customer.');
+        }
+
+        address = CustomerInfo.getAddressComponents(place, addressNames);
+        if (address.location === '') {
+          address.location = CustomerInfo.extractSearchName(document.getElementById('searchAddress').value);
+        }
+        this.getRouteToAddress(address, place);
+        CustomerInfo.lookupAddress(address);
+      } else {
+        console.error('Geocoder failed with status ' + result.status);
+      }
+    });
+  }
+
+  initMap = () => {
     const swLatLng = new window.google.maps.LatLng(29.901972370105305, -95.6411361694336);
     const neLatLng = new window.google.maps.LatLng(30.03224435196566, -95.49694061279297);
     const biasBounds = new window.google.maps.LatLngBounds(swLatLng, neLatLng);
@@ -188,82 +263,27 @@ class CustomerInfo extends React.Component {
       componentRestrictions: { country: 'us' },
       bounds: biasBounds
     };
-    let geocoder = new window.google.maps.Geocoder();
+    this.geocoder = new window.google.maps.Geocoder();
 
-    let map = new window.google.maps.Map(document.getElementById('map'), {
+    this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: { lat: 29.9583341, lng: -95.5646142 },
       zoom: 15,
       mapTypeId: 'roadmap',
     });
 
-    let directionsService = new window.google.maps.DirectionsService();
-    let directionsDisplay = new window.google.maps.DirectionsRenderer();
-    directionsDisplay.setMap(map);
+    this.directionsService = new window.google.maps.DirectionsService();
+    this.directionsDisplay = new window.google.maps.DirectionsRenderer();
+    this.directionsDisplay.setMap(this.map);
 
     let autoComplete = new window.google.maps.places.Autocomplete(document.getElementById('searchAddress'), options);
 
     autoComplete.addListener('place_changed', () => {
-      let place = autoComplete.getPlace();
-      let location = place.geometry.location;
-
-      this.setState({
-        placeFormatted: place.formatted_address,
-        placeId: place.place_id,
-        placeLocation: location.toString(),
-      });
-
-      /*
-       * Invoke the geocoder to get more information about the address.
-       */
-      geocoder.geocode({ address: this.state.placeFormatted }, function (result, status) {
-        let address;
-        if (status === window.google.maps.GeocoderStatus.OK) {
-          place = result[0];
-
-          // Examine result to see if this address could be invalid
-          if (place.geometry.location_type !== 'ROOFTOP') {
-            console.warn('WARNING: This may be an invalid address! Please check the street number with the customer.');
-          }
-
-          address = CustomerInfo.getAddressComponents(place, addressNames);
-          if (address.location === '') {
-            address.location = CustomerInfo.extractSearchName(document.getElementById('searchAddress').value);
-          }
-          CustomerInfo.lookupAddress(address);
-        } else {
-          console.error('Geocoder failed with status ' + result.status);
-        }
-      });
-
-
-      let request = {
-        destination: place.formatted_address,
-        origin: this.state.storeAddress,
-        travelMode: window.google.maps.DirectionsTravelMode.DRIVING
-      };
-
-      directionsService.route(request, function (response, status) {
-        switch (status) {
-          case window.google.maps.DirectionsStatus.OK:
-            directionsDisplay.setDirections(response);
-            break;
-
-          case window.google.maps.DirectionsStatus.NOT_FOUND:
-          case window.google.maps.DirectionsStatus.ZERO_RESULTS:
-          case window.google.maps.DirectionsStatus.INVALID_REQUEST:
-          case window.google.maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
-          case window.google.maps.DirectionsStatus.OVER_QUERY_LIMIT:
-          case window.google.maps.DirectionsStatus.REQUEST_DENIED:
-          case window.google.maps.DirectionsStatus.UNKNOWN_ERROR:
-          default:
-            console.error('Route status: ' + status);
-        }
-      });
-
-
-      // bring the selected place in view on the map
-      map.fitBounds(place.geometry.viewport);
+      this.handleAddressEntry(autoComplete.getPlace());
     });
+  }
+
+  componentDidMount() {
+    this.initMap();
   }
 
   onSearchPhoneChange = (phoneNumber) => {
