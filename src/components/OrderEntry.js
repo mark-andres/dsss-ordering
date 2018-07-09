@@ -5,11 +5,9 @@ import OrderReceipt from './OrderReceipt';
 import SelectionPanel from './SelectionPanel';
 import ReceiptOperations from './ReceiptOperations';
 import OrderOperations from './OrderOperations';
-import ModalContainer from './ModalContainer';
 
 const OrderEntry = () => {
   return (
-    <React.Fragment>
       <div className="main-grid">
         <OrderInfo />
         <CategorySelection />
@@ -18,8 +16,6 @@ const OrderEntry = () => {
         <ReceiptOperations />
         <OrderOperations />
       </div>
-      <ModalContainer />
-    </React.Fragment>
   );
 };
 

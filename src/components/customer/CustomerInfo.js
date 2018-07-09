@@ -200,7 +200,7 @@ class CustomerInfo extends React.Component {
         case window.google.maps.DirectionsStatus.OK:
           this.directionsDisplay.setDirections(response);
           address.miles = response.routes[0].legs.reduce((total, leg) => total + leg.distance.value, 0) / 1609.0;
-          console.log('route result', address);
+          this.setState({ address });
           break;
 
         case window.google.maps.DirectionsStatus.NOT_FOUND:
@@ -307,7 +307,7 @@ class CustomerInfo extends React.Component {
               <AddressInput id='searchAddress' type='text' />
             </Fieldset>
             <Fieldset>
-              <p>{this.state.placeFormatted}</p>
+              { this.state.address && <p>{this.state.address.str + ' ' + this.state.address.miles.toFixed(2) + ' miles' }</p> }
             </Fieldset>
           </CustomerForm>
           <MapDiv id='map' />
