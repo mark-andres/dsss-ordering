@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import styled from 'styled-components';
 import { normalize } from 'react-phone-input-auto-format';
 import { connect } from 'react-redux';
@@ -71,7 +72,7 @@ class CustomerInfo extends React.Component {
     storeAddress: '9719 Mills Rd, Houston, Tx 77070, USA',
   };
 
-  extractSearchName = searchName => {
+  static extractSearchName = searchName => {
     if (searchName.length > 0 && searchName.charAt(0).match(/[a-z]/i)) {
       return searchName.substr(0, searchName.indexOf(','));
     }
@@ -82,7 +83,7 @@ class CustomerInfo extends React.Component {
  * Create an address from the AUTOCOMPLETE place.
  * Create an address object, extracting information from the autocomplete place object.
  */
-  static getAddressComponents = place => {
+  static getAddressComponents = (place, addressNames) => {
     const address = {
       id: null,
       customer: null,
@@ -154,8 +155,9 @@ class CustomerInfo extends React.Component {
     }
 
     if (address.location === '') {
-      const { addressNames } = this.props;
-      const { name } = addressNames.find(`${address.streetNumber} ${address.street}`);
+      const name = _.property('name')(addressNames.find(
+        nameObj => nameObj.street_address === `${address.streetNumber} ${address.street}`)
+      );
       address.location = name || '';
       if (address.location !== '') {
         address.type = "2";
@@ -177,6 +179,7 @@ class CustomerInfo extends React.Component {
   }
 
   componentDidMount() {
+    const { addressNames } = this.props;
     const swLatLng = new window.google.maps.LatLng(29.901972370105305, -95.6411361694336);
     const neLatLng = new window.google.maps.LatLng(30.03224435196566, -95.49694061279297);
     const biasBounds = new window.google.maps.LatLngBounds(swLatLng, neLatLng);
@@ -222,9 +225,9 @@ class CustomerInfo extends React.Component {
             console.warn('WARNING: This may be an invalid address! Please check the street number with the customer.');
           }
 
-          address = CustomerInfo.getAddressComponents(place);
+          address = CustomerInfo.getAddressComponents(place, addressNames);
           if (address.location === '') {
-            address.location = this.extractSearchName(document.getElementById('searchAddress').value);
+            address.location = CustomerInfo.extractSearchName(document.getElementById('searchAddress').value);
           }
           CustomerInfo.lookupAddress(address);
         } else {
