@@ -162,7 +162,7 @@ const applyAttributes = (modifierAttributes, changeAttributes) => {
   return { ...modifierAttributes };
 }
 
-export const addIncludedModifiers = (modifiers, item, part) => {
+export const addIncludedModifiers = (modifiers = [], item, part) => {
   const { includes, menu } = item;
   if (!menu) {
     return null;
@@ -279,9 +279,10 @@ function calculateSubTotals(items) {
 
     if (item.modifiers) {
       modifiersSum = item.modifiers.reduce((total, modifier) => {
-        const { status, attributes, price } = modifier;
+        let { status, attributes, price } = modifier;
         const { extra } = attributes;
         let cost = 0;
+        price = price || 0;
         if (status === 'included') {
           cost = price * extra;
         } else if (status !== 'excluded') {
