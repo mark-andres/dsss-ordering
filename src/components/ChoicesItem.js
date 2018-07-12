@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setNextChoice } from '../actions/app';
+import { MenuItemButton } from './common/MenuItemButton';
 
 class MenuItem extends React.Component {
   onClick = () => {
@@ -19,12 +20,12 @@ class MenuItem extends React.Component {
     let classes = 'menu-item';
 
     return (
-      <div 
+      <MenuItemButton 
         className={classes}
         onClick={this.onClick}
       >
-        <p>{menuItem.name}</p>
-      </div>
+        {menuItem.name}
+      </MenuItemButton>
     );
   }
 }

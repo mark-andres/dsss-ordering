@@ -1,8 +1,8 @@
 {
   "name": "dsss-ordering",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "private": true,
-  "homepage": "https://www.mandresapps.com/ordering-demo",
+  "homepage": "https://dssstest2.mandresapps.com",
   "proxy": "http://localhost",
   "dependencies": {
     "connected-react-router": "^4.3.0",
