@@ -1331,6 +1331,10 @@ export const MENU = {
       name: 'Spaghetti w Sauce',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Marinara',
+        'Spaghetti',
+      ],
       choices: [
         ENTREE_SALAD_CHOICEMENU
       ]
