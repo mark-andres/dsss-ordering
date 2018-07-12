@@ -110,6 +110,7 @@ const appReducer = (state = {}, action) => {
 
     default:
       return {
+        ...state,
         menu: menuReducer(state.menu, action),
         order: orderReducer(state.order, action),
         scratchPad: scratchPadReducer(state.scratchPad, action),
