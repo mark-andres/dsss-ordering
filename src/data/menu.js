@@ -36,6 +36,14 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+const SPECIALTY_PIZZA_TOPPING_PRICES = {
+  [PIZZA_SIZE.SMALL]: 2,
+  [PIZZA_SIZE.MEDIUM]: 2,
+  [PIZZA_SIZE.LARGE]: 2.50,
+  [PIZZA_SIZE.EXTRA_LARGE]: 2.50,
+  [PIZZA_SIZE.SICILIAN]: 2.50
+};
+
 export const SALAD_QUALIFIERS = [{
   name: 'EXTRA',
   internalName: 'extra',
@@ -307,19 +315,19 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Anchovies',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Meatballs',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Grilled Chicken',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Kalamata Olives',
-    price: 2.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Ricotta Cheese',
-    price: 2.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: '__blank__',
     price: 2.50
@@ -340,34 +348,34 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Eggplant',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Garlic',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Spinach',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Tomatoes',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Artichokes',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Green Olives',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Basil',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Pepperonchini',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Pineapple',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Topping Cheese',
-    price: 2.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Pizza Sauce',
     price: 1.50
@@ -379,10 +387,10 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Pizza Cheese',
-    price: 2.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Feta Cheese',
-    price: 2.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }]
 };
 
@@ -596,6 +604,40 @@ export const DRESSINGS_CHOICEMENU = {
     },
   ]
 };
+
+const SIDE_DRESSING_CHOICEMENU = {
+  prompt: 'Please Select Side',
+  type: MENU_TYPE.CHOICES_MENU,
+  items: [
+    {
+      name: 'Ranch',
+    },
+    {
+      name: 'Blue Cheese',
+    },
+    {
+      name: 'Italian',
+    },
+    {
+      name: '1000 Island',
+    },
+    {
+      name: 'Vinaigrette',
+    },
+    {
+      name: 'Caesar',
+    },
+    {
+      name: 'Garlic Butter',
+    },
+    {
+      name: 'Marinara',
+    },
+    {
+      name: 'Hot Sauce',
+    },
+  ]
+}
 
 export const WINGSAUCE_CHOICEMENU = {
   prompt: 'Please choose wingsauce',
@@ -1057,10 +1099,16 @@ export const MENU = {
       name: '2oz Dressing',
       key: uuid(),
       price: 0.50,
+      choices: [
+        SIDE_DRESSING_CHOICEMENU
+      ]
     }, {
       name: '4oz Dressing',
       key: uuid(),
       price: 1.00,
+      choices: [
+        SIDE_DRESSING_CHOICEMENU
+      ]
     }, {
       name: 'Misc Food',
       key: uuid(),
@@ -1295,7 +1343,7 @@ export const MENU = {
     items: [{
       name: 'Spaghetti w Meatballs',
       key: uuid(),
-      price: 10.00,
+      price: 9.00,
       includes: [
         'Marinara',
         'Meatballs',
@@ -1307,7 +1355,7 @@ export const MENU = {
     }, {
       name: 'Spaghetti w Sausage',
       key: uuid(),
-      price: 10.00,
+      price: 9.00,
       includes: [
         'Marinara',
         'Sausage',

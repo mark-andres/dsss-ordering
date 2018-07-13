@@ -27,14 +27,14 @@ const recomputeCompletedItem = scratchPad => {
 
   if (items.length === 2) {
     completedItem = {
-      completedItem: { ...scratchPad.completedItem },
+      ...scratchPad.completedItem,
       name: `${size} H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
       price: ((getPrice(size, items[0]) + getPrice(size, items[1])) / 2),
       size
     }
   } else {
     completedItem = {
-      completedItem: { ...scratchPad.completedItem },
+      ...scratchPad.completedItem,
       name: `${size} ${items[0].name}`,
       price: getPrice(size, items[0]),
       size

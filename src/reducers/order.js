@@ -162,6 +162,19 @@ const applyAttributes = (modifierAttributes, changeAttributes) => {
   return { ...modifierAttributes };
 }
 
+const getModifierPrice = (item, modifier) => {
+  let { price, priceMatrix } = modifier;
+  const { size } = item;
+
+  price = price || 0;
+
+  if (priceMatrix && size) {
+    price = priceMatrix[size];
+  }
+
+  return price;
+}
+
 export const addIncludedModifiers = (modifiers = [], item, part) => {
   const { includes, menu } = item;
   if (!menu) {
@@ -170,28 +183,28 @@ export const addIncludedModifiers = (modifiers = [], item, part) => {
 
   menu.items.forEach(menuItem => {
     if (includes && includes.includes(menuItem.name)) {
-      modifiers = addIncludedModifier(modifiers, menuItem, part);
+      modifiers = addIncludedModifier(modifiers, item, menuItem, part);
     }
   });
 
   return modifiers;
 }
 
-const addIncludedModifier = (modifiers = [], includedModifier, part = 'whole') => {
+const addIncludedModifier = (modifiers = [], item, includedModifier, part = 'whole') => {
   const modifier1 = {
     ...includedModifier,
     status: 'included',
     attributes: { extra: 0, lite: false, side: false },
     location: 'h1'
   };
-  modifier1.price = modifier1.price / 2;
+  modifier1.price = getModifierPrice(item, modifier1) / 2;
   const modifier2 = {
     ...includedModifier,
     status: 'included',
     attributes: { extra: 0, lite: false, side: false },
     location: 'h2'
   };
-  modifier2.price = modifier2.price / 2;
+  modifier2.price = getModifierPrice(item, modifier2) / 2;
 
   if (part && part !== 'whole') {
     return modifiers.concat({
@@ -236,7 +249,7 @@ const changeModifier = (order, item, modifierToChange, qualifiers) => {
     const changeAttributes = getModifierAttributes(qualifiers);
     let newModifiers;
     const _modifierToChange = { ...modifierToChange };
-    _modifierToChange.price = _modifierToChange.price / 2;
+    _modifierToChange.price = getModifierPrice(item, _modifierToChange) / 2;
     
     switch (changeLocation) {
       case 'whole':
