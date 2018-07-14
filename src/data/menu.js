@@ -36,6 +36,14 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+const BLANCO_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 12,
+  [PIZZA_SIZE.MEDIUM]: 14,
+  [PIZZA_SIZE.LARGE]: 16,
+  [PIZZA_SIZE.EXTRA_LARGE]: 18,
+  [PIZZA_SIZE.SICILIAN]: 20
+};
+
 const SPECIALTY_PIZZA_TOPPING_PRICES = {
   [PIZZA_SIZE.SMALL]: 2,
   [PIZZA_SIZE.MEDIUM]: 2,
@@ -312,7 +320,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Italian Sausage',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Anchovies',
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
@@ -384,7 +392,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'White Sauce',
-    price: 1.50
+    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Pizza Cheese',
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
@@ -402,22 +410,22 @@ export const SLICES_MODIFIERS = {
   qualifiers: PIZZA_QUALIFIERS,
   items: [{
     name: 'Pepperoni',
-    price: 1.50,
+    price: 0.50,
   }, {
     name: 'Beef Sausage',
-    price: 1.50,
+    price: 0.50,
   }, {
     name: 'Canadian Bacon',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Italian Sausage',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Anchovies',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Meatballs',
-    price: 1.50
+    price: 0.50
   }, {
     name: '__blank__',
   }, {
@@ -428,57 +436,57 @@ export const SLICES_MODIFIERS = {
     name: '__blank__',
   }, {
     name: 'Bell Peppers',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Mushrooms',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Onions',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Black Olives',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Jalapeños',
-    price: 1.50
+    price: 0.50
   }, {
     name: '__blank__'
   }, {
     name: 'Garlic',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Spinach',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Tomatoes',
-    price: 1.50
+    price: 0.50
   }, {
     name: '__blank__',
   }, {
     name: 'Green Olives',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Basil',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Pepperonchini',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Pineapple',
-    price: 1.50
+    price: 0.50
   }, {
     name: '__blank__',
   }, {
     name: 'Pizza Sauce',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Olive Oil',
-    price: 1.50
+    price: 0.50
   }, {
     name: '__blank__',
   }, {
     name: 'Pizza Cheese',
-    price: 1.50
+    price: 0.50
   }, {
     name: 'Feta Cheese',
     price: 2.50
@@ -821,7 +829,7 @@ export const MENU = {
       name: 'Hawaiian',
       conciseName: 'Hawaiian',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: BLANCO_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -832,7 +840,7 @@ export const MENU = {
       name: 'Blanco Pie',
       conciseName: 'Blanco',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: BLANCO_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
