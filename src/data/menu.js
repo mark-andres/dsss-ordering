@@ -36,6 +36,14 @@ export const SPECIALTY_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+const HAWAIAN_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 13,
+  [PIZZA_SIZE.MEDIUM]: 15,
+  [PIZZA_SIZE.LARGE]: 17,
+  [PIZZA_SIZE.EXTRA_LARGE]: 19,
+  [PIZZA_SIZE.SICILIAN]: 21
+}
+
 const BLANCO_PIZZA_PRICES = {
   [PIZZA_SIZE.SMALL]: 12,
   [PIZZA_SIZE.MEDIUM]: 14,
@@ -829,7 +837,7 @@ export const MENU = {
       name: 'Hawaiian',
       conciseName: 'Hawaiian',
       key: uuid(),
-      priceMatrix: BLANCO_PIZZA_PRICES,
+      priceMatrix: HAWAIAN_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -984,28 +992,28 @@ export const MENU = {
     }, {
       name: 'Small Salad Tray for 10',
       key: uuid(),
-      price: 10.00,
+      price: 20.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Large Salad Tray for 20',
       key: uuid(),
-      price: 10.00,
+      price: 35.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Small Greek Tray for 10',
       key: uuid(),
-      price: 10.00,
+      price: 35.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Large Greek Tray for 20',
       key: uuid(),
-      price: 10.00,
+      price: 55.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
@@ -1090,7 +1098,7 @@ export const MENU = {
     }, {
       name: '1 Meatball',
       key: uuid(),
-      price: 1.00,
+      price: 0.50,
     }, {
       name: 'Side Anchovies',
       key: uuid(),
@@ -1146,6 +1154,10 @@ export const MENU = {
         TWOLITER_CHOICEMENU
       ]
     }, {
+      name: 'Fountain Drink',
+      key: uuid(),
+      price: 2.00,
+    },{
       name: 'Bottled Water',
       key: uuid(),
       price: 1.50,
@@ -1189,7 +1201,7 @@ export const MENU = {
     }, {
       name: 'Supreme Slice',
       key: uuid(),
-      price: 4.50,
+      price: 4.00,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1204,7 +1216,7 @@ export const MENU = {
     }, {
       name: 'Meatlovers Slice',
       key: uuid(),
-      price: 4.50,
+      price: 4.00,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1226,7 +1238,7 @@ export const MENU = {
     }, {
       name: 'Veggie Slice',
       key: uuid(),
-      price: 4.50,
+      price: 4.00,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
