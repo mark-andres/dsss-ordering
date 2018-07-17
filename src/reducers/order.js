@@ -291,6 +291,7 @@ function calculateSubTotals(items) {
     quantity = quantity || 1;
 
     if (item.modifiers) {
+      let excludedDiscount = 0;
       modifiersSum = item.modifiers.reduce((total, modifier) => {
         let { status, attributes, price } = modifier;
         const { extra } = attributes;
@@ -298,12 +299,18 @@ function calculateSubTotals(items) {
         price = price || 0;
         if (status === 'included') {
           cost = price * extra;
-        } else if (status !== 'excluded') {
+        } else if (status === 'excluded') {
+          excludedDiscount += price;
+        } else {
           cost = price * (extra + 1)
         }
         
         return total + cost;        
       }, 0);
+      modifiersSum -= excludedDiscount;
+      if (modifiersSum < 0) {
+        modifiersSum = 0;
+      }
     }
     if (item.subItems) {
       subItemsSum = item.subItems.reduce((total, subItem) => {

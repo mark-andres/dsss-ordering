@@ -110,16 +110,31 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   const formattedModifiers = [];
   let wholeList = [], wholeNames = [];
   let halfList = [];
+  let excludedDiscount = 0;
   const filteredModifiers = modifiers.filter(modifier => !includedModifiersFilter(modifier));
 
   if (includeWhole) {
     wholeList = getModifierWholeList(filteredModifiers);
     wholeNames = wholeList.map(modifier => modifier.name);
     wholeList.forEach(modifier => {
-      formattedModifiers.push({
+      if (modifier.status === 'excluded') {
+        excludedDiscount += modifier.price || 0;
+        delete modifier.price;
+      }
+      const formattedModifier = {
         modifier: adjustModifier(modifier),
         name: getFormattedName(modifier)
-      });
+      }
+      if (formattedModifier.modifier.status !== 'excluded' && excludedDiscount > 0 && formattedModifier.modifier.price) {
+        if (formattedModifier.modifier.price <= excludedDiscount) {
+          excludedDiscount -= formattedModifier.modifier.price;
+          delete formattedModifier.modifier.price;
+        } else {
+          formattedModifier.modifier.price -= excludedDiscount;
+          excludedDiscount = 0;
+        }
+      }
+      formattedModifiers.push(formattedModifier);
     });
   }
 
@@ -128,12 +143,23 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   );
   halfList.forEach(modifier => {
     if (modifier.status === 'excluded') {
+      excludedDiscount += modifier.price || 0;
       delete modifier.price;
     }
-    formattedModifiers.push({
+    const formattedModifier = {
       modifier: adjustModifier(modifier),
-      name: getFormattedName(modifier, 'h1')
-    });
+      name: getFormattedName(modifier)
+    }
+    if (formattedModifier.modifier.status !== 'excluded' && excludedDiscount > 0 && formattedModifier.modifier.price) {
+      if (formattedModifier.modifier.price <= excludedDiscount) {
+        excludedDiscount -= formattedModifier.modifier.price;
+        delete formattedModifier.modifier.price;
+      } else {
+        formattedModifier.modifier.price -= excludedDiscount;
+        excludedDiscount = 0;
+      }
+    }
+    formattedModifiers.push(formattedModifier);
   });
 
   halfList = filteredModifiers.filter(
@@ -141,12 +167,23 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   );
   halfList.forEach(modifier => {
     if (modifier.status === 'excluded') {
+      excludedDiscount += modifier.price || 0;
       delete modifier.price;
     }
-    formattedModifiers.push({
+    const formattedModifier = {
       modifier: adjustModifier(modifier),
-      name: getFormattedName(modifier, 'h2')
-    });
+      name: getFormattedName(modifier)
+    }
+    if (formattedModifier.modifier.status !== 'excluded' && excludedDiscount > 0 && formattedModifier.modifier.price) {
+      if (formattedModifier.modifier.price <= excludedDiscount) {
+        excludedDiscount -= formattedModifier.modifier.price;
+        delete formattedModifier.modifier.price;
+      } else {
+        formattedModifier.modifier.price -= excludedDiscount;
+        excludedDiscount = 0;
+      }
+    }
+    formattedModifiers.push(formattedModifier);
   });
 
   return formattedModifiers;
