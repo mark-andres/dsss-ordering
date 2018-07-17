@@ -111,7 +111,7 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
   let wholeList = [], wholeNames = [];
   let halfList = [];
   let excludedDiscount = 0;
-  const filteredModifiers = modifiers.filter(modifier => !includedModifiersFilter(modifier));
+  const filteredModifiers = _.cloneDeep(modifiers.filter(modifier => !includedModifiersFilter(modifier)));
 
   if (includeWhole) {
     wholeList = getModifierWholeList(filteredModifiers);
@@ -148,7 +148,7 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     }
     const formattedModifier = {
       modifier: adjustModifier(modifier),
-      name: getFormattedName(modifier)
+      name: getFormattedName(modifier, 'h1')
     }
     if (formattedModifier.modifier.status !== 'excluded' && excludedDiscount > 0 && formattedModifier.modifier.price) {
       if (formattedModifier.modifier.price <= excludedDiscount) {
@@ -172,7 +172,7 @@ export const getFormattedModifiers = (modifiers = [], includeWhole = false) => {
     }
     const formattedModifier = {
       modifier: adjustModifier(modifier),
-      name: getFormattedName(modifier)
+      name: getFormattedName(modifier, 'h2')
     }
     if (formattedModifier.modifier.status !== 'excluded' && excludedDiscount > 0 && formattedModifier.modifier.price) {
       if (formattedModifier.modifier.price <= excludedDiscount) {
