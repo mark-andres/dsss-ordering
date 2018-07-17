@@ -391,13 +391,12 @@ export const PIZZA_MODIFIERS = {
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: 'Topping Cheese',
-    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
+    price: 1.50
   }, {
     name: 'Pizza Sauce',
     price: 1.50
   }, {
     name: 'Olive Oil',
-    price: 1.50
   }, {
     name: 'White Sauce',
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
@@ -853,6 +852,18 @@ export const MENU = {
         'Pizza Sauce',
         'Pizza Cheese',
         'White Sauce',
+      ],
+    }, {
+      name: 'Margherita',
+      conciseName: 'Margherita',
+      key: uuid(),
+      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      includes: [
+        'Garlic',
+        'Tomatoes',
+        'Basil',
+        'Olive Oil',
+        'Pizza Cheese'
       ],
     }]
   },
