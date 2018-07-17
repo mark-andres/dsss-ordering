@@ -4,6 +4,8 @@ import { toggleItemInScratch } from '../actions/scratchPad';
 import uuid from 'uuid/v1';
 import { MenuItemButton } from './common/MenuItemButton';
 import { orderItemFromMenu } from '../lib';
+import { loadModal } from '../actions/modal';
+import { QUANTITY_DIALOG } from './modals/QuantityDialog';
 
 class MenuItem extends React.Component {
   constructor() {
@@ -23,13 +25,29 @@ class MenuItem extends React.Component {
   
   onClick = () => {
     const { modifiers } = this.props.menu;
-    this.props.toggleItem(
-      orderItemFromMenu({
-        ...this.props.menuItem,
-        key: this.key,
-        menu: modifiers ? modifiers : this.props.menu
-      }, 1)
-    );
+    if (this.props.menuItem.pricePrompt) {
+      this.props.loadModal(QUANTITY_DIALOG, {
+        enterAmount: true,
+        onOk: amount => {
+          this.props.toggleItem(
+            orderItemFromMenu({
+              ...this.props.menuItem,
+              price: amount,
+              key: this.key,
+              menu: modifiers ? modifiers : this.props.menu
+            }, 1)
+          );
+        }
+      });
+    } else {
+      this.props.toggleItem(
+        orderItemFromMenu({
+          ...this.props.menuItem,
+          key: this.key,
+          menu: modifiers ? modifiers : this.props.menu
+        }, 1)
+      );
+    }
   }
 
   render() {
@@ -47,7 +65,8 @@ class MenuItem extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleItem: item => dispatch(toggleItemInScratch(item))
+  toggleItem: item => dispatch(toggleItemInScratch(item)),
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
 });
 
 const mapStateToProps = state => ({

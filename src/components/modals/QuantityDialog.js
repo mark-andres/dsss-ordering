@@ -60,14 +60,15 @@ class QuantityDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantityStr: ''
+      quantityStr: props.enterAmount ? '0.00' : ''
     };
   }
 
   onOkClicked = () => {
     this.props.hideModal();
     if (this.props.onOk) {
-      const quantity = parseInt(this.state.quantityStr, 10);
+      const quantity = this.props.enterAmount? 
+        parseFloat(this.state.quantityStr, 10) : parseInt(this.state.quantityStr, 10);
       if (quantity) {
         this.props.onOk(quantity);
       }
@@ -78,20 +79,34 @@ class QuantityDialog extends React.Component {
     this.props.hideModal();
   }
 
+  formatQuantity = quantityStr => {
+    if (this.props.enterAmount) {
+      const quantity = parseFloat(quantityStr, 10);
+      quantityStr = (quantity / 100).toFixed(2);
+    }
+    return quantityStr;
+  }
+
   onNumberButtonClicked = e => {
     e.preventDefault();
 
     const digit = e.target.innerText;
-    const quantityStr = this.state.quantityStr;
-    this.setState({ quantityStr: quantityStr + digit });
+    let quantityStr = this.state.quantityStr;
+    if (this.props.enterAmount) {
+      quantityStr = quantityStr.split('.').join('');
+    }
+    this.setState({ quantityStr: this.formatQuantity(quantityStr + digit) });
   }
 
   removeDigit = e => {
     e.preventDefault();
 
-    const quantityStr = this.state.quantityStr;
+    let quantityStr = this.state.quantityStr;
+    if (this.props.enterAmount) {
+      quantityStr = quantityStr.split('.').join('');
+    }
     if (quantityStr.length) {
-      this.setState({ quantityStr: quantityStr.substr(0, quantityStr.length - 1) });
+      this.setState({ quantityStr: this.formatQuantity(quantityStr.substr(0, quantityStr.length - 1)) });
     }
   }
 
@@ -99,7 +114,7 @@ class QuantityDialog extends React.Component {
     return (
       <Modal onClose={this.onClose}>
         <QuantityDiv>
-          <DialogHeading>Enter quantity:</DialogHeading>          
+          <DialogHeading>Enter {this.props.enterAmount? 'amount':'quantity'}:</DialogHeading>          
           <NumberDisplayArea>{this.state.quantityStr}</NumberDisplayArea>
           <NumberInputButtons>
             <NumberButton onClick={this.onNumberButtonClicked}>7</NumberButton>

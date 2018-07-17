@@ -1139,14 +1139,15 @@ export const MENU = {
     }, {
       name: 'Misc Food',
       key: uuid(),
-      price: 1.00,
+      pricePrompt: true,
     }, {
       name: 'Out of Area Fee',
       key: uuid(),
-      price: 3.00,
+      pricePrompt: true,
     }, {
       name: 'Dinnerware',
       key: uuid(),
+      pricePrompt: true,
     }]
   },
   [CATEGORY.BEVERAGES]: {
