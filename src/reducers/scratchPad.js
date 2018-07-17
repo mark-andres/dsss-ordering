@@ -112,8 +112,10 @@ const addItemToScratch = (scratchPad, item) => {
   } else {
     items[0] = item;
   }
-  scratchPad.items = [...items];
-  return computeCompletedItem(scratchPad);
+  return computeCompletedItem({
+    ...scratchPad,
+    items
+  });
 }
 
 const removeItemFromScratch = (scratchPad, itemToRemove) => {
