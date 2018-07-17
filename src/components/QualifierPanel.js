@@ -14,6 +14,18 @@ class QualifierPanel extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.menuQualifiers && nextProps.menuQualifiers !== this.props.menuQualifiers) {
+      let initialPart;
+      if (nextProps.halfOrdering) {
+        initialPart = 'h1';
+      } else {
+        initialPart = 'whole';
+      }
+      this.props.initQualifiers(nextProps.menuQualifiers, initialPart);
+    }
+  }
+
   isQualifierSet(qualifierId) {
     if (qualifierId === 'prepare') {
       return false;

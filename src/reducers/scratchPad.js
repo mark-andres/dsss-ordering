@@ -61,6 +61,7 @@ const computeCompletedItem = scratchPad => {
   if (halfOrdering) {
     if (items.length === 2) {
       completedItem = {
+        ...items[0],
         name: `H1-${items[0].conciseName}/H2-${items[1].conciseName}`,
         modifiers: addIncludedModifiers(addIncludedModifiers(undefined, items[0], 'h1'), items[1], 'h2'),
         quantity: 1,
