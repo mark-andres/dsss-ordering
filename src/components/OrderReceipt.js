@@ -6,10 +6,9 @@ import LineItem from './LineItem';
 import { getFormattedModifiers } from '../selectors/modifiers';
 
 class OrderReceipt extends React.Component {
-  renderComments(comments, item) {
-    return comments.map(comment => {
-      const { name } = comment;
-      return <LineItem isComment={true} key={uuid()} item={{ name }} subItemOwner={item} />;
+  renderNotes(notes, item) {
+    return notes.map(note => {
+      return <LineItem isNote={true} key={uuid()} item={{ name: note }} subItemOwner={item} />;
     });
   }
 
@@ -34,8 +33,8 @@ class OrderReceipt extends React.Component {
       const formattedModifiers = getFormattedModifiers(item.modifiers, !halfOrdering);
       let subItemLines = [], commentLines = [], modifierLines = [];
 
-      if (item.comments) {
-        commentLines = this.renderComments(item.comments, item);
+      if (item.notes) {
+        commentLines = this.renderNotes(item.notes, item);
       }
       if (item.subItems) {
         subItemLines = this.renderSubItems(item.subItems, item);

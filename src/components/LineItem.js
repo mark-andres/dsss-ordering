@@ -17,7 +17,7 @@ class LineItem extends React.Component {
   }
 
   render() {
-    const { item, selectedItem, isSubItem, isComment, subItemOwner } = this.props;
+    const { item, selectedItem, isSubItem, isNote, subItemOwner } = this.props;
 
     if (!item) {
       return <tr><td></td><td></td><td></td></tr>;
@@ -34,10 +34,10 @@ class LineItem extends React.Component {
       quantityStr = '';
       priceStr = price ? (subItemOwner.quantity * price).toFixed(2) : '';
       subItemStyle = { paddingLeft: '2vw' };
-    } else if (isComment) {
+    } else if (isNote) {
       priceStr = '';
       quantityStr = '';
-      subItemStyle = { paddingLeft: '1vw' };
+      subItemStyle = { paddingLeft: '1vw', color: 'green' };
     } else {
       priceStr = (quantity * price).toFixed(2);
     }

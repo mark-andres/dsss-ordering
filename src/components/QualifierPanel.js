@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loadModal } from '../actions/modal';
+import { PREPARE_DIALOG } from './modals/PrepareDialog';
 
 class QualifierPanel extends React.Component {
   componentDidMount() {
@@ -28,6 +31,10 @@ class QualifierPanel extends React.Component {
 
   isQualifierSet(qualifierId) {
     if (qualifierId === 'prepare') {
+      const { notes } = this.props.selectedItem;
+      if (notes && notes.length >= 1) {
+        return true;
+      }
       return false;
     }
 
@@ -38,7 +45,11 @@ class QualifierPanel extends React.Component {
   toggleQualifier(qualifierId) {
     const { qualifiers, setQualifier } = this.props;
 
-    setQualifier(qualifierId, !qualifiers[qualifierId]);
+    if (qualifierId !== 'prepare') {
+      setQualifier(qualifierId, !qualifiers[qualifierId]);
+    } else {
+      this.props.loadModal(PREPARE_DIALOG, { prepareNotes: this.props.qualifiers.prepare });
+    }
   }
 
   render() {
@@ -76,4 +87,8 @@ class QualifierPanel extends React.Component {
   }
 }
 
-export default QualifierPanel;
+const mapDispatchToProps = dispatch => ({
+  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
+});
+
+export default connect(null, mapDispatchToProps)(QualifierPanel);
