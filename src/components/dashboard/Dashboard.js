@@ -14,6 +14,10 @@ const DashboardHeader = styled.h1`
   padding-top: 2vh;
 `;
 
+const Subtitle = styled.h2`
+  text-align: center;
+`;
+
 const Buttons = styled.div`
   width: 14vw;
   margin: 4vh auto;
@@ -23,6 +27,7 @@ const Dashboard = () => {
   return (
     <DashboardBackground>
       <DashboardHeader>Delivery Service Support System</DashboardHeader>
+      <Subtitle>(version {process.env.REACT_APP_VERSION})</Subtitle>
       <Buttons>
         <Link to='/orderentry'>
           <StandardButton style={{ width: '10vw', height: '4vh' }}>Order Entry</StandardButton>
