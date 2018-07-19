@@ -14,12 +14,13 @@ import { setCurrentMenu } from '../actions/menu';
 import { MENU_TYPE } from '../data/menu';
 
 
-const setChoices = (state, choices, modifierMenu) => {
+const setChoices = (state, choices, currentChoiceIndex = 0, choiceOp = addItem) => {
   state.choiceItems = [];
   state.returnMenu = state.menu.currentMenu;
 
   state.choices = [...choices];
-  state.currentChoiceIndex = 0;
+  state.currentChoiceIndex = currentChoiceIndex;
+  state.choiceOp = choiceOp;
   state.menu.currentMenu = {
     ...state.choices[state.currentChoiceIndex]
   }
@@ -40,7 +41,7 @@ const setNextChoice = (state, chosenItem) => {
     const subItems = [...state.choiceItems];
     state.order = orderReducer(
       state.order,
-      addItem({
+      state.choiceOp({
         ...state.scratchPad.completedItem,
         scratchPad: state.scratchPad,
         subItems
@@ -90,7 +91,7 @@ const appReducer = (state = {}, action) => {
         const menuType = state.menu.currentMenu.type;
 
         if (choices) {
-          state = setChoices(state, choices, modifiersMenu);
+          state = setChoices(state, choices);
         } else {
           let orderOp = addItem;
           if (menuType === MENU_TYPE.SIZES_MENU) {
