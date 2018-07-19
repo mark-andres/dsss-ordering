@@ -14,7 +14,7 @@ const DashboardHeader = styled.h1`
   padding-top: 2vh;
 `;
 
-const Subtitle = styled.h2`
+const Subtitle = styled.h4`
   text-align: center;
 `;
 
