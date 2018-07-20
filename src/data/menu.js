@@ -328,7 +328,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Italian Sausage',
-    priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
+    price: 1.50
   }, {
     name: 'Anchovies',
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
@@ -346,7 +346,6 @@ export const PIZZA_MODIFIERS = {
     priceMatrix: SPECIALTY_PIZZA_TOPPING_PRICES,
   }, {
     name: '__blank__',
-    price: 2.50
   }, {
     name: 'Bell Peppers',
     price: 1.50
