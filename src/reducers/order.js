@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { TAX_RATE } from '../data';
 import types from '../actions/types';
+import { getTopMenu } from '../data/menu';
 
 export const orderDefault = {
   orderNumber: 'New',
@@ -181,7 +182,10 @@ export const addIncludedModifiers = (modifiers = [], item, part) => {
     return null;
   }
 
-  menu.items.forEach(menuItem => {
+  let menuRef;
+  menuRef = _.property(menu)(getTopMenu());
+
+  menuRef.items.forEach(menuItem => {
     if (includes && includes.includes(menuItem.name)) {
       modifiers = addIncludedModifier(modifiers, item, menuItem, part);
     }

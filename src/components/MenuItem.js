@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { toggleItemInScratch } from '../actions/scratchPad';
 import uuid from 'uuid/v1';
 import { MenuItemButton } from './common/MenuItemButton';
 import { orderItemFromMenu } from '../lib';
 import { loadModal } from '../actions/modal';
 import { QUANTITY_DIALOG } from './modals/QuantityDialog';
+import { getTopMenu } from '../data/menu';
 
 class MenuItem extends React.Component {
   constructor() {
@@ -22,9 +24,17 @@ class MenuItem extends React.Component {
 
     return !!(items.find(item => item.key === this.key));
   }
+
+  getMenuRef(menu) {
+    const menuRef = [];
+    menuRef[0] = _.findKey(getTopMenu(), { name: menu.name });
+    if (menu.modifiers) {
+      menuRef[1] = 'modifiers';
+    }
+    return menuRef;
+  }
   
   onClick = () => {
-    const { modifiers } = this.props.menu;
     if (this.props.menuItem.pricePrompt) {
       this.props.loadModal(QUANTITY_DIALOG, {
         enterAmount: true,
@@ -34,7 +44,7 @@ class MenuItem extends React.Component {
               ...this.props.menuItem,
               price: amount,
               key: this.key,
-              menu: modifiers ? modifiers : this.props.menu
+              menu: this.getMenuRef(this.props.menu)
             }, 1)
           );
         }
@@ -44,7 +54,7 @@ class MenuItem extends React.Component {
         orderItemFromMenu({
           ...this.props.menuItem,
           key: this.key,
-          menu: modifiers ? modifiers : this.props.menu
+          menu: this.getMenuRef(this.props.menu)
         }, 1)
       );
     }

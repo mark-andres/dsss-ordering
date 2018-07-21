@@ -1,20 +1,28 @@
+import _ from 'lodash';
 import types from '../actions/types';
-import { MENU, getTopMenu } from '../data/menu';
+import { getTopMenu } from '../data/menu';
 
 const menuDefault = {
   menu: getTopMenu(),
-  currentMenu: MENU['Pizza'],
-  menuStack: [MENU['Pizza']] 
+  currentMenu: getTopMenu()[0],
+  menuStack: [getTopMenu()[0]] 
 }
 
-const menuReducer = (menu = menuDefault, action) => {
+const menuReducer = (state = menuDefault, action) => {
   let newState;
 
   switch (action.type) {
     case types.SET_CURRENT_MENU:
+      let currentMenu;
+      if (_.isArray(action.menu)) {
+        currentMenu = _.assign({}, _.property(action.menu)(state.menu));
+        state.menuStack = [ getTopMenu()[action.menu[0]] ];
+      } else {
+        currentMenu = { ...action.menu };
+      }
       newState = {
-        ...menu,
-        currentMenu: { ...action.menu }
+        ...state,
+        currentMenu
       };
       return newState;
 
@@ -23,7 +31,7 @@ const menuReducer = (menu = menuDefault, action) => {
 
     case types.MAKE_TOP_MENU_CURRENT:
       newState = {
-        ...menu,
+        ...state,
         currentMenu: { ...action.topMenu },
       };
       newState.menuStack = [newState.currentMenu];
@@ -31,14 +39,14 @@ const menuReducer = (menu = menuDefault, action) => {
 
     case types.RESTORE_TOP_MENU:
       newState = {
-        ...menu,
-        currentMenu: { ...menu.menuStack[0] }
+        ...state,
+        currentMenu: { ...state.menuStack[0] }
       }      
       newState.menuStack = [newState.currentMenu];
       return newState;
 
     default:
-      return menu;
+      return state;
   }
 }
 
