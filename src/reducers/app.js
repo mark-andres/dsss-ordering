@@ -14,9 +14,9 @@ import { setCurrentMenu } from '../actions/menu';
 import { MENU_TYPE } from '../data/menu';
 
 
-const setChoices = (state, choices, currentChoiceIndex = 0, choiceOp = addItem) => {
+const setChoices = (state, choices, returnMenu, currentChoiceIndex = 0, choiceOp = addItem) => {
   state.choiceItems = [];
-  state.returnMenu = state.menu.currentMenu;
+  state.returnMenu = returnMenu;
 
   state.choices = [...choices];
   state.currentChoiceIndex = currentChoiceIndex;
@@ -91,7 +91,7 @@ const appReducer = (state = {}, action) => {
         const menuType = state.menu.currentMenu.type;
 
         if (choices) {
-          state = setChoices(state, choices);
+          state = setChoices(state, choices, state.menu.currentMenu);
         } else {
           let orderOp = addItem;
           if (menuType === MENU_TYPE.SIZES_MENU) {
