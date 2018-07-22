@@ -41,7 +41,7 @@ class OrderOperations extends React.Component {
           style={{ color: 'green', fontSize: '1.4rem', gridRow: 1, gridColumn: 2 }}
           onClick={this.onNotImplementedClicked}
         >
-          No Sale
+          Drivers
         </StandardButton>
         <ButtonStack
           style={{ gridRow: 1, gridColumn: 3 }}
@@ -86,7 +86,7 @@ class OrderOperations extends React.Component {
           style={{ color: 'green', fontSize: '1.4rem', gridRow: 1, gridColumn: 6 }}
           onClick={this.onNotImplementedClicked}
         >
-          Collect
+          FAQ
         </StandardButton>
       </div>
     );
