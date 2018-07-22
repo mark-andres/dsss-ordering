@@ -6,7 +6,7 @@ import LineItem from './LineItem';
 import { getFormattedModifiers } from '../selectors/modifiers';
 
 class OrderReceipt extends React.Component {
-  renderNotes(notes, item) {
+  renderItemNotes(notes, item) {
     return notes.map(note => {
       return <LineItem isNote={true} key={uuid()} item={{ name: note }} subItemOwner={item} />;
     });
@@ -34,7 +34,7 @@ class OrderReceipt extends React.Component {
       let subItemLines = [], commentLines = [], modifierLines = [];
 
       if (item.notes) {
-        commentLines = this.renderNotes(item.notes, item);
+        commentLines = this.renderItemNotes(item.notes, item);
       }
       if (item.subItems) {
         subItemLines = this.renderSubItems(item.subItems, item);
@@ -51,6 +51,10 @@ class OrderReceipt extends React.Component {
 
     const flatItems = _.flatten(lineItems);
     return flatItems;
+  }
+
+  renderOrderNotes(order) {
+    return null;
   }
 
   render() {
@@ -74,6 +78,7 @@ class OrderReceipt extends React.Component {
                 <div className="order-receipt-body">
                   <table>
                     <tbody>
+                      {this.renderOrderNotes(order)}
                       {this.renderLineItems(order)}
                       <LineItem key={uuid()} />
                       {order.items.length > 0 && (
