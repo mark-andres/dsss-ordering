@@ -346,9 +346,10 @@ const orderReducer = (order = orderDefault, action) => {
       return addItem(order, _.cloneDeep(action.item));
 
     case types.SET_SELECTED_ITEM:
+      const selectedItem = action.item? { ...action.item } : null;
       return {
         ...order,
-        selectedItem: { ...action.item }
+        selectedItem
       };
 
     case types.SEND_ORDER:
