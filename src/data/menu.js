@@ -848,7 +848,6 @@ export const MENU = {
       key: uuid(),
       priceMatrix: BLANCO_PIZZA_PRICES,
       includes: [
-        'Pizza Sauce',
         'Pizza Cheese',
         'White Sauce',
       ],
