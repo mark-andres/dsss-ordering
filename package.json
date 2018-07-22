@@ -1,6 +1,6 @@
 {
   "name": "dsss-ordering",
-  "version": "0.10.12",
+  "version": "0.10.13",
   "private": true,
   "homepage": "https://dssstest2.mandresapps.com",
   "proxy": "http://localhost",
