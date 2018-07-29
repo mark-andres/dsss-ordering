@@ -8,7 +8,8 @@ import { isEmpty } from '../lib';
 
 class LineItem extends React.Component {
   onClick = () => {
-    const { isSubItem, subItemOwner, setCurrentMenu, setSelectedItem, resetScratch, item } = this.props;
+    const { setCurrentMenu, setSelectedItem, resetScratch } = this.props;
+    const { isSubItem, isNote, subItemOwner, item } = this.props;
     const targetItem = isSubItem ? subItemOwner : item;
 
     setCurrentMenu(targetItem.menu);
@@ -17,7 +18,7 @@ class LineItem extends React.Component {
   }
 
   render() {
-    const { item, selectedItem, isSubItem, isNote, subItemOwner } = this.props;
+    const { item, selectedItem, isSubItem, isNote, subItemOwner, noteIndex } = this.props;
 
     if (!item) {
       return <tr><td></td><td></td><td></td></tr>;
@@ -37,7 +38,11 @@ class LineItem extends React.Component {
     } else if (isNote) {
       priceStr = '';
       quantityStr = '';
-      subItemStyle = { paddingLeft: '1vw', color: 'green' };
+      if (noteIndex) {
+        subItemStyle = { color: 'green' };
+      } else {
+        subItemStyle = { paddingLeft: '1vw', color: 'green' };
+      }
     } else {
       priceStr = (quantity * price).toFixed(2);
     }

@@ -7,6 +7,7 @@ import { getTopMenu } from '../data/menu';
 export const orderDefault = {
   orderNumber: 'New',
   items: [],
+  notes: [],
   selectedItem: null,
   subtotal: 0,
   tax: 0,

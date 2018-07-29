@@ -54,7 +54,9 @@ class OrderReceipt extends React.Component {
   }
 
   renderOrderNotes(order) {
-    return null;
+    return order.notes.map((note, index) => {
+      return <LineItem isSubItem={false} key={uuid()} item={{ name: note }} noteIndex={index} />;
+    });
   }
 
   render() {
