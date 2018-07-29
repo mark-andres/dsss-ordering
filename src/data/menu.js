@@ -431,7 +431,7 @@ export const SLICES_MODIFIERS = {
     price: 0.50
   }, {
     name: 'Meatballs',
-    price: 0.50
+    price: 0.75
   }, {
     name: '__blank__',
   }, {
@@ -459,18 +459,19 @@ export const SLICES_MODIFIERS = {
     name: '__blank__'
   }, {
     name: 'Garlic',
-    price: 0.50
+    price: 0.75
   }, {
     name: 'Spinach',
-    price: 0.50
+    price: 0.75
   }, {
     name: 'Tomatoes',
-    price: 0.50
+    price: 0.75
   }, {
-    name: '__blank__',
+    name: 'Artichokes',
+    price: 0.75
   }, {
     name: 'Green Olives',
-    price: 0.50
+    price: 0.75
   }, {
     name: 'Basil',
     price: 0.50
@@ -891,7 +892,7 @@ export const MENU = {
     }, {
       name: 'Side Greek Salad',
       key: uuid(),
-      price: 3.50,
+      price: 3.75,
       includes: [
         'Tomatoes',
         'Onions',
@@ -908,7 +909,7 @@ export const MENU = {
     }, {
       name: 'Side Caesar Salad',
       key: uuid(),
-      price: 3.50,
+      price: 3.75,
       includes: [
         'Tomatoes',
         'Onions',
