@@ -3,6 +3,8 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { normalize } from 'react-phone-input-auto-format';
 import { connect } from 'react-redux';
+import 'react-tabs/style/react-tabs.css';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import SearchPhone from './SearchPhone';
 import { loadModal } from '../../actions/modal';
@@ -32,6 +34,7 @@ const Grid = styled.div`
 
 const MapDiv = styled.div`
   height: 100%;
+  width: 100%;
   background-color: white;
 `;
 
@@ -315,7 +318,20 @@ class CustomerInfo extends React.Component {
               { this.state.address && <p>{this.state.address.str + ' ' + this.state.address.miles.toFixed(2) + ' miles' }</p> }
             </Fieldset>
           </CustomerForm>
-          <MapDiv id='map' />
+          <Tabs forceRenderTabPanel={true} defaultIndex={0}
+          >
+            <TabList>
+              <Tab>Map</Tab>
+              <Tab>Order Details</Tab>
+            </TabList>
+
+            <TabPanel style={{height: '94%', width: '99%'}}>
+              <MapDiv id='map' />
+            </TabPanel>
+            <TabPanel>
+              <h2>Order Details</h2>
+            </TabPanel>
+          </Tabs>
         </Grid>
       </StyledCustomerInfo>
     );
