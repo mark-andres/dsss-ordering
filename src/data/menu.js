@@ -268,7 +268,7 @@ export const SALADS_MODIFIERS = {
     price: 0.50,
   }, {
     name: 'Salami',
-    price: 1.00,
+    price: 0.50,
   }, {
     name: 'Green Peppers',
     price: 0.50,
@@ -283,7 +283,7 @@ export const SALADS_MODIFIERS = {
     price: 0.50,
   }, {
     name: 'Chicken',
-    price: 1.00,
+    price: 2.50,
   }, {
     name: 'Lettuce',
     price: 0.50,
@@ -301,13 +301,11 @@ export const SALADS_MODIFIERS = {
     price: 0.50,
   }, {
     name: 'Greek Olives',
-    price: 1.00,
-  }, {
-    name: 'Mushroom',
     price: 0.50,
   }, {
+    name: 'Mushroom',
+  }, {
     name: 'Artichokes',
-    price: 1.00
   }]
 };
 
@@ -882,6 +880,7 @@ export const MENU = {
       includes: [
         'Tomatoes',
         'Pepperoni',
+        'Black Olives',
         'Mozzarella',
         'Lettuce',
         'Parmesan',
