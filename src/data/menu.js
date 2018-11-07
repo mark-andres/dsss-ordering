@@ -799,7 +799,6 @@ export const MENU = {
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
-        'Olive Oil',
         'Spinach',
         'Tomatoes',
         'Garlic',
