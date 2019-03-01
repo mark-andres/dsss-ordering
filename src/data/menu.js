@@ -391,7 +391,7 @@ export const PIZZA_MODIFIERS = {
     price: 1.50
   }, {
     name: 'Pizza Sauce',
-    price: 1.50
+    price: 0
   }, {
     name: 'Olive Oil',
   }, {
@@ -1166,7 +1166,7 @@ export const MENU = {
       name: 'Fountain Drink',
       key: uuid(),
       price: 2.00,
-    },{
+    }, {
       name: 'Bottled Water',
       key: uuid(),
       price: 1.50,
@@ -1448,19 +1448,6 @@ export const MENU = {
         'Marinara',
         'Mozzarella',
         'Spaghetti',
-      ],
-      choices: [
-        ENTREE_SALAD_CHOICEMENU
-      ]
-    }, {
-      name: 'Baked Ziti',
-      key: uuid(),
-      price: 9.00,
-      includes: [
-        'Marinara',
-        'Mozzarella',
-        'Ricotta',
-        'Penne',
       ],
       choices: [
         ENTREE_SALAD_CHOICEMENU
