@@ -649,6 +649,9 @@ const SIDE_DRESSING_CHOICEMENU = {
     {
       name: 'Hot Sauce',
     },
+    {
+      name: 'BBQ Sauce',
+    },
   ]
 }
 
@@ -661,6 +664,8 @@ export const WINGSAUCE_CHOICEMENU = {
     },
     {
       name: 'Garlic Parmesan',
+    }, {
+      name: 'BBQ',
     },
     {
       name: 'Dry',
@@ -1046,7 +1051,7 @@ export const MENU = {
     }, {
       name: 'Chicken Tenders',
       key: uuid(),
-      price: 8.00,
+      price: 6.00,
       choices: [
         DIP_CHOICEMENU
       ]
@@ -1085,6 +1090,24 @@ export const MENU = {
       choices: [
         DIP_CHOICEMENU
       ]
+    }, {
+      name: 'Side Meatballs',
+      key: uuid(),
+      price: 5.00,
+    }, {
+      name: 'Small Fries',
+      key: uuid(),
+      price: 2.00,
+      choices: [
+        DIP_CHOICEMENU
+      ]
+    }, {
+      name: 'Large Fries',
+      key: uuid(),
+      price: 3.50,
+      choices: [
+        DIP_CHOICEMENU
+      ]
     }]
   },
   [CATEGORY.SIDES]: {
@@ -1096,18 +1119,6 @@ export const MENU = {
     row: 1,
     column: 4,
     items: [{
-      name: 'Side Meatballs',
-      key: uuid(),
-      price: 5.00,
-    }, {
-      name: 'Kids Spagetti',
-      key: uuid(),
-      price: 5.00,
-    }, {
-      name: '1 Meatball',
-      key: uuid(),
-      price: 0.50,
-    }, {
       name: 'Side Anchovies',
       key: uuid(),
       price: 1.00,
@@ -1348,16 +1359,6 @@ export const MENU = {
         'Pizza Sauce',
         'Pizza Cheese',
       ]
-    }, {
-      name: 'Grilled Chicken Sub',
-      key: uuid(),
-      price: 9.00,
-      includes: [
-        'Grilled Chicken',
-        'Tomatoes',
-        'Provolone',
-        'Lettuce'
-      ]
     }]
   },
   [CATEGORY.PASTA]: {
@@ -1415,6 +1416,18 @@ export const MENU = {
       choices: [
         ENTREE_SALAD_CHOICEMENU
       ]
+    }, {
+      name: 'Kids Spagetti',
+      key: uuid(),
+      price: 5.00,
+      includes: [
+        'Marinara',
+        'Spaghetti'
+      ]
+    }, {
+      name: '1 Meatball',
+      key: uuid(),
+      price: 0.50,
     }, {
       name: 'Cheese Ravioli',
       key: uuid(),
