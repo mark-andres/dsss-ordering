@@ -1349,11 +1349,75 @@ export const MENU = {
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
+        'Breaded Chicken Fillet'
       ]
     }, {
       name: 'Eggplant Parm Sub',
       key: uuid(),
       price: 9.00,
+      includes: [
+        'Eggplant',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
+    }, {
+      name: 'Half MB Sub',
+      key: uuid(),
+      price: 4.50,
+      includes: [
+        'Meatballs',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ]
+    }, {
+      name: 'Half Italian Sub',
+      key: uuid(),
+      price: 4.50,
+      includes: [
+        'Ham',
+        'Salami',
+        'Tomatoes',
+        'Provolone',
+        'Lettuce',
+      ],
+      choices: [
+        TOASTED_UNTOASTED_CHOICEMENU
+      ]
+    }, {
+      name: 'Half Italian Sausage Sub',
+      key: uuid(),
+      price: 4.50,
+      includes: [
+        'Italian Sausage',
+        'Bell Peppers',
+        'Onions',
+        'Pizza Sauce',
+        'Pizza Cheese',
+      ],
+    }, {
+      name: 'Half Philly',
+      key: uuid(),
+      price: 5.00,
+      includes: [
+        'Steak',
+        'Bell Peppers',
+        'Mushrooms',
+        'Onions',
+        'Pizza Cheese',
+      ]
+    }, {
+      name: 'Half Chicken Parm',
+      key: uuid(),
+      price: 5.00,
+      includes: [
+        'Pizza Sauce',
+        'Pizza Cheese',
+        'Breaded Chicken Fillet'
+      ]
+    }, {
+      name: 'Half Eggplant Parm',
+      key: uuid(),
+      price: 5.00,
       includes: [
         'Eggplant',
         'Pizza Sauce',
