@@ -22,7 +22,7 @@ class MenuItem extends React.Component {
       return false;
     }
 
-    return !!(items.find(item => item.key === this.key));
+    return !!items.find(item => item.key === this.key);
   }
 
   getMenuRef(menu) {
@@ -33,40 +33,48 @@ class MenuItem extends React.Component {
     }
     return menuRef;
   }
-  
+
   onClick = () => {
     if (this.props.menuItem.pricePrompt) {
       this.props.loadModal(QUANTITY_DIALOG, {
         enterAmount: true,
         onOk: amount => {
           this.props.toggleItem(
-            orderItemFromMenu({
-              ...this.props.menuItem,
-              price: amount,
-              key: this.key,
-              menu: this.getMenuRef(this.props.menu)
-            }, 1)
+            orderItemFromMenu(
+              {
+                ...this.props.menuItem,
+                price: amount,
+                key: this.key,
+                menu: this.getMenuRef(this.props.menu)
+              },
+              1
+            )
           );
         }
       });
     } else {
       this.props.toggleItem(
-        orderItemFromMenu({
-          ...this.props.menuItem,
-          key: this.key,
-          menu: this.getMenuRef(this.props.menu)
-        }, 1)
+        orderItemFromMenu(
+          {
+            ...this.props.menuItem,
+            key: this.key,
+            menu: this.getMenuRef(this.props.menu)
+          },
+          1
+        )
       );
     }
-  }
+  };
 
   render() {
-    const menuItem = this.props.menuItem;
+    const { menuItem, height, width } = this.props;
 
     return (
-      <MenuItemButton 
+      <MenuItemButton
         active={this.isSet()}
         onClick={this.onClick}
+        height={height}
+        width={width}
       >
         {menuItem.name}
       </MenuItemButton>
@@ -76,11 +84,15 @@ class MenuItem extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   toggleItem: item => dispatch(toggleItemInScratch(item)),
-  loadModal: (modalType, modalProps) => dispatch(loadModal(modalType, modalProps))
+  loadModal: (modalType, modalProps) =>
+    dispatch(loadModal(modalType, modalProps))
 });
 
 const mapStateToProps = state => ({
   scratchPad: state.scratchPad
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenuItem);

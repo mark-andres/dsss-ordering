@@ -9,26 +9,43 @@ import { isEmpty } from '../lib';
 class LineItem extends React.Component {
   onClick = () => {
     const { setCurrentMenu, setSelectedItem, resetScratch } = this.props;
+    // eslint-disable-next-line
     const { isSubItem, isNote, subItemOwner, item } = this.props;
     const targetItem = isSubItem ? subItemOwner : item;
 
     setCurrentMenu(targetItem.menu);
     resetScratch(targetItem.scratchPad);
     setSelectedItem(targetItem);
-  }
+  };
 
   render() {
-    const { item, selectedItem, isSubItem, isNote, subItemOwner, noteIndex } = this.props;
+    const {
+      item,
+      selectedItem,
+      isSubItem,
+      isNote,
+      subItemOwner,
+      noteIndex
+    } = this.props;
 
     if (!item) {
-      return <tr><td></td><td></td><td></td></tr>;
+      return (
+        <tr>
+          <td />
+          <td />
+          <td />
+        </tr>
+      );
     }
 
     const { quantity, name, price, add } = item;
     let quantityStr = quantity ? quantity.toString() : '';
     let priceStr;
 
-    const style = (!isEmpty(selectedItem) && selectedItem.id === item.id) ? selectedItemStyle : {};
+    const style =
+      !isEmpty(selectedItem) && selectedItem.id === item.id
+        ? selectedItemStyle
+        : {};
     let subItemStyle = {};
 
     if (isSubItem) {
@@ -56,9 +73,9 @@ class LineItem extends React.Component {
         </tr>
         {!!add && (
           <tr onClick={this.onClick} style={style}>
-            <td></td>
+            <td />
             <td style={subItemStyle}>{add}</td>
-            <td></td>
+            <td />
           </tr>
         )}
       </React.Fragment>
@@ -76,4 +93,7 @@ const mapStateToProps = state => ({
   selectedItem: state.order.selectedItem
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LineItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LineItem);
