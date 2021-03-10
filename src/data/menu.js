@@ -21,14 +21,30 @@ export const PIZZA_SIZE = {
 };
 
 export const CHEESE_PIZZA_PRICES = {
-  [PIZZA_SIZE.SMALL]: 10,
-  [PIZZA_SIZE.MEDIUM]: 12,
-  [PIZZA_SIZE.LARGE]: 14,
-  [PIZZA_SIZE.EXTRA_LARGE]: 16,
-  [PIZZA_SIZE.SICILIAN]: 18
+  [PIZZA_SIZE.SMALL]: 11,
+  [PIZZA_SIZE.MEDIUM]: 13,
+  [PIZZA_SIZE.LARGE]: 15,
+  [PIZZA_SIZE.EXTRA_LARGE]: 17,
+  [PIZZA_SIZE.SICILIAN]: 20
 };
 
 export const SPECIALTY_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 18,
+  [PIZZA_SIZE.MEDIUM]: 20,
+  [PIZZA_SIZE.LARGE]: 22,
+  [PIZZA_SIZE.EXTRA_LARGE]: 24,
+  [PIZZA_SIZE.SICILIAN]: 26
+};
+
+export const MEAT_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 17,
+  [PIZZA_SIZE.MEDIUM]: 19,
+  [PIZZA_SIZE.LARGE]: 21,
+  [PIZZA_SIZE.EXTRA_LARGE]: 23,
+  [PIZZA_SIZE.SICILIAN]: 25
+};
+
+const MARGARITA_PIZZA_PRICES = {
   [PIZZA_SIZE.SMALL]: 16,
   [PIZZA_SIZE.MEDIUM]: 18,
   [PIZZA_SIZE.LARGE]: 20,
@@ -37,19 +53,19 @@ export const SPECIALTY_PIZZA_PRICES = {
 };
 
 const HAWAIAN_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 14,
+  [PIZZA_SIZE.MEDIUM]: 16,
+  [PIZZA_SIZE.LARGE]: 18,
+  [PIZZA_SIZE.EXTRA_LARGE]: 20,
+  [PIZZA_SIZE.SICILIAN]: 22
+}
+
+const BLANCO_PIZZA_PRICES = {
   [PIZZA_SIZE.SMALL]: 13,
   [PIZZA_SIZE.MEDIUM]: 15,
   [PIZZA_SIZE.LARGE]: 17,
   [PIZZA_SIZE.EXTRA_LARGE]: 19,
   [PIZZA_SIZE.SICILIAN]: 21
-}
-
-const BLANCO_PIZZA_PRICES = {
-  [PIZZA_SIZE.SMALL]: 12,
-  [PIZZA_SIZE.MEDIUM]: 14,
-  [PIZZA_SIZE.LARGE]: 16,
-  [PIZZA_SIZE.EXTRA_LARGE]: 18,
-  [PIZZA_SIZE.SICILIAN]: 20
 };
 
 const SPECIALTY_PIZZA_TOPPING_PRICES = {
@@ -283,7 +299,7 @@ export const SALADS_MODIFIERS = {
     price: 0.50,
   }, {
     name: 'Chicken',
-    price: 2.50,
+    price: 1.50,
   }, {
     name: 'Lettuce',
     price: 0.50,
@@ -800,7 +816,7 @@ export const MENU = {
       name: 'Spinach Tomato & Garlic',
       conciseName: 'STG',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: MEAT_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -812,7 +828,7 @@ export const MENU = {
       name: 'Veggie Lovers',
       conciseName: 'Veggie',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: MEAT_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -825,7 +841,7 @@ export const MENU = {
       name: 'Meat Lovers',
       conciseName: 'Meat',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: MEAT_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -855,10 +871,10 @@ export const MENU = {
         'White Sauce',
       ],
     }, {
-      name: 'Margherita',
-      conciseName: 'Margherita',
+      name: 'Margarita',
+      conciseName: 'Margarita',
       key: uuid(),
-      priceMatrix: SPECIALTY_PIZZA_PRICES,
+      priceMatrix: MARGARITA_PIZZA_PRICES,
       includes: [
         'Garlic',
         'Tomatoes',
@@ -880,7 +896,7 @@ export const MENU = {
     items: [{
       name: 'Side Salad',
       key: uuid(),
-      price: 3.00,
+      price: 4.00,
       includes: [
         'Tomatoes',
         'Pepperoni',
@@ -895,7 +911,7 @@ export const MENU = {
     }, {
       name: 'Side Greek Salad',
       key: uuid(),
-      price: 3.75,
+      price: 4.50,
       includes: [
         'Tomatoes',
         'Onions',
@@ -912,7 +928,7 @@ export const MENU = {
     }, {
       name: 'Side Caesar Salad',
       key: uuid(),
-      price: 3.75,
+      price: 4.00,
       includes: [
         'Tomatoes',
         'Onions',
@@ -928,7 +944,7 @@ export const MENU = {
     }, {
       name: 'Half Order Cold Antipasto',
       key: uuid(),
-      price: 5.00,
+      price: 7.50,
       includes: [
         'Tomatoes',
         'Pepperoni',
@@ -947,7 +963,7 @@ export const MENU = {
     }, {
       name: 'Dinner Salad',
       key: uuid(),
-      price: 5.00,
+      price: 6.75,
       includes: [
         'Tomatoes',
         'Pepperoni',
@@ -963,7 +979,7 @@ export const MENU = {
     }, {
       name: 'Caesar Salad',
       key: uuid(),
-      price: 7.00,
+      price: 7.50,
       includes: [
         'Tomatoes',
         'Onions',
@@ -979,14 +995,14 @@ export const MENU = {
     }, {
       name: 'Greek Salad',
       key: uuid(),
-      price: 7.00,
+      price: 8.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Cold Antipasto Salad',
       key: uuid(),
-      price: 10.00,
+      price: 13.00,
       includes: [
         'Tomatoes',
         'Pepperoni',
@@ -1005,21 +1021,21 @@ export const MENU = {
     }, {
       name: 'Small Salad Tray for 10',
       key: uuid(),
-      price: 20.00,
+      price: 22.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Large Salad Tray for 20',
       key: uuid(),
-      price: 35.00,
+      price: 38.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
     }, {
       name: 'Small Greek Tray for 10',
       key: uuid(),
-      price: 35.00,
+      price: 30.00,
       choices: [
         DRESSINGS_CHOICEMENU
       ]
@@ -1043,7 +1059,7 @@ export const MENU = {
     items: [{
       name: 'Chicken Wings',
       key: uuid(),
-      price: 9.00,
+      price: 13.50,
       choices: [
         WINGSAUCE_CHOICEMENU,
         DIP2_CHOICEMENU
@@ -1051,21 +1067,21 @@ export const MENU = {
     }, {
       name: 'Chicken Tenders',
       key: uuid(),
-      price: 6.00,
+      price: 7.50,
       choices: [
         DIP_CHOICEMENU
       ]
     }, {
       name: 'Fried Calamari',
       key: uuid(),
-      price: 8.00,
+      price: 9.00,
       choices: [
         DIP_CHOICEMENU
       ]
     }, {
       name: 'Fried Mushrooms',
       key: uuid(),
-      price: 7.00,
+      price: 8.00,
       choices: [
         DIP_CHOICEMENU
       ]
@@ -1079,21 +1095,21 @@ export const MENU = {
     }, {
       name: 'Garlic Bread',
       key: uuid(),
-      price: 3.00,
+      price: 4.00,
       choices: [
         DIP_CHOICEMENU
       ]
     }, {
       name: 'Garlic Cheese Bread',
       key: uuid(),
-      price: 4.00,
+      price: 5.00,
       choices: [
         DIP_CHOICEMENU
       ]
     }, {
       name: 'Side Meatballs',
       key: uuid(),
-      price: 5.00,
+      price: 7.00,
     }, {
       name: 'Small Fries',
       key: uuid(),
@@ -1121,15 +1137,15 @@ export const MENU = {
     items: [{
       name: 'Side Anchovies',
       key: uuid(),
-      price: 1.00,
+      price: 1.25,
     }, {
       name: 'Side Jalapeños',
       key: uuid(),
-      price: 1.00,
+      price: 1.25,
     }, {
       name: 'Side Pepperoncini',
       key: uuid(),
-      price: 1.00,
+      price: 1.25,
     }, {
       name: '2oz Dressing',
       key: uuid(),
@@ -1195,7 +1211,7 @@ export const MENU = {
     items: [{
       name: 'Cheese Slice',
       key: uuid(),
-      price: 3.00,
+      price: 3.25,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1203,7 +1219,7 @@ export const MENU = {
     }, {
       name: 'Pepperoni Slice',
       key: uuid(),
-      price: 3.50,
+      price: 3.75,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1212,7 +1228,7 @@ export const MENU = {
     }, {
       name: 'Beef Sausage Slice',
       key: uuid(),
-      price: 3.50,
+      price: 3.75,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1221,7 +1237,7 @@ export const MENU = {
     }, {
       name: 'Supreme Slice',
       key: uuid(),
-      price: 4.00,
+      price: 4.50,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1236,7 +1252,7 @@ export const MENU = {
     }, {
       name: 'Meatlovers Slice',
       key: uuid(),
-      price: 4.00,
+      price: 4.50,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1248,7 +1264,7 @@ export const MENU = {
     }, {
       name: 'Hawaiian Slice',
       key: uuid(),
-      price: 4.00,
+      price: 4.50,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1258,7 +1274,7 @@ export const MENU = {
     }, {
       name: 'Veggie Slice',
       key: uuid(),
-      price: 4.00,
+      price: 4.50,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1281,7 +1297,7 @@ export const MENU = {
     items: [{
       name: 'Calzone',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Canadian Bacon',
         'Ricotta',
@@ -1290,7 +1306,7 @@ export const MENU = {
     }, {
       name: 'Stromboli',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Pepperoni',
         'Italian Sausage',
@@ -1300,7 +1316,7 @@ export const MENU = {
     }, {
       name: 'Meatball Sub',
       key: uuid(),
-      price: 8.00,
+      price: 9.25,
       includes: [
         'Meatballs',
         'Pizza Sauce',
@@ -1309,7 +1325,7 @@ export const MENU = {
     }, {
       name: 'Italian Sub',
       key: uuid(),
-      price: 8.00,
+      price: 8.50,
       includes: [
         'Ham',
         'Salami',
@@ -1323,7 +1339,7 @@ export const MENU = {
     }, {
       name: 'Italian Sausage Sub',
       key: uuid(),
-      price: 8.00,
+      price: 9.25,
       includes: [
         'Italian Sausage',
         'Bell Peppers',
@@ -1334,7 +1350,7 @@ export const MENU = {
     }, {
       name: 'Philly Cheese Steak',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Steak',
         'Bell Peppers',
@@ -1345,7 +1361,7 @@ export const MENU = {
     }, {
       name: 'Chicken Parm Sub',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1354,7 +1370,7 @@ export const MENU = {
     }, {
       name: 'Eggplant Parm Sub',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Eggplant',
         'Pizza Sauce',
@@ -1363,7 +1379,7 @@ export const MENU = {
     }, {
       name: 'Half MB Sub',
       key: uuid(),
-      price: 4.50,
+      price: 4.75,
       includes: [
         'Meatballs',
         'Pizza Sauce',
@@ -1437,7 +1453,7 @@ export const MENU = {
     items: [{
       name: 'Spaghetti w Meatballs',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Marinara',
         'Meatballs',
@@ -1449,7 +1465,7 @@ export const MENU = {
     }, {
       name: 'Spaghetti w Sausage',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Marinara',
         'Sausage',
@@ -1461,7 +1477,7 @@ export const MENU = {
     }, {
       name: 'Spaghetti w Meat Sauce',
       key: uuid(),
-      price: 9.00,
+      price: 10.00,
       includes: [
         'Meat Sauce',
         'Spaghetti',
@@ -1472,7 +1488,7 @@ export const MENU = {
     }, {
       name: 'Spaghetti w Sauce',
       key: uuid(),
-      price: 9.00,
+      price: 8.00,
       includes: [
         'Marinara',
         'Spaghetti',
@@ -1491,11 +1507,11 @@ export const MENU = {
     }, {
       name: '1 Meatball',
       key: uuid(),
-      price: 0.50,
+      price: 0.75,
     }, {
       name: 'Cheese Ravioli',
       key: uuid(),
-      price: 8.50,
+      price: 9.50,
       includes: [
         'Marinara',
         'Mozzarella',
@@ -1506,7 +1522,7 @@ export const MENU = {
     }, {
       name: 'Chicken Parmesan',
       key: uuid(),
-      price: 12.50,
+      price: 13.50,
       includes: [
         'Breaded Chicken Fillet',
         'Marinara',
@@ -1519,7 +1535,7 @@ export const MENU = {
     }, {
       name: 'Eggplant Parmesan',
       key: uuid(),
-      price: 12.50,
+      price: 13.50,
       includes: [
         'Eggplant',
         'Marinara',
@@ -1532,7 +1548,7 @@ export const MENU = {
     }, {
       name: 'Lasagna',
       key: uuid(),
-      price: 10.00,
+      price: 11.00,
       includes: [
         'Marinara',
         'Mozzarella',
@@ -1553,15 +1569,15 @@ export const MENU = {
     items: [{
       name: 'Cheesecake',
       key: uuid(),
-      price: 3.00,
+      price: 3.25,
     }, {
       name: 'Strawberry Cheesecake',
       key: uuid(),
-      price: 3.00,
+      price: 3.25,
     }, {
       name: 'Cannoli',
       key: uuid(),
-      price: 3.00,
+      price: 3.50,
     }, {
       name: 'Mini Cannoli',
       key: uuid(),
