@@ -12,7 +12,7 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react-dom": "^16.3.3",
     "react-phone-input-auto-format": "^0.0.6",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
