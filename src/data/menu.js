@@ -52,12 +52,20 @@ const MARGARITA_PIZZA_PRICES = {
   [PIZZA_SIZE.SICILIAN]: 24
 };
 
+const SGT_PIZZA_PRICES = {
+  [PIZZA_SIZE.SMALL]: 17,
+  [PIZZA_SIZE.MEDIUM]: 19,
+  [PIZZA_SIZE.LARGE]: 21,
+  [PIZZA_SIZE.EXTRA_LARGE]: 23,
+  [PIZZA_SIZE.SICILIAN]: 24
+}
+
 const HAWAIAN_PIZZA_PRICES = {
   [PIZZA_SIZE.SMALL]: 14,
   [PIZZA_SIZE.MEDIUM]: 16,
   [PIZZA_SIZE.LARGE]: 18,
   [PIZZA_SIZE.EXTRA_LARGE]: 20,
-  [PIZZA_SIZE.SICILIAN]: 22
+  [PIZZA_SIZE.SICILIAN]: 21
 }
 
 const BLANCO_PIZZA_PRICES = {
@@ -816,7 +824,7 @@ export const MENU = {
       name: 'Spinach Tomato & Garlic',
       conciseName: 'STG',
       key: uuid(),
-      priceMatrix: MEAT_PIZZA_PRICES,
+      priceMatrix: SGT_PIZZA_PRICES,
       includes: [
         'Pizza Sauce',
         'Pizza Cheese',
@@ -1581,7 +1589,7 @@ export const MENU = {
     }, {
       name: 'Mini Cannoli',
       key: uuid(),
-      price: 1.50,
+      price: 1.75,
     }]
   },
 };
