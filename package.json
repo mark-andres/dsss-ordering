@@ -10,7 +10,7 @@
     "history": "^4.7.2",
     "jquery-param": "^1.0.1",
     "lodash": "^4.17.10",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-phone-input-auto-format": "^0.0.6",
